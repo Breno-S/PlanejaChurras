@@ -15,7 +15,7 @@ const ButtonCardapio = () => {
     <TouchableOpacity onPress={openDrawer} style={{padding:10}}>
       <Image
         source={hamburguerButton}
-        style={{ marginHorizontal: 10, width: 36, height: 36 }}
+        style={{ marginHorizontal: 10, width: 30, height: 30 }}
       />
     </TouchableOpacity>
   );

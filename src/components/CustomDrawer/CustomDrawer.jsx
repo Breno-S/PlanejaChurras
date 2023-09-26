@@ -10,35 +10,26 @@ export default function CustomDrawer({ navigation }) {
     // Fundo do Drawer/ Drawer itself
     <DrawerContentScrollView contentContainerStyle={{backgroundColor: '#000'}}>
 
-          {/* Opção Calculadora */}
+          {/* Opção Home */}
             <DrawerItem
-              label={""}
+              label={"1"}
               labelStyle={ {color: '#fff'} }
               icon={() => null}
-              onPress={() => navigation.navigate("")}
+              onPress={() => navigation.navigate("HomePage")}
               // focused={true}
               // activeTintColor="#5203FC00"
             />
 
-            {/* Opção Temperatura */}
+            {/* Opção Novo Churrasco */}
             <DrawerItem
-              label={""}
+              label={"2"}
               labelStyle={ {color: '#fff'} }
               icon={() => null}
-              onPress={() => navigation.navigate("")}
+              onPress={() => navigation.navigate("NovoChurrasco")}
               // focused={true}
               // activeTintColor="#5203FC"
             />
 
-            {/* Opção Comprimento */}
-            <DrawerItem
-              label={""}
-              labelStyle={ {color: '#fff'} }
-              icon={() => null}
-              onPress={() => navigation.navigate("")}
-              // focused={true}
-              // activeTintColor="#5203FC"
-            />
 	</DrawerContentScrollView>
 
   );

@@ -2,6 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
+import { useFonts, Karantina_400Regular } from '@expo-google-fonts/karantina';
+
 
 import CustomDrawer from './src/components/CustomDrawer/CustomDrawer';
 import ButtonCardapio from './src/components/ButtonCardapio/ButtonCardapio';
@@ -12,24 +14,34 @@ import NovoChurrasco from './src/pages/NovoChurrasco/NovoChurrasco';
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  // carrega a fonte karantina
+  let [fontsLoaded, fontError] = useFonts({
+    Karantina_400Regular,
+  });
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
         // opções da barra superior do aplicativo
         screenOptions={{
-          drawerStyle: { backgroundColor: '#272929'},
-          headerTitleAlign: 'center',
+          drawerPosition: 'right',
+          drawerStyle: { backgroundColor: '#000' },
           headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 40},
           headerShadowVisible: false,
-          headerTitle: '',
+          headerLeft: () => null,
           headerRight: () => <ButtonCardapio />,
         }}
-        initialRouteName=""
+        initialRouteName="HomePage"
         // propriedade que define o Drawer customizado
         // drawerContent={(props) => <CustomDrawer {...props} />}
       >
-        <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/>
-        <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/>
+        <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "Home", } }/>
+        <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "Novo Churrasco",} }/>
         {/* <Drawer.Screen name="" component={null} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/> */}
       </Drawer.Navigator>
     </NavigationContainer>
