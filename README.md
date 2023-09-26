@@ -46,7 +46,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * Você tem uma máquina `<Windows / Linux / Mac>`, e um dispositivo móvel `<IOS / Android>`.
 
 
-## 🚀 Instalando Burroladora
+## 🚀 Instalando PlanejaChurras
 
 Para instalar a Burroladora, siga estas etapas:
 
