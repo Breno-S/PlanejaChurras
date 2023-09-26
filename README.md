@@ -9,7 +9,9 @@
 
 ## Objetivo
 
-
+Você está participando de um processo seletivo para uma vaga de desenvolvedor mobile
+júnior na ACME Tecnologia cuja primeira etapa é desenvolver um aplicativo móvel para uma
+calculadora de churrasco.
 
 ## Requisitos Funcionais
 
