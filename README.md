@@ -15,11 +15,7 @@
 
 * Calcular e exibir o consumo individual e total de carnes e bebidas;
 * Calcular e exibir o valor do rateio por pessoa (R$) com o churrasco;
-* Calcular e exibir o valor total gasto (R$) com o churrasco estratificado por:
-  Carnes;
-  Bebidas;
-  Material de consumo e;
-  Locação do local para o evento.
+* Calcular e exibir o valor total gasto (R$) com o churrasco estratificado por: carnes, bebidas, material de consumo e locação do local para o evento.
 * Exibir em um mapa a localização do churrasco;
 * Oferecer no mínimo três opções de carnes. Ex: Bovina, suína e frango;
 * Oferecer no mínimo três tipos de carne.
