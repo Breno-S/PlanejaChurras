@@ -13,7 +13,20 @@
 
 ## Requisitos Funcionais
 
-
+* Calcular e exibir o consumo individual e total de carnes e bebidas;
+* Calcular e exibir o valor do rateio por pessoa (R$) com o churrasco;
+* Calcular e exibir o valor total gasto (R$) com o churrasco estratificado por:
+  Carnes;
+  Bebidas;
+  Material de consumo e;
+  Locação do local para o evento.
+* Exibir em um mapa a localização do churrasco;
+* Oferecer no mínimo três opções de carnes. Ex: Bovina, suína e frango;
+* Oferecer no mínimo três tipos de carne.
+* Oferecer no mínimo três opções de bebidas. Ex: Água, Refrigerante e Cerveja.
+* Exibir no mínimo uma receita de cada carne oferecida no churrasco. Tomar como referência
+* Indicar um local para a compra das carnes. Ex: Açougue ou supermercado;
+* Exibir informações de contato do responsável pelo evento;
 
 ## Tecnologias utilizadas
 
