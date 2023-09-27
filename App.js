@@ -5,8 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 import { useFonts, Karantina_400Regular } from '@expo-google-fonts/karantina';
 
-
-// import CustomDrawer from './src/components/CustomDrawer/CustomDrawer';
+import CustomDrawer from './src/components/CustomDrawer/CustomDrawer';
 import ButtonCardapio from './src/components/ButtonCardapio/ButtonCardapio';
 
 import HomePage from './src/pages/HomePage/HomePage';
@@ -31,16 +30,15 @@ export default function App() {
         // opções da barra superior do aplicativo
         screenOptions={{
           drawerPosition: 'right',
-          drawerStyle: { backgroundColor: '#191B1B' },
-          headerStyle: { backgroundColor: '#191B1B' },
+          drawerStyle: { backgroundColor: '#0000000' },
+          headerStyle: { backgroundColor: '#000' },
           headerTitleStyle: {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 40},
-          headerShadowVisible: false,
           headerLeft: () => null,
           headerRight: () => <ButtonCardapio />,
         }}
         initialRouteName="HomePage"
         // propriedade que define o Drawer customizado
-        // drawerContent={(props) => <CustomDrawer {...props} />}
+        drawerContent={(props) => <CustomDrawer {...props} />}
       >
         <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "Planeja Churras", } }/>
         <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "Planeja Churras",} }/>
