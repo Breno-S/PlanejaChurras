@@ -40,9 +40,9 @@ export default function App() {
         // propriedade que define o Drawer customizado
         drawerContent={(props) => <CustomDrawer {...props} />}
       >
-        <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "Planeja Churras", } }/>
-        <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "Planeja Churras",} }/>
-        <Drawer.Screen name="InfoChurras" component={InfoChurras} options={ {title: "Planeja Churras",} }/>
+        <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "PLANEJA CHURRAS", } }/>
+        <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "PLANEJA CHURRAS",} }/>
+        <Drawer.Screen name="InfoChurras" component={InfoChurras} options={ {title: "PLANEJA CHURRAS",} }/>
         {/* <Drawer.Screen name="" component={null} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/> */}
       </Drawer.Navigator>
     </NavigationContainer>

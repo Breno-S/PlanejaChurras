@@ -27,21 +27,21 @@ export default function CustomDrawer({ navigation }) {
       <View style={ {} }>
       <DrawerItem
         label={"Home"}
-        labelStyle={ {color: '#fff'} }
+        labelStyle={ {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 28 } }
         icon={() => Icon_Home}
         onPress={() => navigation.navigate("HomePage")}
       />
 
       <DrawerItem
         label={"Novo Churrasco"}
-        labelStyle={ {color: '#fff'} }
+        labelStyle={ {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 28} }
         icon={() => Icon_Grelha}
         onPress={() => navigation.navigate("NovoChurras")}
       />
 
       <DrawerItem
         label={"Info Churras"}
-        labelStyle={ {color: '#fff'} }
+        labelStyle={ {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 28} }
         icon={() => null}
         onPress={() => navigation.navigate("InfoChurras")}
       />
