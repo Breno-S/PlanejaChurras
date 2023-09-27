@@ -11,43 +11,81 @@ import { useFonts, Karantina_400Regular } from "@expo-google-fonts/karantina";
 import { React, useState, useEffect } from "react";
 import Input from "../../components/Input/Input";
 
-
 export default function InfoChurras({ info }) {
   const windowWidth = Dimensions.get("window").width;
 
-  const [nome, setNome] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [cep, setCep] = useState('');
-  const [logradouro, setLogradouro] = useState('');
-  const [numero, setNumero] = useState();
-  const [complemento, setComplemento] = useState('');
-  const [municipio, setMunicipio] = useState('');
-  const [estado, setEstado] = useState('');
+  const [infoInput, setInfoInput] = useState([
+    {
+      nome: "",
+      telefone: "",
+      cep: "",
+      logradouro: "",
+      numero: "",
+      complemento: "",
+      municipio: "",
+      estado: "",
+    },
+  ]);
 
   const handleNome = (nome) => {
-    setNome(nome);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].nome = nome;
+
+    setInfoInput(updatedInfoInput);
+  };
   const handleTelefone = (tel) => {
-    setNome(tel);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].telefone = tel;
+
+    setInfoInput(updatedInfoInput);
+
+  };
   const handleCep = (cep) => {
-    setNome(cep);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].cep = cep;
+
+    setInfoInput(updatedInfoInput);
+  };
   const handleLogradouro = (logradouro) => {
-    setNome(logradouro);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].logradouro = logradouro;
+
+    setInfoInput(updatedInfoInput);
+  };
   const handleNumero = (numero) => {
-    setNome(numero);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].numero = numero;
+
+    setInfoInput(updatedInfoInput);
+  };
   const handleComplemento = (complemento) => {
-    setNome(complemento);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].complemento = complemento;
+
+    setInfoInput(updatedInfoInput);
+  };
   const handleMunicipio = (municipio) => {
-    setNome(municipio);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].municipio = municipio;
+
+    setInfoInput(updatedInfoInput);
+  };
   const handleEstado = (estado) => {
-    setNome(estado);
-  }
+    const updatedInfoInput = [...infoInput];
+
+    updatedInfoInput[0].estado = estado;
+
+    setInfoInput(updatedInfoInput);
+  };
+
+  const teste = () => {};
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -59,27 +97,52 @@ export default function InfoChurras({ info }) {
           <Text style={styles.titleContent}>Informações do Anfitrião</Text>
 
           <View style={styles.input}>
-            <Input type={"text"} label={"Nome"} onValueChange={handleNome}/>
-            <Input type={"cel"} label={"Telefone"} onValueChange={handleTelefone}/>
+            <Input type={"text"} label={"Nome"} onValueChange={handleNome} />
+            <Input
+              type={"cel"}
+              label={"Telefone"}
+              onValueChange={handleTelefone}
+            />
           </View>
           <View style={[styles.underlineGray, { width: windowWidth }]}></View>
 
           <Text style={styles.titleContent}>Local</Text>
 
           <View style={styles.input}>
-            <Input type={"number"} label={"CEP"} onValueChange={handleCep}/>
-            <Input type={"text"} label={"Logradouro"} onValueChange={handleLogradouro}/>
-            <Input type={"number"} label={"Nº"} onValueChange={handleNumero}/>
-            <Input type={"text"} label={"Complemento"} onValueChange={handleComplemento}/>
-            <Input type={"text"} label={"Municipio"} onValueChange={handleMunicipio}/>
-            <Input type={"text"} label={"Estado"} onValueChange={handleEstado}/>
+            <Input type={"number"} label={"CEP"} onValueChange={handleCep} />
+            <Input
+              type={"text"}
+              label={"Logradouro"}
+              onValueChange={handleLogradouro}
+            />
+            <Input type={"number"} label={"Nº"} onValueChange={handleNumero} />
+            <Input
+              type={"text"}
+              label={"Complemento"}
+              onValueChange={handleComplemento}
+            />
+            <Input
+              type={"text"}
+              label={"Municipio"}
+              onValueChange={handleMunicipio}
+            />
+            <Input
+              type={"text"}
+              label={"Estado"}
+              onValueChange={handleEstado}
+            />
           </View>
 
           <View style={[styles.underlineGray, { width: windowWidth }]}></View>
 
           <View style={styles.containerButton}>
             <View style={styles.contentButton}>
-              <Button color="#fff" title="PROSSEGUIR" style={styles.button} />
+              <Button
+                onPress={teste}
+                color="#fff"
+                title="PROSSEGUIR"
+                style={styles.button}
+              />
             </View>
           </View>
         </View>
@@ -139,8 +202,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginTop : 40,
-    marginBottom : 80,
+    marginTop: 40,
+    marginBottom: 80,
   },
   contentButton: {
     backgroundColor: "#EF820D",
