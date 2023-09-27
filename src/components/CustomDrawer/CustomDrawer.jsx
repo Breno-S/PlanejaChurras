@@ -4,7 +4,7 @@ import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Dimensions } from "react-native";
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import Logo from "../../../assets/images/icon-churras.png"
+import Logo from "../../../assets/images/churras_icon.png"
 
 const Icon_Grelha = <Icon name="outdoor-grill" size={30} color="#9A1A1A" />
 const Icon_Home = <Icon name="home" size={30} color="#9A1A1A" />
