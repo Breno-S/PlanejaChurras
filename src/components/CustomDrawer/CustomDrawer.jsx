@@ -38,6 +38,13 @@ export default function CustomDrawer({ navigation }) {
         icon={() => Icon_Grelha}
         onPress={() => navigation.navigate("NovoChurras")}
       />
+
+      <DrawerItem
+        label={"Info Churras"}
+        labelStyle={ {color: '#fff'} }
+        icon={() => null}
+        onPress={() => navigation.navigate("InfoChurras")}
+      />
       
       </View>
 
