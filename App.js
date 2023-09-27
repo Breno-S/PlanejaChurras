@@ -11,6 +11,7 @@ import ButtonCardapio from './src/components/ButtonCardapio/ButtonCardapio';
 
 import HomePage from './src/pages/HomePage/HomePage';
 import NovoChurrasco from './src/pages/NovoChurrasco/NovoChurrasco';
+import InfoChurras from './src/pages/InfoChurras/InfoChurras';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,29 +26,27 @@ export default function App() {
   }
 
   return (
-    <>
-      <StatusBar />
-      <NavigationContainer>
-        <Drawer.Navigator
-          // opções da barra superior do aplicativo
-          screenOptions={{
-            drawerPosition: 'right',
-            drawerStyle: { backgroundColor: '#000' },
-            headerStyle: { backgroundColor: '#000' },
-            headerTitleStyle: {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 40},
-            headerShadowVisible: false,
-            headerLeft: () => null,
-            headerRight: () => <ButtonCardapio />,
-          }}
-          initialRouteName="HomePage"
-          // propriedade que define o Drawer customizado
-          // drawerContent={(props) => <CustomDrawer {...props} />}
-        >
-          <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "Home", } }/>
-          <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "Novo Churrasco",} }/>
-          {/* <Drawer.Screen name="" component={null} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/> */}
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </>
+    <NavigationContainer>
+      <Drawer.Navigator
+        // opções da barra superior do aplicativo
+        screenOptions={{
+          drawerPosition: 'right',
+          drawerStyle: { backgroundColor: '#191B1B' },
+          headerStyle: { backgroundColor: '#191B1B' },
+          headerTitleStyle: {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 40},
+          headerShadowVisible: false,
+          headerLeft: () => null,
+          headerRight: () => <ButtonCardapio />,
+        }}
+        initialRouteName="HomePage"
+        // propriedade que define o Drawer customizado
+        // drawerContent={(props) => <CustomDrawer {...props} />}
+      >
+        <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "Planeja Churras", } }/>
+        <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "Planeja Churras",} }/>
+        <Drawer.Screen name="InfoChurras" component={InfoChurras} options={ {title: "Planeja Churras",} }/>
+        {/* <Drawer.Screen name="" component={null} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/> */}
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
