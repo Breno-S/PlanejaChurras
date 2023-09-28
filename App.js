@@ -3,7 +3,10 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
-import { useFonts, Karantina_400Regular } from '@expo-google-fonts/karantina';
+import { globalStyles } from './src/styles/globalStyles';
+
+import { useFonts, Karantina_400Regular} from '@expo-google-fonts/karantina';
+import { Graduate_400Regular } from '@expo-google-fonts/graduate';
 
 import CustomDrawer from './src/components/CustomDrawer/CustomDrawer';
 import ButtonCardapio from './src/components/ButtonCardapio/ButtonCardapio';
@@ -15,9 +18,10 @@ import InfoChurras from './src/pages/InfoChurras/InfoChurras';
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-  // carrega a fonte karantina
+  // carrega as fontes
   let [fontsLoaded, fontError] = useFonts({
     Karantina_400Regular,
+    Graduate_400Regular
   });
 
   if (!fontsLoaded && !fontError) {
@@ -32,7 +36,7 @@ export default function App() {
           drawerPosition: 'right',
           drawerStyle: { backgroundColor: '#0000000' },
           headerStyle: { backgroundColor: '#000' },
-          headerTitleStyle: {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 40},
+          headerTitleStyle: [globalStyles.text,  { fontSize: 40 }],
           headerLeft: () => null,
           headerRight: () => <ButtonCardapio />,
         }}

@@ -4,5 +4,6 @@ export const globalStyles = StyleSheet.create({
   text: {
     fontFamily: 'Karantina_400Regular',
     color: 'white',
+    letterSpacing: 1
   },
 });

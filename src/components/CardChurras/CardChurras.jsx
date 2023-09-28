@@ -1,59 +1,69 @@
-import { View, Text, StyleSheet } from "react-native";
-import { globalStyles } from "../../pages/styles/globalStyles";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { globalStyles } from "../../styles/globalStyles";
 
 export default function CardChurras(params) {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity onPress={null}>
+      <View style={styles.card}>
 
-      {/* Titulo do card */}
-      <View style={ [styles.viewTitle] }>
-        <Text style={ [styles.title, globalStyles.text] }>Nome do Churras</Text>
-      </View>
+        {/* Titulo do card */}
+        <View style={ [styles.viewTitle] }>
+          <Text style={ [styles.title, globalStyles.text] }>Nome do Churras</Text>
+        </View>
 
-      {/* Row */}
-      <View style={ {flexDirection: 'row'}}>
+        {/* Row */}
+        <View style={ {flexDirection: 'row',} }>
 
-        {/* Parte Esquerda */}
-        <View style={ [styles.viewLeft] }>
-          <Text style={[globalStyles.text]}>Quantidade Adultos: 50</Text>
-          <Text style={[globalStyles.text]}>Quantidade Jovens: 25</Text>
-          <Text style={[globalStyles.text]}>Quantidade Crianças: 5</Text>
-          <Text style={[globalStyles.text]}>Local: Onde Judas Morreu</Text>
+          {/* Parte Esquerda */}
+          <View style={ [styles.halfLeft] }>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Adultos: <Text style={ {color: '#EF820D'} }>50</Text></Text>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Jovens: <Text style={ {color: '#EF820D'} }>25</Text></Text>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Crianças: <Text style={ {color: '#EF820D'} }>5</Text></Text>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Local: <Text style={ {color: '#EF820D'} }>Onde Judas Morreu</Text></Text>
+          </View>
+      
+          {/* Parte Direita */}
+          <View style={ [styles.halfRight] }>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Preço Total: <Text style={ {color: '#EF820D'} }>R$1000,00</Text></Text>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Preço por Pessoa: <Text style={ {color: '#EF820D'} }>R$50,00</Text></Text>
+          </View>
+
         </View>
         
-        {/* Parte Direita */}
-        <View style={ [styles.viewRight] }>
-          <Text style={[globalStyles.text]}>Preço Total: R$1000,00</Text>
-          <Text style={[globalStyles.text]}>Preço por Pessoa: R$50,00</Text>
-        </View>
-
       </View>
-
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    width: '95%',
+    alignSelf: 'center',
+    width: '90%',
     backgroundColor: '#191B1B',
+    borderRadius: 5,
+    elevation: 1,
   },
 
   viewTitle: {
     padding: 10,
+    borderBottomColor: '#000',
+    borderBottomWidth: 1,
   },
 
-  viewRight: {
+  halfRight: {
     padding: 10,
   },
 
-  viewLeft: {
+  halfLeft: {
     padding: 10,
   },
 
   title: {
     fontSize: 24,
-    alignSelf: 'center'
-
+    alignSelf: 'center',
   },
+
+  cardInfo: {
+    fontSize: 18,
+  }
 });

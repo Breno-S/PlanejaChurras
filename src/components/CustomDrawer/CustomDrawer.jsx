@@ -2,12 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Dimensions } from "react-native";
+import { globalStyles } from "../../styles/globalStyles";
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Logo from "../../../assets/images/churras_icon.png"
 
-const Icon_Grelha = <Icon name="outdoor-grill" size={30} color="#9A1A1A" />
-const Icon_Home = <Icon name="home" size={30} color="#9A1A1A" />
+const Icon_Grelha = () => <Icon name="outdoor-grill" size={30} color="#9A1A1A" />;
+const Icon_Home = () => <Icon name="home" size={30} color="#9A1A1A" />;
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -27,21 +28,21 @@ export default function CustomDrawer({ navigation }) {
       <View style={ {} }>
       <DrawerItem
         label={"Home"}
-        labelStyle={ {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 28 } }
-        icon={() => Icon_Home}
+        labelStyle={ [globalStyles.text, {fontSize: 28 }] }
+        icon={Icon_Home}
         onPress={() => navigation.navigate("HomePage")}
       />
 
       <DrawerItem
         label={"Novo Churrasco"}
-        labelStyle={ {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 28} }
-        icon={() => Icon_Grelha}
+        labelStyle={ [globalStyles.text, {fontSize: 28 }] }
+        icon={Icon_Grelha}
         onPress={() => navigation.navigate("NovoChurras")}
       />
 
       <DrawerItem
         label={"Info Churras"}
-        labelStyle={ {color: '#fff', fontFamily: 'Karantina_400Regular', fontSize: 28} }
+        labelStyle={ [globalStyles.text, {fontSize: 28 }] }
         icon={() => null}
         onPress={() => navigation.navigate("InfoChurras")}
       />

@@ -1,9 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { useCallback, useState, useEffect } from 'react';
-import { useFonts, Karantina_400Regular } from '@expo-google-fonts/karantina';
 import { TextInput } from 'react-native-gesture-handler';
 import SliderInput from '../../components/SliderInput/SliderInput';
+import { globalStyles } from '../../styles/globalStyles';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const Icon_Edit = () => <Icon name="pencil-square-o" size={32} color="#fff" style={ {margin: 10} }/>;
+
+const windowWidth = Dimensions.get('window').width;
 
 export default function NovoChurrasco(){
 
@@ -12,7 +17,12 @@ export default function NovoChurrasco(){
   return(
     
     <View style={styles.container}>
-      <TextInput style={styles.title}>Nome do Churrasco</TextInput>
+      <View style={ {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'} }>
+        <TextInput style={ [globalStyles.text, styles.title] }>Nome do Churrasco </TextInput>
+          <TouchableOpacity onPress={null}>
+            <Icon_Edit />
+          </TouchableOpacity>
+      </View>
       
       <SliderInput />
       <SliderInput />
@@ -42,7 +52,8 @@ const styles = StyleSheet.create({
     color: '#fff', 
     textAlign: 'center',
     marginBottom: 20,
-    marginTop: 20
+    marginTop: 20,
+    width: windowWidth-(windowWidth/5),
   }
 
 })
