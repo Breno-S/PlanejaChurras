@@ -14,6 +14,8 @@ import ButtonCardapio from './src/components/ButtonCardapio/ButtonCardapio';
 import HomePage from './src/pages/HomePage/HomePage';
 import NovoChurrasco from './src/pages/NovoChurrasco/NovoChurrasco';
 import InfoChurras from './src/pages/InfoChurras/InfoChurras';
+import DetalheChurras from './src/pages/DetalheChurras/DetalheChurras';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -47,6 +49,7 @@ export default function App() {
         <Drawer.Screen name="HomePage" component={HomePage} options={ {title: "PLANEJA CHURRAS", } }/>
         <Drawer.Screen name="NovoChurras" component={NovoChurrasco} options={ {title: "PLANEJA CHURRAS",} }/>
         <Drawer.Screen name="InfoChurras" component={InfoChurras} options={ {title: "PLANEJA CHURRAS",} }/>
+        <Drawer.Screen name="DetalheChurras" component={DetalheChurras} options={ {title: "PLANEJA CHURRAS",} }/>
         {/* <Drawer.Screen name="" component={null} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/> */}
       </Drawer.Navigator>
     </NavigationContainer>

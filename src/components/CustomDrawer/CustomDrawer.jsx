@@ -46,6 +46,13 @@ export default function CustomDrawer({ navigation }) {
         icon={() => null}
         onPress={() => navigation.navigate("InfoChurras")}
       />
+
+      <DrawerItem
+      label={"Detalhes Churrasco"}
+      labelStyle={ [globalStyles.text, {fontSize: 28 }] }
+      icon={() => null}
+      onPress={() => navigation.navigate("DetalheChurras")}
+      />
       
       </View>
 
