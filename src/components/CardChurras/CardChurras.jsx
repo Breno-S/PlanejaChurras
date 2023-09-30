@@ -12,7 +12,7 @@ export default function CardChurras(params) {
         </View>
 
         {/* Row */}
-        <View style={ {flexDirection: 'row',} }>
+        <View style={ {flexDirection: 'row', justifyContent: 'space-between'} }>
 
           {/* Parte Esquerda */}
           <View style={ [styles.halfLeft] }>
@@ -52,10 +52,12 @@ const styles = StyleSheet.create({
 
   halfRight: {
     padding: 10,
+    width: '50%',
   },
 
   halfLeft: {
     padding: 10,
+    width: '50%',
   },
 
   title: {
