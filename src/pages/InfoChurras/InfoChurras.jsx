@@ -10,9 +10,11 @@ import {
 import { useFonts, Karantina_400Regular } from "@expo-google-fonts/karantina";
 import { React, useState, useEffect } from "react";
 import Input from "../../components/Input/Input";
+import { useNavigation } from '@react-navigation/native';
 
 export default function InfoChurras({ info }) {
   const windowWidth = Dimensions.get("window").width;
+  const navigation = useNavigation();
 
   const [infoInput, setInfoInput] = useState([
     {
@@ -85,7 +87,9 @@ export default function InfoChurras({ info }) {
     setInfoInput(updatedInfoInput);
   };
 
-  const teste = () => {};
+  const handleButtonPress = () => {
+    navigation.navigate('DetalheChurras', { infoInput });
+  };
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -138,7 +142,7 @@ export default function InfoChurras({ info }) {
           <View style={styles.containerButton}>
             <View style={styles.contentButton}>
               <Button
-                onPress={teste}
+                onPress={handleButtonPress}
                 color="#fff"
                 title="PROSSEGUIR"
                 style={styles.button}

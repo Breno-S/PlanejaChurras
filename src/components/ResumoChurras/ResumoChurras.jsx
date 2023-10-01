@@ -12,9 +12,9 @@ export default function ResumoChurras(){
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>
-                <Text style={ [globalStyles.text, styles.info] }>Adultos - <Text style={ {color: '#EF820D'} }>50</Text></Text>
-                <Text style={ [globalStyles.text, styles.info] }>Jovens - <Text style={ {color: '#EF820D'} }>25</Text></Text>
-                <Text style={ [globalStyles.text, styles.info] }>Crianças - <Text style={ {color: '#EF820D'} }>5</Text></Text>
+                <Text style={ [globalStyles.text, styles.info] }>Adultos : <Text style={ {color: '#EF820D'} }>50</Text></Text>
+                <Text style={ [globalStyles.text, styles.info] }>Jovens : <Text style={ {color: '#EF820D'} }>25</Text></Text>
+                <Text style={ [globalStyles.text, styles.info] }>Crianças : <Text style={ {color: '#EF820D'} }>5</Text></Text>
             </View>
 
 
