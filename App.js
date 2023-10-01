@@ -5,21 +5,29 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 import { globalStyles } from './src/styles/globalStyles';
 
+// Fontes
 import { useFonts, Karantina_400Regular} from '@expo-google-fonts/karantina';
 import { Graduate_400Regular } from '@expo-google-fonts/graduate';
 
+// Drawer
 import CustomDrawer from './src/components/CustomDrawer/CustomDrawer';
 import ButtonCardapio from './src/components/ButtonCardapio/ButtonCardapio';
 
+// Páginas
 import HomePage from './src/pages/HomePage/HomePage';
 import NovoChurrasco from './src/pages/NovoChurrasco/NovoChurrasco';
 import InfoChurras from './src/pages/InfoChurras/InfoChurras';
 import DetalheChurras from './src/pages/DetalheChurras/DetalheChurras';
 
+// SQLite
+import createDummySchema from './src/database/dummySchema';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  // CRIA BCD DE TESTES
+  createDummySchema();
+
   // carrega as fontes
   let [fontsLoaded, fontError] = useFonts({
     Karantina_400Regular,
