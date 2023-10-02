@@ -4,11 +4,125 @@
 
 import db from ".";
 
+
+
+export default function createDummySchema() {
+	
+/******************************************************************************/
+/******************************** PRODUTO *************************************/
+/******************************************************************************/
+
+	const dummyData5 = [
+		// Carnes Bovinas
+		{
+			nome_produto: 'Fraldinha',
+			preco_unitario: 29.99,
+			categoria: 'Carnes Bovinas',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Contrafilé',
+			preco_unitario: 34.98,
+			categoria: 'Carnes Bovinas',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Alcatra',
+			preco_unitario: 39.90,
+			categoria: 'Carnes Bovinas',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Picanha',
+			preco_unitario: 59.99,
+			categoria:'Carnes Bovinas',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Cupim',
+			preco_unitario: 49.90,
+			categoria:'Carnes Bovinas',
+			medida: 'quilos',
+		},
+		// Carnes Suínas
+		{
+			nome_produto: 'Pernil',
+			preco_unitario: 22.50,
+			categoria: 'Carnes Suínas',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Lombo',
+			preco_unitario: 27.99,
+			categoria: 'Carnes Suínas',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Linguiça',
+			preco_unitario: 19.99,
+			categoria: 'Carnes Suínas',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Panceta',
+			preco_unitario: 26.90,
+			categoria:'Carnes Suínas',
+			medida: 'quilos',
+		},
+		// Carnes de Frango
+		{
+			nome_produto: 'Coxa',
+			preco_unitario: 10.80,
+			categoria: 'Carnes de Frango',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Asa',
+			preco_unitario: 16.80,
+			categoria: 'Carnes de Frango',
+			medida: 'quilos',
+		},
+		{
+			nome_produto: 'Coração',
+			preco_unitario: 38.80,
+			categoria: 'Carnes de Frango',
+			medida: 'quilos',
+		},
+	];
+
+////////////////////////// SOMENTE PARA TESTES
+	db.transaction(tx => {
+		tx.executeSql("DROP TABLE IF EXISTS Produto;",
+		[],
+		(_, resultSet) => console.log("Tabela 'Produto' deletada"),
+		(_, error) => console.error("Erro deletando tabela 'Produto'", error)
+		)
+	});
+////////////////////////// SOMENTE PARA TESTES
+
+	db.transaction(tx => {
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Produto (pk_produto INTEGER PRIMARY KEY AUTOINCREMENT, nome_produto VARCHAR(32), preco_unitario DECIMAL(8,2), categoria VARCHAR(24) NOT NULL, medida VARCHAR(10) NOT NULL, CONSTRAINT unique_produto UNIQUE (nome_produto, categoria));",
+			[],
+			(_, resultSet) => console.log("Tabela 'Produto' criada"),
+			(_, error) => console.error("Erro criando tabela 'Produto'", error)
+		)
+	});
+
+	// Popular tabela
+	for (let i = 0; i < 4; i++) {
+		db.transaction(tx => {
+			tx.executeSql("INSERT INTO Produto (nome_produto, preco_unitario, categoria, medida, ) VALUES (?, ?, ?, ?);",
+				[j+1, dummyData5[i].nome_produto, dummyData5[i].preco_unitario, dummyData5[i].categoria, dummyData5[i].medida],
+				(_, resultSet) => console.log("Registro adicionado à tabela 'Produto'"),
+				(_, error) => console.error("Erro criando registro em 'Produto'", error)
+			)
+		});
+	}
+
 /******************************************************************************/
 /******************************** CHURRAS *************************************/
 /******************************************************************************/
 
-export default function createDummySchema() {
 	const dummyData1 = {
 		nome_churras: "Churras Teste",
 		qtd_adultos: 10,
@@ -32,7 +146,7 @@ export default function createDummySchema() {
 		tx.executeSql("CREATE TABLE IF NOT EXISTS Churras (pk_churras INTEGER PRIMARY KEY AUTOINCREMENT, nome_churras VARCHAR(128) NOT NULL, qtd_adultos TINYINT(2) NOT NULL, qtd_jovens TINYINT(2) NOT NULL, qtd_criancas TINYINT(2) NOT NULL, preco_total DECIMAL(10, 2), preco_pessoa DECIMAL(10, 2), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP); CREATE TRIGGER update_churras_modtime AFTER UPDATE ON Churras FOR EACH ROW BEGIN UPDATE Churras SET updated_at = CURRENT_TIMESTAMP WHERE pk_churras = OLD.pk_churras; END;",
 			[],
 			(_, resultSet) => console.log("Tabela 'Churras' criada"),
-			(_, error) => console.error("Erro criando 'tabela Churras'", error)
+			(_, error) => console.error("Erro criando tabela 'Churras'", error)
 		)
 	});
 
@@ -71,7 +185,7 @@ export default function createDummySchema() {
 		tx.executeSql("CREATE TABLE IF NOT EXISTS Info_Churras (pk_info_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, nome_anfitriao VARCHAR(64) NOT NULL, telefone VARCHAR(16) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			(_, resultSet) => console.log("Tabela 'Info_Churras' criada"),
-			(_, error) => console.error("Erro criando 'tabela Info_Churras'", error)
+			(_, error) => console.error("Erro criando tabela 'Info_Churras'", error)
 		)
 	});
 
@@ -115,7 +229,7 @@ export default function createDummySchema() {
 		tx.executeSql("CREATE TABLE IF NOT EXISTS Local_Churras (pk_local_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, cep VARCHAR(9) NOT NULL, logradouro VARCHAR(64) NOT NULL, numero VARCHAR(8) NOT NULL, complemento VARCHAR(8), municipio VARCHAR(32) NOT NULL, estado VARCHAR(20) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			(_, resultSet) => console.log("Tabela 'Local_Churras' criada"),
-			(_, error) => console.error("Erro criando 'tabela Local_Churras'", error)
+			(_, error) => console.error("Erro criando tabela 'Local_Churras'", error)
 		)
 	});
 
@@ -161,7 +275,7 @@ export default function createDummySchema() {
 		},
 	];
 
-	////////////////////////// SOMENTE PARA TESTES
+////////////////////////// SOMENTE PARA TESTES
 	db.transaction(tx => {
 		tx.executeSql("DROP TABLE IF EXISTS Item_Churras;",
 		[],
@@ -169,13 +283,13 @@ export default function createDummySchema() {
 		(_, error) => console.error("Erro deletando tabela 'Item_Churras'", error)
 		)
 	});
-	////////////////////////// SOMENTE PARA TESTES
+////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
 		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, nome_item VARCHAR(32) NOT NULL, categoria VARCHAR(24) NOT NULL, medida VARCHAR(10) NOT NULL, quantidade DECIMAL(8, 2) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			(_, resultSet) => console.log("Tabela 'Item_Churras' criada"),
-			(_, error) => console.error("Erro criando 'tabela Item_Churras'", error)
+			(_, error) => console.error("Erro criando tabela 'Item_Churras'", error)
 		)
 	});
 
@@ -191,5 +305,4 @@ export default function createDummySchema() {
 			});
 		}
 	}
-
 }
