@@ -11,20 +11,18 @@ export default function CheckBoxes({type}){
   cBovinas = ['Fraldinha [kg] ',
               'Contrafilé [kg]',
               'Alcatra [kg]',
-              'Costela [kg]',
-              'Picanha [kg]']
+              'Picanha [kg]',
+              'Cupim [kg]']
               
   cSuinas = [ 'Pernil [kg]',
               'Lombo [kg]',
               'Bisteca [kg]',
               'Linguiça [kg]',
-              'Maminha [kg]']
+              'Panceta [kg]']
               
-  cFrango = ['Coxa [kg]',
-              'Sobrecoxa [kg]',
+  cFrango = [ 'Coxa [kg]',
               'Asa [kg]',
-              'Coração [kg]',
-              'Linguiça de Frango [kg]']
+              'Coração [kg]',]
 
   Bebidas = [ 'Água [2L]',
               'Refrigerante [2L]',
@@ -35,7 +33,8 @@ export default function CheckBoxes({type}){
   Acompanhamentos = ['Pão de Alho',
                      'Queijo Coalho',
                      'Farofa Pronta',
-                     'Pão',
+                     'Pão Francês',
+                     'Ovo de Codorna',
                      'Vinagrete']
 
   Suprimentos = ['Carvão',
@@ -102,7 +101,7 @@ export default function CheckBoxes({type}){
       );
     case "Carnes de Frango":
       return(
-        <View style={styles.container}>
+        <View style={[styles.container, {height: 250}]}>
             <View style={styles.hr}/>
             <View style={{flexDirection: 'row', marginBottom: 20, marginTop: 10}}>
                 <Text style={[styles.text, {marginLeft: 20}]}>{type}</Text>    
@@ -154,7 +153,7 @@ export default function CheckBoxes({type}){
       );
     case "Acompanhamentos":
       return(
-        <View style={styles.container}>
+        <View style={[styles.container, {height: 350}]}>
             <View style={styles.hr}/>
             <View style={{flexDirection: 'row', marginBottom: 20, marginTop: 10}}>
                 <Text style={[styles.text, {marginLeft: 20}]}>{type}</Text>    

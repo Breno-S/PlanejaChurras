@@ -21,6 +21,11 @@ export default function NovoChurrasco(){
       qtdAdultos: "",
       qtdJovens: "",
       qtdCriancas: "",
+      cBovinas: "",
+      cSuinas: "",
+      cFrango: "",
+      Acomp: "",
+      Suprim: ""
 
     },
   ]);
@@ -53,7 +58,7 @@ export default function NovoChurrasco(){
     <ScrollView style={styles.scrollview}> 
       <View style={styles.container}>
         <View style={ {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'} }>
-          <TextInput style={ [globalStyles.text, styles.title] }>Nome do Churrasco </TextInput>
+          <TextInput style={ [globalStyles.text, styles.title] }>Nome do Churrasco</TextInput>
             <TouchableOpacity onPress={null}>
               <Icon_Edit />
             </TouchableOpacity>
@@ -70,7 +75,7 @@ export default function NovoChurrasco(){
         <CheckBoxes type="Acompanhamentos"/>
         <CheckBoxes type="Suprimentos"/>
 
-        <View style={styles.hr}/>
+        
         <TouchableOpacity style={ styles.newButton} onPress={() => navigation.navigate("InfoChurras")}>
           <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>Informações{'\n'}do Churras</Text>
         </TouchableOpacity>
