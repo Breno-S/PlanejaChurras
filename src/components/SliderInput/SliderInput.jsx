@@ -6,38 +6,35 @@ import Slider from '@react-native-community/slider';
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function SliderInput(){
+export default function SliderInput({type}){
   
   const [sliderValue, setSliderValue] = useState(0);
 
   
+      return(
+    
+        <View style={styles.container}>
+            <View style={styles.hr}/>
+            <View style={{flexDirection: 'row', marginBottom: 20, marginTop: 10}}>
+                <Text style={[styles.text, {marginLeft: 20}]}>{type}</Text>    
+                <Text style={[styles.text, {marginLeft: 310}]}>{sliderValue}</Text>    
+            </View>
+            <View style={styles.sliderBody}>
+                <Slider minimumValue={0}
+                        maximumValue={50}
+                        value={sliderValue}
+                        onValueChange={(value) => setSliderValue(value)}
+                        step={1}
+                        minimumTrackTintColor='#EF820D'
+                        maximumTrackTintColor='#000'
+                        style={styles.slider}
+                        />
+            </View>         
+        </View>
+    
+      );
     
     
-  return(
-
-    <View style={styles.container}>
-        <View style={styles.hr}/>
-        <View style={{flexDirection: 'row', marginBottom: 20, marginTop: 10}}>
-            <Text style={[styles.text, {marginLeft: 20}]}>Tipo</Text>    
-            <Text style={[styles.text, {marginLeft: 310}]}>{sliderValue}</Text>    
-        </View>
-        <View style={styles.sliderBody}>
-            <Slider minimumValue={0}
-                    maximumValue={50}
-                    value={sliderValue}
-                    onValueChange={(value) => setSliderValue(value)}
-                    step={1}
-                    minimumTrackTintColor='#EF820D'
-                    maximumTrackTintColor='#000'
-                    style={styles.slider}
-                    />
-        </View>
-
-
-                    
-    </View>
-
-  );
 }
 
 const styles = StyleSheet.create({
