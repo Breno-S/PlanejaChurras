@@ -1,8 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import ResumoChurras from '../../components/ResumoChurras/ResumoChurras';
 import { globalStyles } from '../../styles/globalStyles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
+
 
 export default function DetalheChurras() {
 

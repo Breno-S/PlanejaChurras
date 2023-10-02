@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
+
+const windowWidth = Dimensions.get('window').width;
 
 export default function ResumoChurras(){
     return(
@@ -178,11 +180,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection:'row',
         justifyContent: 'space-around',
-        width: 340,
         height: 36,
         backgroundColor: '#191B1B',
         borderRadius: 5,
         elevation: 1,
+        width: windowWidth*0.9
     },
 
     info: {
@@ -195,12 +197,12 @@ const styles = StyleSheet.create({
     campo2: {
         alignSelf: 'center',
         flexDirection: 'column',
-        width: 340,
         height: 415,
         backgroundColor: '#191B1B',
         borderRadius: 10,
         elevation: 1,
         padding: 5,
+        width: windowWidth * 0.9
     },
 
     infoTitle: {
@@ -226,12 +228,12 @@ const styles = StyleSheet.create({
     campo3: {
         alignSelf: 'center',
         flexDirection:'column',
-        width: 340,
         height: 300,
         backgroundColor: '#191B1B',
         borderRadius: 10,
         elevation: 1,
         padding: 5,
+        width: windowWidth * 0.9
     },
 
 })

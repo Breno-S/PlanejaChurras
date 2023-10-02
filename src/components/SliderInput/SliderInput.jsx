@@ -8,9 +8,10 @@ const windowWidth = Dimensions.get('window').width;
 
 export default function SliderInput({type}){
   
+  
   const [sliderValue, setSliderValue] = useState(0);
 
-  
+      
       return(
     
         <View style={styles.container}>

@@ -23,11 +23,12 @@ export default function CheckBoxes({type}){
   cFrango = ['Coxa [kg]',
               'Sobrecoxa [kg]',
               'Asa [kg]',
-              'Coração [kg]']
+              'Coração [kg]',
+              'Linguiça de Frango [kg]']
 
   Bebidas = [ 'Água [2L]',
               'Refrigerante [2L]',
-              'Suco [2L]',
+              'Suco [1L]',
               'Cerveja [lata]',
               'Caipirinha [300 ml]']
 
@@ -63,8 +64,8 @@ export default function CheckBoxes({type}){
                   text={item}
                   iconStyle={{ borderColor: "#EF820D", borderRadius: 1 }}
                   style={{marginLeft: 20, marginVertical: 5}}
-                  innerIconStyle={{ borderWidth: 2, borderRadius: 1 }}
-                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20  }}
+                  innerIconStyle={{ borderWidth: 2, borderRadius:1 }}
+                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20, textDecorationLine: "none"  }}
                   onPress={() => setCheckboxState(!checkboxState)}
                 />
                 
@@ -91,7 +92,7 @@ export default function CheckBoxes({type}){
                   iconStyle={{ borderColor: "#EF820D", borderRadius: 1 }}
                   style={{marginLeft: 20, marginVertical: 5}}
                   innerIconStyle={{ borderWidth: 2, borderRadius: 1 }}
-                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20  }}
+                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20, textDecorationLine: "none"  }}
                   onPress={() => setCheckboxState(!checkboxState)}
                 />
                 
@@ -117,7 +118,7 @@ export default function CheckBoxes({type}){
                   iconStyle={{ borderColor: "#EF820D", borderRadius: 1 }}
                   style={{marginLeft: 20, marginVertical: 5}}
                   innerIconStyle={{ borderWidth: 2, borderRadius: 1 }}
-                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20  }}
+                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20, textDecorationLine: "none"  }}
                   onPress={() => setCheckboxState(!checkboxState)}
                 />
                 
@@ -143,7 +144,7 @@ export default function CheckBoxes({type}){
                   iconStyle={{ borderColor: "#EF820D", borderRadius: 1 }}
                   style={{marginLeft: 20, marginVertical: 5}}
                   innerIconStyle={{ borderWidth: 2, borderRadius: 1 }}
-                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20  }}
+                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20, textDecorationLine: "none"  }}
                   onPress={() => setCheckboxState(!checkboxState)}
                 />
                 
@@ -169,7 +170,7 @@ export default function CheckBoxes({type}){
                   iconStyle={{ borderColor: "#EF820D", borderRadius: 1 }}
                   style={{marginLeft: 20, marginVertical: 5}}
                   innerIconStyle={{ borderWidth: 2, borderRadius: 1 }}
-                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20  }}
+                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20, textDecorationLine: "none"  }}
                   onPress={() => setCheckboxState(!checkboxState)}
                 />
                 
@@ -196,7 +197,7 @@ export default function CheckBoxes({type}){
                   iconStyle={{ borderColor: "#EF820D", borderRadius: 1 }}
                   style={{marginLeft: 20, marginVertical: 5}}
                   innerIconStyle={{ borderWidth: 2, borderRadius: 1 }}
-                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20  }}
+                  textStyle={{ fontFamily: 'Karantina_400Regular', color: '#fff', fontSize: 20, textDecorationLine: "none"  }}
                   onPress={() => setCheckboxState(!checkboxState)}
                 />
                 
@@ -225,11 +226,5 @@ const styles = StyleSheet.create({
     fontSize: 30, 
     color: '#fff',
   },
-  listText: {
-    fontFamily: 'Karantina_400Regular', 
-    fontSize: 20, 
-    color: '#fff',
-    marginLeft: 20
-  }
 
 })
