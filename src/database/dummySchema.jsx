@@ -88,6 +88,69 @@ export default function createDummySchema() {
 			categoria: 'Carnes de Frango',
 			medida: 'quilos',
 		},
+		// Bebidas Não Alcoólicas
+		{
+			nome_produto: 'Água',
+			preco_unitario: 3.50,
+			categoria: 'Bebidas Não Alcoólicas',
+			medida: 'litros'
+		},
+		{
+			nome_produto: 'Refrigerante',
+			preco_unitario: 5.49,
+			categoria: 'Bebidas Não Alcoólicas',
+			medida: 'litros'
+		},
+		{
+			nome_produto: 'Suco',
+			preco_unitario: 4.99,
+			categoria: 'Bebidas Não Alcoólicas',
+			medida: 'litros'
+		},
+		// Bebidas Alcoólicas
+		{
+			nome_produto: 'Cerveja',
+			preco_unitario: 8.99,
+			categoria: 'Bebidas Alcoólicas',
+			medida: 'litros'
+		},
+		{
+			nome_produto: 'Caipirinha',
+			preco_unitario: 38.54,
+			categoria: 'Bebidas Alcoólicas',
+			medida: 'litros'
+		},
+		// Acompanhamentos
+		{
+			nome_produto: 'Arroz',
+			preco_unitario: 5.90,
+			categoria: 'Acompanhamentos',
+			medida: 'quilos'
+		},
+		{
+			nome_produto: 'Pão de Alho',
+			preco_unitario: 30.00,
+			categoria: 'Acompanhamentos',
+			medida: 'quilos'
+		},
+		{
+			nome_produto: 'Queijo Coalho',
+			preco_unitario: 53.90,
+			categoria: 'Acompanhamentos',
+			medida: 'quilos'
+		},
+		{
+			nome_produto: 'Farofa Pronta',
+			preco_unitario: 18.98,
+			categoria: 'Acompanhamentos',
+			medida: 'quilos'
+		},
+		{
+			nome_produto: 'Pão Francês',
+			preco_unitario: 15.00,
+			categoria: 'Acompanhamentos',
+			medida: 'quilos'
+		},
 	];
 
 ////////////////////////// SOMENTE PARA TESTES
