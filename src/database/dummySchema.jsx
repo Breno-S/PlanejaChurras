@@ -4,154 +4,13 @@
 
 import db from ".";
 
-
+import { dummyDataProdutos, dummyDataChurras, dummyDataInfo_Churras, dummyDataLocal_Churras, dummyDataItem_Churras } from "./db_reference/dummyData"; 
 
 export default function createDummySchema() {
 	
 /******************************************************************************/
 /******************************** PRODUTO *************************************/
 /******************************************************************************/
-
-	const dummyData5 = [
-		// Carnes Bovinas
-		{
-			nome_produto: 'Fraldinha',
-			preco_unitario: 29.99,
-			categoria: 'Carnes Bovinas',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Contrafilé',
-			preco_unitario: 34.98,
-			categoria: 'Carnes Bovinas',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Alcatra',
-			preco_unitario: 39.90,
-			categoria: 'Carnes Bovinas',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Picanha',
-			preco_unitario: 59.99,
-			categoria:'Carnes Bovinas',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Cupim',
-			preco_unitario: 49.90,
-			categoria:'Carnes Bovinas',
-			medida: 'quilos',
-		},
-		// Carnes Suínas
-		{
-			nome_produto: 'Pernil',
-			preco_unitario: 22.50,
-			categoria: 'Carnes Suínas',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Lombo',
-			preco_unitario: 27.99,
-			categoria: 'Carnes Suínas',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Linguiça',
-			preco_unitario: 19.99,
-			categoria: 'Carnes Suínas',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Panceta',
-			preco_unitario: 26.90,
-			categoria:'Carnes Suínas',
-			medida: 'quilos',
-		},
-		// Carnes de Frango
-		{
-			nome_produto: 'Coxa',
-			preco_unitario: 10.80,
-			categoria: 'Carnes de Frango',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Asa',
-			preco_unitario: 16.80,
-			categoria: 'Carnes de Frango',
-			medida: 'quilos',
-		},
-		{
-			nome_produto: 'Coração',
-			preco_unitario: 38.80,
-			categoria: 'Carnes de Frango',
-			medida: 'quilos',
-		},
-		// Bebidas Não Alcoólicas
-		{
-			nome_produto: 'Água',
-			preco_unitario: 3.50,
-			categoria: 'Bebidas Não Alcoólicas',
-			medida: 'litros'
-		},
-		{
-			nome_produto: 'Refrigerante',
-			preco_unitario: 5.49,
-			categoria: 'Bebidas Não Alcoólicas',
-			medida: 'litros'
-		},
-		{
-			nome_produto: 'Suco',
-			preco_unitario: 4.99,
-			categoria: 'Bebidas Não Alcoólicas',
-			medida: 'litros'
-		},
-		// Bebidas Alcoólicas
-		{
-			nome_produto: 'Cerveja',
-			preco_unitario: 8.99,
-			categoria: 'Bebidas Alcoólicas',
-			medida: 'litros'
-		},
-		{
-			nome_produto: 'Caipirinha',
-			preco_unitario: 38.54,
-			categoria: 'Bebidas Alcoólicas',
-			medida: 'litros'
-		},
-		// Acompanhamentos
-		{
-			nome_produto: 'Arroz',
-			preco_unitario: 5.90,
-			categoria: 'Acompanhamentos',
-			medida: 'quilos'
-		},
-		{
-			nome_produto: 'Pão de Alho',
-			preco_unitario: 30.00,
-			categoria: 'Acompanhamentos',
-			medida: 'quilos'
-		},
-		{
-			nome_produto: 'Queijo Coalho',
-			preco_unitario: 53.90,
-			categoria: 'Acompanhamentos',
-			medida: 'quilos'
-		},
-		{
-			nome_produto: 'Farofa Pronta',
-			preco_unitario: 18.98,
-			categoria: 'Acompanhamentos',
-			medida: 'quilos'
-		},
-		{
-			nome_produto: 'Pão Francês',
-			preco_unitario: 15.00,
-			categoria: 'Acompanhamentos',
-			medida: 'quilos'
-		},
-	];
 
 ////////////////////////// SOMENTE PARA TESTES
 	db.transaction(tx => {
@@ -164,7 +23,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Produto (pk_produto INTEGER PRIMARY KEY AUTOINCREMENT, nome_produto VARCHAR(32), preco_unitario DECIMAL(8,2), categoria VARCHAR(24) NOT NULL, medida VARCHAR(10) NOT NULL, CONSTRAINT unique_produto UNIQUE (nome_produto, categoria));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Produto (pk_produto INTEGER PRIMARY KEY AUTOINCREMENT, nome_produto VARCHAR(64), preco_unitario DECIMAL(8,2), categoria VARCHAR(24) NOT NULL, medida VARCHAR(10) NOT NULL, CONSTRAINT unique_produto UNIQUE (nome_produto, categoria));",
 			[],
 			(_, resultSet) => console.log("Tabela 'Produto' criada"),
 			(_, error) => console.error("Erro criando tabela 'Produto'", error)
@@ -172,10 +31,10 @@ export default function createDummySchema() {
 	});
 
 	// Popular tabela
-	for (let i = 0; i < 4; i++) {
+	for (let i = 0; i < dummyDataProdutos.length; i++) {
 		db.transaction(tx => {
-			tx.executeSql("INSERT INTO Produto (nome_produto, preco_unitario, categoria, medida, ) VALUES (?, ?, ?, ?);",
-				[j+1, dummyData5[i].nome_produto, dummyData5[i].preco_unitario, dummyData5[i].categoria, dummyData5[i].medida],
+			tx.executeSql("INSERT INTO Produto (nome_produto, preco_unitario, categoria, medida) VALUES (?, ?, ?, ?);",
+				[...Object.values(dummyDataProdutos[i])],
 				(_, resultSet) => console.log("Registro adicionado à tabela 'Produto'"),
 				(_, error) => console.error("Erro criando registro em 'Produto'", error)
 			)
@@ -185,15 +44,6 @@ export default function createDummySchema() {
 /******************************************************************************/
 /******************************** CHURRAS *************************************/
 /******************************************************************************/
-
-	const dummyData1 = {
-		nome_churras: "Churras Teste",
-		qtd_adultos: 10,
-		qtd_jovens: 100,
-		qtd_criancas: 1000,
-		preco_total: 2250.00,
-		preco_pessoa: 225.00,
-	}
 
 ////////////////////////// SOMENTE PARA TESTES
 	db.transaction(tx => {
@@ -217,7 +67,7 @@ export default function createDummySchema() {
 	for (let i = 0; i < 3; i++) {
 		db.transaction(tx => {
 			tx.executeSql("INSERT INTO Churras (nome_churras, qtd_adultos, qtd_jovens, qtd_criancas, preco_total, preco_pessoa) VALUES (?, ?, ?, ?, ?, ?);",
-				[...Object.values(dummyData1)],
+				[...Object.values(dummyDataChurras)],
 				(_, resultSet) => console.log("Registro adicionado à tabela 'Churras'"),
 				(_, error) => console.error("Erro criando registro em 'Churras'", error)
 			)
@@ -227,12 +77,6 @@ export default function createDummySchema() {
 /******************************************************************************/
 /*************************** INFO_CHURRAS *************************************/
 /******************************************************************************/
-
-	const dummyData2 = {
-		fk_churras: 1,
-		nome_anfitriao: "Seu Madruga",
-		telefone: "(11) 99999-9999",
-	}
 
 ////////////////////////// SOMENTE PARA TESTES
 	db.transaction(tx => {
@@ -256,7 +100,7 @@ export default function createDummySchema() {
 	for (let i = 0; i < 3; i++) {
 		db.transaction(tx => {
 			tx.executeSql("INSERT INTO Info_Churras (fk_churras, nome_anfitriao, telefone) VALUES (?, ?, ?);",
-				[i+1, dummyData2.nome_anfitriao, dummyData2.telefone],
+				[i+1, dummyDataInfo_Churras.nome_anfitriao, dummyDataInfo_Churras.telefone],
 				(_, resultSet) => console.log("Registro adicionado à tabela 'Info_Churras'"),
 				(_, error) => console.error("Erro criando registro em 'Info_Churras'", error)
 			)
@@ -267,16 +111,6 @@ export default function createDummySchema() {
 /******************************************************************************/
 /*************************** LOCAL_CHURRAS ************************************/
 /******************************************************************************/
-
-	const dummyData3 = {
-		fk_churras: 1,
-		cep: "88523-497",
-		logradouro: "Rua Terezinha Candinho do Amarante",
-		numero: "123",
-		complemento: null,
-		municipio: "Lages",
-		estado: "Santa Catarina",
-	}
 
 ////////////////////////// SOMENTE PARA TESTES
 	db.transaction(tx => {
@@ -300,7 +134,7 @@ export default function createDummySchema() {
 	for (let i = 0; i < 3; i++) {
 		db.transaction(tx => {
 			tx.executeSql("INSERT INTO Local_Churras (fk_churras, cep, logradouro, numero, complemento, municipio, estado) VALUES (?, ?, ?, ?, ?, ?, ?);",
-				[i+1, dummyData3.cep, dummyData3.logradouro, dummyData3.numero, dummyData3.complemento, dummyData3.municipio, dummyData3.estado],
+				[i+1, dummyDataLocal_Churras.cep, dummyDataLocal_Churras.logradouro, dummyDataLocal_Churras.numero, dummyDataLocal_Churras.complemento, dummyDataLocal_Churras.municipio, dummyDataLocal_Churras.estado],
 				(_, resultSet) => console.log("Registro adicionado à tabela 'Local_Churras'"),
 				(_, error) => console.error("Erro criando registro em 'Local_Churras'", error)
 			)
@@ -310,33 +144,6 @@ export default function createDummySchema() {
 /******************************************************************************/
 /*************************** ITEM_CHURRAS *************************************/
 /******************************************************************************/
-
-	const dummyData4 = [
-		{
-			nome_item: 'Linguiça',
-			categoria: 'Carnes Suínas',
-			medida: 'quilos',
-			quantidade: 1.5,
-		},
-		{
-			nome_item: 'Filé Mignon',
-			categoria: 'Carnes Bovinas',
-			medida: 'quilos',
-			quantidade: 1.5,
-		},
-		{
-			nome_item: 'Bisteca',
-			categoria: 'Carnes Suínas',
-			medida: 'quilos',
-			quantidade: 1.5,
-		},
-		{
-			nome_item: 'Cerveja',
-			categoria: 'Bebidas Alcoólicas',
-			medida: 'litros',
-			quantidade: 4,
-		},
-	];
 
 ////////////////////////// SOMENTE PARA TESTES
 	db.transaction(tx => {
@@ -349,7 +156,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, nome_item VARCHAR(32) NOT NULL, categoria VARCHAR(24) NOT NULL, medida VARCHAR(10) NOT NULL, quantidade DECIMAL(8, 2) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, fk_produto VARCHAR(64) NOT NULL, quantidade DECIMAL(8, 2) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			(_, resultSet) => console.log("Tabela 'Item_Churras' criada"),
 			(_, error) => console.error("Erro criando tabela 'Item_Churras'", error)
@@ -357,11 +164,11 @@ export default function createDummySchema() {
 	});
 
 	// Popular tabela
-	for (let j = 0; j < 3; j++) {
-		for (let i = 0; i < 4; i++) {
+	for (let i = 0; i < 3; i++) {
+		for (let j = 0; j < 4; j++) {
 			db.transaction(tx => {
-				tx.executeSql("INSERT INTO Item_Churras (fk_churras, nome_item, categoria, medida, quantidade) VALUES (?, ?, ?, ?, ?);",
-					[j+1, dummyData4[i].nome_item, dummyData4[i].categoria, dummyData4[i].medida, dummyData4[i].quantidade],
+				tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
+					[i+1, dummyDataItem_Churras[j].fk_produto, dummyDataItem_Churras[j].quantidade],
 					(_, resultSet) => console.log("Registro adicionado à tabela 'Item_Churras'"),
 					(_, error) => console.error("Erro criando registro em 'Item_Churras'", error)
 				)
