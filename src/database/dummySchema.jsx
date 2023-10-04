@@ -156,7 +156,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, fk_produto VARCHAR(64) NOT NULL, quantidade DECIMAL(8, 2) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, fk_produto INT(11) NOT NULL, quantidade DECIMAL(8, 2) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			(_, resultSet) => console.log("Tabela 'Item_Churras' criada"),
 			(_, error) => console.error("Erro criando tabela 'Item_Churras'", error)
