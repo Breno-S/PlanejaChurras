@@ -20,7 +20,7 @@ CREATE TABLE Churras (
 CREATE TABLE Item_Churras (
     pk_item_churras INT(11) AUTO_INCREMENT,
     fk_churras INT(11) NOT NULL,
-    fk_produto VARCHAR(32) NOT NULL,
+    fk_produto INT(11) NOT NULL,
     quantidade DECIMAL(8, 2) NOT NULL,
     PRIMARY KEY (pk_item_churras),
     FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras)
