@@ -49,11 +49,11 @@ CREATE TABLE Local_Churras (
 );
 
 CREATE TABLE Produto(
-	pk_produto INT(11) AUTO_INCREMENT,
-	nome_produto VARCHAR(32),
-	preco_unitario DECIMAL(8,2),
+    pk_produto INT(11) AUTO_INCREMENT,
+    nome_produto VARCHAR(32),
+    preco_unitario DECIMAL(8,2),
     categoria ENUM('Carnes Bovinas', 'Carnes Suínas', 'Carnes de Frango', 'Bebidas Alcoólicas', 'Bebidas Não Alcoólicas', 'Acompanhamentos', 'Suprimentos') NOT NULL,
     medida ENUM('quilos', 'litros', 'unidades') NOT NULL,
-	PRIMARY KEY (pk_produto),
+    PRIMARY KEY (pk_produto),
     CONSTRAINT unique_produto UNIQUE (nome_produto, categoria)
 );
