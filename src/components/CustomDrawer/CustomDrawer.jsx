@@ -9,6 +9,7 @@ import Logo from "../../../assets/images/churras_icon.png"
 
 const Icon_Grelha = () => <Icon name="outdoor-grill" size={30} color="#9A1A1A" />;
 const Icon_Home = () => <Icon name="home" size={30} color="#9A1A1A" />;
+const Icon_Receita = () => <Icon name="book" size={30} color="#9A1A1A"></Icon>
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -38,6 +39,13 @@ export default function CustomDrawer({ navigation }) {
         labelStyle={ [globalStyles.text, {fontSize: 28 }] }
         icon={Icon_Grelha}
         onPress={() => navigation.navigate("NovoChurras")}
+      />
+
+      <DrawerItem
+        label={"Receitas"}
+        labelStyle={ [globalStyles.text, {fontSize: 28 }] }
+        icon={Icon_Receita}
+        onPress={() => navigation.navigate("Receitas")}
       />
 
       <DrawerItem

@@ -22,14 +22,14 @@ export default function InfoChurras({  }) {
 
   const [infoInput, setInfoInput] = useState([
     {
-      qtdAdultos: info[0].qtdAdultos,
-      qtdJovens: info[0].qtdJovens,
-      qtdCriancas: info[0].qtdCriancas,
-      cBovinas: info[0].cBovinas,
-      cSuinas: info[0].cSuinas,
-      cFrango: info[0].cFrango,
-      Acomp: info[0].Acomp,
-      Suprim: info[0].Suprim,
+      qtdAdultos: info[0].qtdAdultos || '',
+      qtdJovens: info[0].qtdJovens || '',
+      qtdCriancas: info[0].qtdCriancas || '',
+      cBovinas: info[0].cBovinas || '',
+      cSuinas: info[0].cSuinas || '',
+      cFrango: info[0].cFrango || '',
+      Acomp: info[0].Acomp || '',
+      Suprim: info[0].Suprim || '',
       nome: "",
       telefone: "",
       cep: "",
