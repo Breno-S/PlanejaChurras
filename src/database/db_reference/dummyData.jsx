@@ -44,6 +44,12 @@ const dummyDataProdutos = [
         medida: 'quilos',
     },
     {
+        nome_produto: 'Bisteca Suína',
+        preco_unitario: 16.80,
+        categoria: 'Carnes Suínas',
+        medida: 'quilos',
+    },
+    {
         nome_produto: 'Linguiça',
         preco_unitario: 19.99,
         categoria: 'Carnes Suínas',
@@ -210,32 +216,28 @@ const dummyDataItem_Churras = [
         quantidade: 1,
     },
     {
-        fk_produto: 8,
+        fk_produto: 9,
         quantidade: 1,
     },
     {
-        fk_produto: 12,
+        fk_produto: 13,
         quantidade: 0.8,
     },
     {
-        fk_produto: 14,
+        fk_produto: 15,
         quantidade: 8,
     },
     {
-        fk_produto: 16,
+        fk_produto: 17,
         quantidade: 8,
     },
     {
-        fk_produto: 18,
+        fk_produto: 19,
         quantidade: 1,
-    },
-    {
-        fk_produto: 23,
-        quantidade: 2,
     },
     {
         fk_produto: 24,
-        quantidade: 1,
+        quantidade: 2,
     },
     {
         fk_produto: 25,
@@ -247,6 +249,10 @@ const dummyDataItem_Churras = [
     },
     {
         fk_produto: 27,
+        quantidade: 1,
+    },
+    {
+        fk_produto: 28,
         quantidade: 1,
     },
 ];
