@@ -165,7 +165,7 @@ export default function createDummySchema() {
 
 	// Popular tabela
 	for (let i = 0; i < 3; i++) {
-		for (let j = 0; j < 4; j++) {
+		for (let j = 0; j < dummyDataItem_Churras.length; j++) {
 			db.transaction(tx => {
 				tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
 					[i+1, dummyDataItem_Churras[j].fk_produto, dummyDataItem_Churras[j].quantidade],

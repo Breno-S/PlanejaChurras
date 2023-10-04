@@ -173,8 +173,9 @@ const dummyDataProdutos = [
 const dummyDataChurras = {
     nome_churras: "Churras Teste",
     qtd_adultos: 10,
-    qtd_jovens: 50,
-    qtd_criancas: 1000,
+    qtd_jovens: 4,
+    qtd_criancas: 5,
+    // Comente essas propriedades para testar o calculo com SQL
     preco_total: 2250.00,
     preco_pessoa: 225.00,
 };
@@ -197,24 +198,56 @@ const dummyDataLocal_Churras = {
 
 const dummyDataItem_Churras = [
     {
-        fk_churras: 1,
         fk_produto: 1,
-        quantidade: 1.5,
+        quantidade: 1,
     },
     {
-        fk_churras: 1,
-        fk_produto: 1,
-        quantidade: 1.5,
+        fk_produto: 2,
+        quantidade: 1,
     },
     {
-        fk_churras: 1,
-        fk_produto: 1,
-        quantidade: 1.5,
+        fk_produto: 3,
+        quantidade: 1,
     },
     {
-        fk_churras: 1,
-        fk_produto: 1,
-        quantidade: 1.5,
+        fk_produto: 8,
+        quantidade: 1,
+    },
+    {
+        fk_produto: 12,
+        quantidade: 0.8,
+    },
+    {
+        fk_produto: 14,
+        quantidade: 8,
+    },
+    {
+        fk_produto: 16,
+        quantidade: 8,
+    },
+    {
+        fk_produto: 18,
+        quantidade: 1,
+    },
+    {
+        fk_produto: 23,
+        quantidade: 2,
+    },
+    {
+        fk_produto: 24,
+        quantidade: 1,
+    },
+    {
+        fk_produto: 25,
+        quantidade: 1,
+    },
+    {
+        fk_produto: 26,
+        quantidade: 1,
+    },
+    {
+        fk_produto: 27,
+        quantidade: 1,
     },
 ];
 
