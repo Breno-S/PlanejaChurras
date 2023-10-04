@@ -4,7 +4,9 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function ResumoChurras(){
+export default function ResumoChurras({resumo}){
+
+    
     return(
         <ScrollView style={styles.container}>
 
@@ -14,9 +16,9 @@ export default function ResumoChurras(){
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>
-                <Text style={ [globalStyles.text, styles.info] }>Adultos : <Text style={ {color: '#EF820D'} }>50</Text></Text>
-                <Text style={ [globalStyles.text, styles.info] }>Jovens : <Text style={ {color: '#EF820D'} }>25</Text></Text>
-                <Text style={ [globalStyles.text, styles.info] }>Crianças : <Text style={ {color: '#EF820D'} }>5</Text></Text>
+                <Text style={ [globalStyles.text, styles.info] }>Adultos : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdAdultos}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info] }>Jovens : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdJovens}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info] }>Crianças : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdCriancas}</Text></Text>
             </View>
 
 

@@ -76,7 +76,7 @@ export default function NovoChurrasco(){
         <CheckBoxes type="Suprimentos"/>
 
         
-        <TouchableOpacity style={ styles.newButton} onPress={() => navigation.navigate("InfoChurras")}>
+        <TouchableOpacity style={ styles.newButton} onPress={() => navigation.navigate("InfoChurras", {infoInput})}>
           <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>Informações{'\n'}do Churras</Text>
         </TouchableOpacity>
         

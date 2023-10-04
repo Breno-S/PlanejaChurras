@@ -10,6 +10,7 @@ export default function DetalheChurras() {
     const route = useRoute();
     const { infoInput } = route.params || {};
 
+
     return (
         <ScrollView style={styles.container}>
 
@@ -19,8 +20,9 @@ export default function DetalheChurras() {
 
             {/* informações dos campos*/}
             <View>
-                <ResumoChurras />
+                <ResumoChurras resumo={infoInput}/>
             </View>
+
 
         </ScrollView>
     );

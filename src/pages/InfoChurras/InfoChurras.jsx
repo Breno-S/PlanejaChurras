@@ -10,14 +10,26 @@ import {
 import { useFonts, Karantina_400Regular } from "@expo-google-fonts/karantina";
 import { React, useState, useEffect } from "react";
 import Input from "../../components/Input/Input";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
-export default function InfoChurras({ info }) {
+export default function InfoChurras({  }) {
+  const route = useRoute();
+  const info = route.params.infoInput || {};
+  
   const windowWidth = Dimensions.get("window").width;
   const navigation = useNavigation();
 
   const [infoInput, setInfoInput] = useState([
     {
+      qtdAdultos: info[0].qtdAdultos,
+      qtdJovens: info[0].qtdJovens,
+      qtdCriancas: info[0].qtdCriancas,
+      cBovinas: info[0].cBovinas,
+      cSuinas: info[0].cSuinas,
+      cFrango: info[0].cFrango,
+      Acomp: info[0].Acomp,
+      Suprim: info[0].Suprim,
       nome: "",
       telefone: "",
       cep: "",
@@ -28,6 +40,7 @@ export default function InfoChurras({ info }) {
       estado: "",
     },
   ]);
+
 
   const handleNome = (nome) => {
     const updatedInfoInput = [...infoInput];
@@ -42,7 +55,6 @@ export default function InfoChurras({ info }) {
     updatedInfoInput[0].telefone = tel;
 
     setInfoInput(updatedInfoInput);
-
   };
   const handleCep = (cep) => {
     const updatedInfoInput = [...infoInput];
@@ -88,7 +100,8 @@ export default function InfoChurras({ info }) {
   };
 
   const handleButtonPress = () => {
-    navigation.navigate('DetalheChurras', { infoInput });
+
+    navigation.navigate("DetalheChurras", { infoInput });
   };
 
   return (
@@ -217,4 +230,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  text : {
+    color : '#fff'
+  }
 });
