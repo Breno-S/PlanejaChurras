@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { useCallback, useState, useEffect } from 'react';
-import { TextInput } from 'react-native-gesture-handler';
-import { globalStyles } from '../../styles/globalStyles';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { TextInput } from 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import { globalStyles } from '../../styles/globalStyles';
 import SliderInput from '../../components/SliderInput/SliderInput';
 import CheckBoxes from '../../components/CheckBoxes/CheckBoxes';
 
@@ -15,45 +15,74 @@ const windowWidth = Dimensions.get('window').width;
 export default function NovoChurrasco(){
 
   const navigation = useNavigation();
-
-  const [infoInput, setInfoInput] = useState([
+ 
+  const [infoInput, setinfoInput] = useState([
     {
-      qtdAdultos: "",
-      qtdJovens: "",
-      qtdCriancas: "",
-      cBovinas: "",
-      cSuinas: "",
-      cFrango: "",
-      Acomp: "",
-      Suprim: ""
-
+      qtdAdultos: "0",
+      qtdJovens: "0",
+      qtdCriancas: "0",
+      cBovinas: [],
+      cSuinas: [],
+      cFrango: [],
+      Bebidas: [],
+      Acomp: [],
+      Suprim: []
     },
   ]);
 
+  // const [selectedCBovinas, setSelectedCBovinas] = useState([]);
+
+
   const handleAdultos = (qtdAdultos) => {
-    const updatedInfoInput = [...infoInput];
-
-    updatedInfoInput[0].qtdAdultos = qtdAdultos;
-
-    setInfoInput(updatedInfoInput);
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].qtdAdultos = qtdAdultos;
+    setinfoInput(updatedinfoInput);
   };
   const handleJovens = (qtdJovens) => {
-    const updatedInfoInput = [...infoInput];
-
-    updatedInfoInput[0].qtdJovens = qtdJovens;
-
-    setInfoInput(updatedInfoInput);
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].qtdJovens = qtdJovens;
+    setinfoInput(updatedinfoInput);
   };
   const handleCriancas = (qtdCriancas) => {
-    const updatedInfoInput = [...infoInput];
-
-    updatedInfoInput[0].qtdCriancas = qtdCriancas;
-
-    setInfoInput(updatedInfoInput);
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].qtdCriancas = qtdCriancas;
+    setinfoInput(updatedinfoInput);
   };
 
-    
-    
+  const handleBovinas = (selectedItems) => {
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].cBovinas = selectedItems;
+    setinfoInput(updatedinfoInput);
+  };
+  const handleSuinas = (selectedItems) => {
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].cSuinas = selectedItems;
+    setinfoInput(updatedinfoInput);
+  };
+  const handleFrango = (selectedItems) => {
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].cFrango = selectedItems;
+    setinfoInput(updatedinfoInput);
+  };
+  const handleBebidas = (selectedItems) => {
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].Bebidas = selectedItems;
+    setinfoInput(updatedinfoInput);
+  };
+  
+  const handleAcomp = (selectedItems) => {
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].Acomp = selectedItems;
+    setinfoInput(updatedinfoInput);
+  };
+  const handleSuprim = (selectedItems) => {
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].Suprim = selectedItems;
+    setinfoInput(updatedinfoInput);
+  };
+
+  
+  
   return(
     <ScrollView style={styles.scrollview}> 
       <View style={styles.container}>
@@ -68,12 +97,12 @@ export default function NovoChurrasco(){
         <SliderInput type="Jovens" onValueChange={handleJovens}/>
         <SliderInput type="Crianças" onValueChange={handleCriancas}/>
 
-        <CheckBoxes type="Carnes Bovinas"/>
-        <CheckBoxes type="Carnes Suínas"/>
-        <CheckBoxes type="Carnes de Frango"/>
-        <CheckBoxes type="Bebidas"/>
-        <CheckBoxes type="Acompanhamentos"/>
-        <CheckBoxes type="Suprimentos"/>
+        <CheckBoxes type="Carnes Bovinas"onValueChange={handleBovinas} />
+        <CheckBoxes type="Carnes Suínas"onValueChange={handleSuinas} />
+        <CheckBoxes type="Carnes de Frango"onValueChange={handleFrango} />
+        <CheckBoxes type="Bebidas" onValueChange={handleBebidas} />
+        <CheckBoxes type="Acompanhamentos"onValueChange={handleAcomp} />
+        <CheckBoxes type="Suprimentos"onValueChange={handleSuprim} />
 
         
         <TouchableOpacity style={ styles.newButton} onPress={() => navigation.navigate("InfoChurras", {infoInput})}>
