@@ -109,15 +109,17 @@ export default function InfoChurras({  }) {
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <Text style={styles.title}>INFORMAÇÕES DO CHURRAS</Text>
+
+        {/* === Mostragem de Dados Temporária  === */}
         <Text style={styles.titleContent}>
         QTD ADULTOS: {info[0].qtdAdultos}{'\n'}
         QTD JOVENS: {info[0].qtdJovens}{'\n'}
-        QTD CRIANCAS: {info[0].qtdCriancas}{'\n'}
-        C.BOVINAS: {info[0].cBovinas.map(item => item.label).join(', ')}{'\n'}
-        C.BOVINAS: {info[0].cBovinas.map(item => item.selected).join(', ')}{'\n'}
-        {/* SUPRIMENTOS: {info[0].Suprim}{'\n'} */}
-
+        QTD CRIANCAS: {info[0].qtdCriancas}{'\n\n'}
+        BEBIDAS:{'\n'}{info[0].Bebidas.map(item => item.label).join('\n')}{'\n\n'}
+        SELECIONADAS:{'\n'}{info[0].Bebidas.map(item => item.selected).join('\n')}{'\n'}
         </Text>
+        {/* === Deletar se Necessário === */}
+        
         <View style={styles.underline}></View>
         <View style={[styles.underlineGray, { width: windowWidth }]}></View>
         <View style={styles.content}>
