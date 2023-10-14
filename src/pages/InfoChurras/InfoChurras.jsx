@@ -12,6 +12,7 @@ import { React, useState, useEffect } from "react";
 import Input from "../../components/Input/Input";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
+import { globalStyles } from "../../styles/globalStyles";
 
 export default function InfoChurras({  }) {
   const route = useRoute();
@@ -108,15 +109,15 @@ export default function InfoChurras({  }) {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        <Text style={styles.title}>INFORMAÇÕES DO CHURRAS</Text>
+        <Text style={ [globalStyles.text, styles.title] }>INFORMAÇÕES DO CHURRAS</Text>
 
         {/* === Mostragem de Dados Temporária  === */}
         <Text style={styles.titleContent}>
         QTD ADULTOS: {info[0].qtdAdultos}{'\n'}
         QTD JOVENS: {info[0].qtdJovens}{'\n'}
         QTD CRIANCAS: {info[0].qtdCriancas}{'\n\n'}
-        BEBIDAS:{'\n'}{info[0].Bebidas.map(item => item.label).join('\n')}{'\n\n'}
-        SELECIONADAS:{'\n'}{info[0].Bebidas.map(item => item.selected).join('\n')}{'\n'}
+        CBOVINAS:{'\n'}{info[0].cBovinas.map(item => item.label).join('\n')}{'\n\n'}
+        SELECIONADAS:{'\n'}{info[0].cBovinas.map(item => item.selected).join('\n')}{'\n'}
         </Text>
         {/* === Deletar se Necessário === */}
         
@@ -193,12 +194,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   title: {
-    fontFamily: "Karantina_400Regular",
-    fontSize: 30,
-    color: "#fff",
+    fontSize: 40,
     marginTop: 40,
-    letterSpacing: 2,
-    fontWeight: "bold",
+    borderBottomWidth: 1,
+    borderBottomColor: "#fff",
   },
   underline: {
     borderBottomWidth: 1,

@@ -10,7 +10,7 @@ export default function CheckBoxes({type, onValueChange}){
   
 
   const [cBovinas, setcBovinas] = useState([ 
-    {label:'Fraldinha [kg] ', selected: false},
+    {label:'Fraldinha [kg]' , selected: false},
     {label:'Contrafilé [kg]', selected: false},
     {label:'Alcatra [kg]'   , selected: false},
     {label:'Picanha [kg]'   , selected: false},

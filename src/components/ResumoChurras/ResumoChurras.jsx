@@ -6,153 +6,245 @@ const windowWidth = Dimensions.get('window').width;
 
 export default function ResumoChurras({resumo}){
 
+
+    let selecionado = [];
+
+    // const tamanho = Object.keys(resumo[0].cBovinas.selected).length
+    // const tamanho = resumo[0].cBovinas.selected.length();
+
+    for (let x = 0; x < 1 ; x++){
+         if (resumo[x].cBovinas.selected == true){
+            selecionado.push(resumo[x].cBovinas.label)
+         }
+    }
     
+    
+
     return(
         <ScrollView style={styles.container}>
 
             {/* Titulo do campo 1 */}
             <View style={ [styles.viewTitle] }>
+                <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.label).join(',')}</Text>
+                <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.selected).join(',')}</Text>
                 <Text style={ [globalStyles.text, styles.title] }>Participantes:</Text>
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>
-                <Text style={ [globalStyles.text, styles.info] }>Adultos : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdAdultos}</Text></Text>
-                <Text style={ [globalStyles.text, styles.info] }>Jovens : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdJovens}</Text></Text>
-                <Text style={ [globalStyles.text, styles.info] }>Crianças : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdCriancas}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}] }>Adultos : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdAdultos}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>Jovens : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdJovens}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'}] }>Crianças : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdCriancas}</Text></Text>
             </View>
 
 
-            {/* Titulo do campo 2 */}
+            {/* |||||||||||||||||||||||||||| TITULO  CAMPO 2 CARNES |||||||||||||||||||||||||||||||||||||| */}
             <View style={ [styles.viewTitle] }>
                 <Text style={ [globalStyles.text, styles.title] }>Carnes:</Text>
             </View>
-             {/* Informações do campo 2 */}
-             <View style={styles.campo2}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>                  
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>BOVINAS       </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>QTD </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>PREÇO TOTAL </Text>
+
+            {/* |||||||||||||||||||||||||||| INFORMAÇÕES CAMPO 2 CARNES ||||||||||||||||||||||||||||||||||*/}
+            <View style={styles.cardAllSelected}>
+
+                <View style={styles.section}>
+                    {/* =============================== CABEÇALHO BOVINA ===================================== */}
+                    <View style={ [ styles.header ] }>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'left'}  ] }>BOVINAS</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
+                    </View>
+                    {/* ============================= SELECIONADOS ================================ */}
+                    
+                    {resumo[0].cBovinas.map((item, index) => {
+                        if (item.selected) {
+                            return(
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                </View>
+                            )    
+                        }
+                    })}
+
                 </View>
-                <View style={styles.linhaOrange}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Fraldinha</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>10kg </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
+
+                <View style={styles.section}>
+                    {/* ================================= CABEÇALHO SUINAS ===================================== */}
+                    <View style={ [styles.header] }>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'left'}  ] }>SUINAS</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
+                    </View>
+                    {/* ================================= SELECIONADO ===================================== */}
+                    {resumo[0].cSuinas.map((item, index) => {
+                        if (item.selected) {
+                            return(
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                </View>
+                            )    
+                        }
+                    })}
                 </View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Picanha </Text>
-                    <Text style={ [globalStyles.text, styles.info] }> 10kg </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
+
+                <View style={styles.section}>
+                    {/* ================================= CABECALHO FRANGO ===================================== */}
+                    <View style={ [styles.header] }>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'left'}  ] }>FRANGO</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
+                    </View>
+                    {/* ================================= SELECIONADOS ===================================== */}
+                    {resumo[0].cFrango.map((item, index) => {
+                        if (item.selected) {
+                            return(
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                </View>
+                            )    
+                        }
+                    })}
                 </View>
+
                 <View style={styles.linhaBlack}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>                  
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>SUINAS      </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>    QTD  </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>PREÇO TOTAL </Text>
+
+                {/* ================================= TOTAL CARNES ===================================== */}
+                <View style={styles.section}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R$239,94</Text>
+                    </View>
                 </View>
-                <View style={styles.linhaOrange}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Linguiça</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>10kg </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
-                </View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Bisteca </Text>
-                    <Text style={ [globalStyles.text, styles.info] }> 10kg </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
-                </View>
-                <View style={styles.linhaBlack}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>                  
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>FRANGO     </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>    QTD  </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>PREÇO TOTAL </Text>
-                </View>
-                <View style={styles.linhaOrange}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Coração</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>10kg </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
-                </View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Tulipa  </Text>
-                    <Text style={ [globalStyles.text, styles.info] }> 10kg </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
-                </View>
-                <View style={styles.linhaBlack}></View>
-                <View style={styles.linhaOrange}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Total:  </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>  </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$239,94 </Text>
-                </View>
+                
             </View>
 
 
-            {/* Titulo do campo 3 */}
+            {/* ||||||||||||||||||||||||||||||| TITULO CAMPO 3 BEBIDAS ||||||||||||||||||||||||||||||||||| */}
             <View style={ [styles.viewTitle] }>
                 <Text style={ [globalStyles.text, styles.title] }>Bebidas:</Text>
             </View>
-             {/* Informações do campo 3 */}
-             <View style={styles.campo3}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>                  
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>ALCOÓLICAS  </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>    QTD  </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>PREÇO TOTAL </Text>
+
+            {/* |||||||||||||||||||||||||| INFORMAÇÕES CAMPO 3 BEBIDAS |||||||||||||||||||||||||||||| */}
+            <View style={styles.cardAllSelected}>
+
+                <View style={styles.section}>
+                    {/* ================================= CABEÇALHO BEBIDAS ALCOOLICAS ===================================== */}
+                    <View style={ [styles.header] }>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'left'}  ] }>ALCOÓLICAS</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
+                    </View>
+                    {/* ================================= SELECIONADOS BEBICAS ALCOOLICAS  ===================================== */}
+                    {resumo[0].Bebidas.map((item, index) => {
+                        if (item.selected) {
+                            return(
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                </View>
+                            )    
+                        }
+                    })}
                 </View>
-                <View style={styles.linhaOrange}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Cerveja   </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>20 unidades</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
+
+                <View style={styles.section}>
+                    {/* ================================= CABECALHO BEBIDAS NAO ALCOOLICAS ===================================== */}
+                    <View style={ [styles.header] }>
+                        <Text numberOfLines={1} adjustsFontSizeToFit={true} style={ [globalStyles.text, styles.infoTitle, {textAlign: 'left'}] }>NÃO ALCOÓLICAS</Text>
+                        <Text adjustsFontSizeToFit={true} style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
+                    </View>
+                    {/* ================================= SELECIONADOS BEBIDAS NAO ALCOOLICAS ===================================== */}
+                    {resumo[0].Bebidas.map((item, index) => {
+                        if (item.selected) {
+                            return(
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                </View>
+                            )    
+                        }
+                    })}
                 </View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Caipirinha</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>20 unidades</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
-                </View>
+
                 <View style={styles.linhaBlack}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>                  
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>NÃO ALCOÓLICAS</Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>QTD  </Text>
-                    <Text style={ [globalStyles.text, styles.infoTitle] }>PREÇO TOTAL </Text>
-                </View>
-                <View style={styles.linhaOrange}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Suco 2L   </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>   05 unidades</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
-                </View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Refrigerante</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>20 unidades</Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$39,99 </Text>
-                </View>
-                <View style={styles.linhaBlack}></View>
-                <View style={styles.linhaOrange}></View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={ [globalStyles.text, styles.info] }>Total:  </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>  </Text>
-                    <Text style={ [globalStyles.text, styles.info] }>R$239,94 </Text>
+
+                {/* ================================= TOTAL BEBIDAS ===================================== */}
+                <View style={styles.section}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R$239,94</Text>
+                    </View>
                 </View>
             </View>
 
-            {/* Titulo do campo 4 */}
+            {/* Titulo do campo 4 ACOMPANHAMENTOS*/}
             <View style={ [styles.viewTitle] }>
                 <Text style={ [globalStyles.text, styles.title] }>Acompanhamentos:</Text>
             </View>
-            {/* Informações do campo 4 */}
-            <View style={styles.campo4}>
+            {/* Informações do campo 4 ACOMPANHAMENTOS*/}
+            <View style={styles.cardAllSelected}>
+                <View style={styles.section}>
+                    {resumo[0].Acomp.map((item, index) => {
+                        if (item.selected) {
+                            return(
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                </View>
+                            )
+                        }
+                    })}
+                </View>
 
+                <View style={styles.linhaBlack}></View>
+
+                {/* ================================= TOTAL ACOMPANHAMENTOS ===================================== */}
+                <View style={styles.section}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R$239,94</Text>
+                    </View>
+                </View>
             </View>
 
 
-            {/* Titulo do campo 5 */}
+            {/* Titulo do campo 5 SUPRIMENTOS*/}
             <View style={ [styles.viewTitle] }>
                 <Text style={ [globalStyles.text, styles.title] }>Suprimentos:</Text>
             </View>
-            {/* Informações do campo 5 */}
-            <View style={styles.campo5}>
+            {/* Informações do campo 5 SUPRIMENTOS*/}
+            <View style={styles.cardAllSelected}>
+                <View style={styles.section}>
+                    {resumo[0].Suprim.map((item, index) => {
+                        if (item.selected) {
+                            return(
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                </View>
+                            )
+                        }
+                    })}
+                </View>
 
+                <View style={styles.linhaBlack}></View>
+
+                {/* ================================= TOTAL SUPRIMENTOS ===================================== */}
+                <View style={styles.section}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
+                        <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R$239,94</Text>
+                    </View>
+                </View>
             </View>
 
         </ScrollView>
@@ -179,10 +271,9 @@ const styles = StyleSheet.create({
 
     campo1: {
         alignSelf: 'center',
-        alignItems: 'center',
         flexDirection:'row',
-        justifyContent: 'space-around',
-        height: 36,
+        justifyContent: 'space-between',
+        padding: 5, 
         backgroundColor: '#191B1B',
         borderRadius: 5,
         elevation: 1,
@@ -190,26 +281,37 @@ const styles = StyleSheet.create({
     },
 
     info: {
+        width: '33%',
         fontSize: 20,  
         padding: 2,
     },
 
 
     /* Parte 2 das informações */
-    campo2: {
+    cardAllSelected: {
         alignSelf: 'center',
         flexDirection: 'column',
-        height: 415,
         backgroundColor: '#191B1B',
-        borderRadius: 10,
+        borderRadius: 5,
         elevation: 1,
-        padding: 5,
-        width: windowWidth * 0.9
+        width: windowWidth * 0.9,
     },
 
     infoTitle: {
         fontSize: 25,
         color: '#EF820D',
+        width: '33%',
+    },
+
+    section: {
+        padding: 5,
+    },
+
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomColor: '#EF820D',
+        borderBottomWidth: 1,
     },
 
     linhaOrange: {
@@ -223,7 +325,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         width: "100%",
         height: 1,
-        marginVertical: 10,
     },
 
     /* Parte 3 das informações */

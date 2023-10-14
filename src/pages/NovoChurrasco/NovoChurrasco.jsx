@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -13,7 +13,6 @@ const Icon_Edit = () => <Icon name="pencil-square-o" size={32} color="#fff" styl
 const windowWidth = Dimensions.get('window').width;
 
 export default function NovoChurrasco(){
-
   const navigation = useNavigation();
  
   const [infoInput, setinfoInput] = useState([
@@ -31,7 +30,6 @@ export default function NovoChurrasco(){
   ]);
 
   // const [selectedCBovinas, setSelectedCBovinas] = useState([]);
-
 
   const handleAdultos = (qtdAdultos) => {
     const updatedinfoInput = [...infoInput];
@@ -81,14 +79,21 @@ export default function NovoChurrasco(){
     setinfoInput(updatedinfoInput);
   };
 
-  
+  const textInputRef = useRef(null);
+
+  const handleIconPress = () => {
+    // Foca no TextInput quando o ícone é pressionado
+    if (textInputRef.current) {
+      textInputRef.current.focus();
+    }
+  };
   
   return(
     <ScrollView style={styles.scrollview}> 
       <View style={styles.container}>
         <View style={ {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'} }>
-          <TextInput style={ [globalStyles.text, styles.title] }>Nome do Churrasco</TextInput>
-            <TouchableOpacity onPress={null}>
+          <TextInput ref={textInputRef} style={ [globalStyles.text, styles.title] }>Nome do Churrasco</TextInput>
+            <TouchableOpacity onPress={handleIconPress}>
               <Icon_Edit />
             </TouchableOpacity>
         </View>

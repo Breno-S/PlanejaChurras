@@ -3,6 +3,7 @@ import ResumoChurras from '../../components/ResumoChurras/ResumoChurras';
 import { globalStyles } from '../../styles/globalStyles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
+import { salvaChurras } from '../../services/sqlite/functions';
 
 
 export default function DetalheChurras() {
@@ -23,6 +24,9 @@ export default function DetalheChurras() {
                 <ResumoChurras resumo={infoInput}/>
             </View>
 
+            <TouchableOpacity onPress={null}>
+                <Text style={ [globalStyles.text] }>CONFIRMAR</Text>
+            </TouchableOpacity>
 
         </ScrollView>
     );
