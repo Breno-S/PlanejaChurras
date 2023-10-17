@@ -73,8 +73,7 @@ export default function CheckBoxes({type, onValueChange}){
     { label: 'Queijo Coalho' , selected: false },
     { label: 'Farofa Pronta' , selected: false },
     { label: 'Pão Francês'   , selected: false },
-    { label: 'Ovo de Codorna', selected: false },
-    { label: 'Vinagrete'     , selected: false }
+    { label: 'Arroz'         , selected: false }
   ]);
 
   const toggleAcompanhamentosCheckbox = (index) => {
@@ -214,7 +213,7 @@ export default function CheckBoxes({type, onValueChange}){
       );
     case "Acompanhamentos":
       return (
-        <View style={[styles.container, {height: 350}]}>
+        <View style={[styles.container, {height: 300}]}>
           <View style={styles.hr} />
           <View style={{ flexDirection: 'row', marginBottom: 20, marginTop: 10 }}>
             <Text style={[styles.text, { marginLeft: 20 }]}>{type}</Text>

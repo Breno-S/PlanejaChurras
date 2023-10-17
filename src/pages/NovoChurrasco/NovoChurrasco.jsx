@@ -14,6 +14,8 @@ const Icon_Edit = () => <Icon name="pencil-square-o" size={32} color="#fff" styl
 const windowWidth = Dimensions.get('window').width;
 
 export default function NovoChurrasco(){
+  const navigation = useNavigation();
+  
   const [infoInput, setinfoInput] = useState([
     {
       qtdAdultos: "0",
@@ -28,7 +30,6 @@ export default function NovoChurrasco(){
     },
   ]);
 
-  const navigation = useNavigation();
 
   // const route = useRoute();
   // const reset = route.params.paramKey; // undefined

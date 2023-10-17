@@ -5,7 +5,7 @@ import {
   Dimensions,
   SafeAreaView,
   ScrollView,
-  Button,
+  TouchableOpacity
 } from "react-native";
 import { useFonts, Karantina_400Regular } from "@expo-google-fonts/karantina";
 import { React, useState, useEffect } from "react";
@@ -113,11 +113,11 @@ export default function InfoChurras({  }) {
 
         {/* === Mostragem de Dados Temporária  === */}
         <Text style={styles.titleContent}>
-        QTD ADULTOS: {info[0].qtdAdultos}{'\n'}
-        QTD JOVENS: {info[0].qtdJovens}{'\n'}
-        QTD CRIANCAS: {info[0].qtdCriancas}{'\n\n'}
-        CBOVINAS:{'\n'}{info[0].cBovinas.map(item => item.label).join('\n')}{'\n\n'}
-        SELECIONADAS:{'\n'}{info[0].cBovinas.map(item => item.selected).join('\n')}{'\n'}
+        {/* QTD ADULTOS: {info[0].qtdAdultos}{'\n'} */}
+        {/* QTD JOVENS: {info[0].Suprim}{'\n'} */}
+        {/* {console.log(info[0].Suprim)}{'\n\n'} */}
+        {/* SUPRIM:{'\n'}{info[0].Suprim.map(item => item.label).join('\n')}{'\n\n'}
+        SELECIONADAS:{'\n'}{info[0].Suprim.map(item => item.selected).join('\n')}{'\n'} */}
         </Text>
         {/* === Deletar se Necessário === */}
         
@@ -165,16 +165,21 @@ export default function InfoChurras({  }) {
 
           <View style={[styles.underlineGray, { width: windowWidth }]}></View>
 
-          <View style={styles.containerButton}>
+          {/* <View style={styles.containerButton}>
             <View style={styles.contentButton}>
               <Button
                 onPress={handleButtonPress}
-                color="#fff"
+                color="#000"
                 title="PROSSEGUIR"
                 style={styles.button}
               />
             </View>
-          </View>
+          </View> */}
+
+        <TouchableOpacity style={ styles.newButton} onPress={handleButtonPress}>
+        <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>PROSSEGUIR</Text>
+        </TouchableOpacity>
+
         </View>
       </View>
     </ScrollView>
@@ -233,13 +238,14 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 80,
   },
-  contentButton: {
-    backgroundColor: "#EF820D",
-    width: 200,
-    height: 50,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
+  newButton: {
+    margin: 32,
+    alignSelf: 'center',
+    backgroundColor: '#EF820D',
+    borderRadius: 5,
+    padding: 10,
+    paddingHorizontal: 30,
+    elevation: 2,
   },
   text : {
     color : '#fff'

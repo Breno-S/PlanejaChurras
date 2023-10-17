@@ -52,7 +52,7 @@ export default function CustomDrawer({ navigation }) {
         label={"Novo Churrasco"}
         labelStyle={ [globalStyles.text, {fontSize: 28 }] }
         icon={Icon_Grelha}
-        onPress={() => navigation.navigate("NovoChurras", {/*paramKey: resetInput*/})}
+        onPress={() => navigation.navigate("NovoChurras")}
       />
 
       <DrawerItem

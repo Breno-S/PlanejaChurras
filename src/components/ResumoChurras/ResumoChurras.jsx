@@ -1,10 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
+import { useRoute } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function ResumoChurras({resumo}){
+export default function ResumoChurras(){
+
+    const route = useRoute();
+    const resumo = route.params.infoInput || {};
+
 
     let BovinasSelec = [];
     let SuinasSelec  = [];
@@ -18,44 +23,33 @@ export default function ResumoChurras({resumo}){
     const Criancas  = resumo[0].qtdCriancas;
     const totalConv = resumo[0].qtdAdultos + resumo[0].qtdJovens + resumo[0].qtdCriancas;
 
-
-// dummyResumo = [
-//     {
-//         qtdAdultos: "0",
-//         qtdJovens: "0",
-//         qtdCriancas: "0",
-//         cBovinas: [
-//             {label: "a", selected: true},
-//             {},
-//             {}
-//         ],
-//         cSuinas: [],
-//         cFrango: [],
-//         Bebidas: [],
-//         Acomp: [],
-//         Suprim: []
-//     },
-// ];
-
-// Algúm erro aparente aqui "Cannot Read Property Of Undefined"
-    for (let x = 0; x <= 5; x++){
+    for (let x = 0; x <= 2; x++){
         // Lista de checkboxes que possuem 3 opções diferentes
-        if (x <= 2){
+        if (resumo[0].cFrango[0] != undefined){
             if (resumo[0].cFrango[x].selected === true){
                 FrangoSelec.push(resumo[0].cFrango[x].label)
             }
         }
-        if (x <= 4){
-            // Lista de checkboxes que possuem 5 opções diferentes
+    
+    }
+    for (let x = 0; x <= 4; x++){ 
+        // Lista de checkboxes que possuem 5 opções diferentes
+        if (resumo[0].cBovinas[0] != undefined){
             if (resumo[0].cBovinas[x].selected === true){
                 BovinasSelec.push(resumo[0].cBovinas[x].label);
             }
+        }
+        if (resumo[0].cSuinas[0] != undefined){
             if (resumo[0].cSuinas[x].selected === true){
                 SuinasSelec.push(resumo[0].cSuinas[x].label);
             }
+        }
+        if (resumo[0].Suprim[0] != undefined){
             if (resumo[0].Suprim[x].selected === true){
                 SuprimSelec.push(resumo[0].Suprim[x].label);
             }
+        }
+        if (resumo[0].Bebidas[0] != undefined){
             if (resumo[0].Bebidas[x].selected === true){
                 if (resumo[0].Bebidas[x].label === 'Caipirinha [300ml]'|| 
                     resumo[0].Bebidas[x].label === 'Cerveja [lata]'){
@@ -65,22 +59,13 @@ export default function ResumoChurras({resumo}){
                 }
             }
         }
-        if (x <= 5){
-            // Lista de checkboxes que possuem 6 opções diferentes
+        if (resumo[0].Acomp[0] != undefined){
             if (resumo[0].Acomp[x].selected === true){
                 AcompSelec.push(resumo[0].Acomp[x].label);
             }
         }
     }
 
-    console.log(BovinasSelec[0]);
-    console.log(SuinasSelec[0]);
-    console.log(FrangoSelec[0]);
-    console.log(BebidasAlcSelec[0]);
-    console.log(BebidasSelec[0]);
-    console.log(AcompSelec[0]);
-    console.log(SuprimSelec[0]);
-    
     return(
         <ScrollView style={styles.container}>
 
