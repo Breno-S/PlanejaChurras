@@ -15,7 +15,7 @@ const windowWidth = Dimensions.get('window').width;
 
 export default function NovoChurrasco(){
   const navigation = useNavigation();
-  
+
   const [infoInput, setinfoInput] = useState([
     {
       qtdAdultos: "0",
@@ -29,19 +29,6 @@ export default function NovoChurrasco(){
       Suprim: []
     },
   ]);
-
-
-  // const route = useRoute();
-  // const reset = route.params.paramKey; // undefined
-
-  // useEffect(() => {
-  //   setinfoInput(reset);
-  //   console.log("infoInput dps do reset: " + infoInput);
-  // }, []);
-  
-  
-  // setinfoInput(reset);
-  
 
   const handleAdultos = (qtdAdultos) => {
     const updatedinfoInput = [...infoInput];
@@ -101,7 +88,7 @@ export default function NovoChurrasco(){
   };
   
   return(
-    <ScrollView style={styles.scrollview}> 
+    <ScrollView style={styles.scrollView}> 
       <View style={styles.container}>
         <View style={ {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'} }>
           <TextInput ref={textInputRef} style={ [globalStyles.text, styles.title] }>Nome do Churrasco</TextInput>
@@ -155,7 +142,7 @@ const styles = StyleSheet.create({
     width: windowWidth-(windowWidth/5),
   },
   scrollView: {
-    backgroundColor: "#191B1B",
+    backgroundColor: "#000",
   },
   newButton: {
     margin: 32,
