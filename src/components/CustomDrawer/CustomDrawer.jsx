@@ -12,8 +12,22 @@ const Icon_Home = () => <Icon name="home" size={30} color="#9A1A1A" />;
 const Icon_Receita = () => <Icon name="book" size={30} color="#9A1A1A"></Icon>
 
 const windowHeight = Dimensions.get('window').height;
+const resetInput = [
+  {
+    qtdAdultos: "0",
+    qtdJovens: "0",
+    qtdCriancas: "0",
+    cBovinas: [],
+    cSuinas: [],
+    cFrango: [],
+    Bebidas: [],
+    Acomp: [],
+    Suprim: []
+  }
+];
 
 export default function CustomDrawer({ navigation }) {
+
   return (
     // Fundo do Drawer/ Drawer itself
     <>
@@ -38,7 +52,7 @@ export default function CustomDrawer({ navigation }) {
         label={"Novo Churrasco"}
         labelStyle={ [globalStyles.text, {fontSize: 28 }] }
         icon={Icon_Grelha}
-        onPress={() => navigation.navigate("NovoChurras")}
+        onPress={() => navigation.navigate("NovoChurras", {/*paramKey: resetInput*/})}
       />
 
       <DrawerItem

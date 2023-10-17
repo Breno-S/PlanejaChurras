@@ -214,7 +214,7 @@ export default function CheckBoxes({type, onValueChange}){
       );
     case "Acompanhamentos":
       return (
-        <View style={styles.container}>
+        <View style={[styles.container, {height: 350}]}>
           <View style={styles.hr} />
           <View style={{ flexDirection: 'row', marginBottom: 20, marginTop: 10 }}>
             <Text style={[styles.text, { marginLeft: 20 }]}>{type}</Text>

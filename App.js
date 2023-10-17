@@ -24,7 +24,19 @@ import Receitas from './src/pages/Receitas/Receitas';
 import createDummySchema from './src/database/dummySchema';
 
 const Drawer = createDrawerNavigator();
-
+const resetInput = [
+  {
+    qtdAdultos: "0",
+    qtdJovens: "0",
+    qtdCriancas: "0",
+    cBovinas: [],
+    cSuinas: [],
+    cFrango: [],
+    Bebidas: [],
+    Acomp: [],
+    Suprim: []
+  }
+];
 export default function App() {
   // CRIA BCD DE TESTES
   createDummySchema();
@@ -38,6 +50,8 @@ export default function App() {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+
+  
 
   return (
     <NavigationContainer>
@@ -64,4 +78,8 @@ export default function App() {
       </Drawer.Navigator>
     </NavigationContainer>
   );
+}
+
+export {
+  resetInput,
 }

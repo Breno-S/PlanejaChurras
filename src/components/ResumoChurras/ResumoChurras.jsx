@@ -12,9 +12,29 @@ export default function ResumoChurras({resumo}){
     // const tamanho = Object.keys(resumo[0].cBovinas.selected).length
     // const tamanho = resumo[0].cBovinas.selected.length();
 
+    const Adultos = resumo[0].qtdAdultos;
+    const Jovens = resumo[0].qtdJovens;
+    const Criancas = resumo[0].qtdCriancas;
+    const totalConv = resumo[0].qtdAdultos + resumo[0].qtdJovens + resumo[0].qtdCriancas;
+
     for (let x = 0; x < 1 ; x++){
          if (resumo[x].cBovinas.selected == true){
             selecionado.push(resumo[x].cBovinas.label)
+         }
+         if (resumo[x].cSuinas.selected == true){
+            selecionado.push(resumo[x].cSuinas.label)
+         }
+         if (resumo[x].cFrango.selected == true){
+            selecionado.push(resumo[x].cFrango.label)
+         }
+         if (resumo[x].Bebidas.selected == true){
+            selecionado.push(resumo[x].Bebidas.label)
+         }
+         if (resumo[x].Acomp.selected == true){
+            selecionado.push(resumo[x].Acomp.label)
+         }
+         if (resumo[x].Suprim.selected == true){
+            selecionado.push(resumo[x].Suprim.label)
          }
     }
     
@@ -25,21 +45,25 @@ export default function ResumoChurras({resumo}){
 
             {/* Titulo do campo 1 */}
             <View style={ [styles.viewTitle] }>
-                <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.label).join(',')}</Text>
-                <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.selected).join(',')}</Text>
-                <Text style={ [globalStyles.text, styles.title] }>Participantes:</Text>
+                {/* <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.label).join(',')}</Text>
+                <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.selected).join(',')}</Text> */}
+                {for (i = 0; i < selecionado.length(); i++) {
+                    console.log(selecionado[i])
+                })}
+                <Text style={ [globalStyles.text, styles.title] }>Participantes: {totalConv}</Text>
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>
-                <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}] }>Adultos : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdAdultos}</Text></Text>
-                <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>Jovens : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdJovens}</Text></Text>
-                <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'}] }>Crianças : <Text style={ {color: '#EF820D'} }>{resumo[0].qtdCriancas}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}] }>Adultos : <Text style={ {color: '#EF820D'} }>{Adultos}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>Jovens : <Text style={ {color: '#EF820D'} }>{Jovens}</Text></Text>
+                <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'}] }>Crianças : <Text style={ {color: '#EF820D'} }>{Criancas}</Text></Text>
+                
             </View>
 
 
             {/* |||||||||||||||||||||||||||| TITULO  CAMPO 2 CARNES |||||||||||||||||||||||||||||||||||||| */}
             <View style={ [styles.viewTitle] }>
-                <Text style={ [globalStyles.text, styles.title] }>Carnes:</Text>
+                <Text style={ [globalStyles.text, styles.title] }>Carnes:{totalConv}</Text>
             </View>
 
             {/* |||||||||||||||||||||||||||| INFORMAÇÕES CAMPO 2 CARNES ||||||||||||||||||||||||||||||||||*/}

@@ -5,7 +5,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
 import { salvaChurras } from '../../services/sqlite/functions';
 
-
 export default function DetalheChurras() {
 
     const route = useRoute();

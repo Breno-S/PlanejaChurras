@@ -2,19 +2,19 @@ import { useCallback, useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { useRoute } from "@react-navigation/native";
 import { TextInput } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { globalStyles } from '../../styles/globalStyles';
 import SliderInput from '../../components/SliderInput/SliderInput';
 import CheckBoxes from '../../components/CheckBoxes/CheckBoxes';
+import { resetInput }  from '../../../App' ;
 
 const Icon_Edit = () => <Icon name="pencil-square-o" size={32} color="#fff" style={ {margin: 10} }/>;
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function NovoChurrasco(){
-  const navigation = useNavigation();
- 
   const [infoInput, setinfoInput] = useState([
     {
       qtdAdultos: "0",
@@ -29,7 +29,19 @@ export default function NovoChurrasco(){
     },
   ]);
 
-  // const [selectedCBovinas, setSelectedCBovinas] = useState([]);
+  const navigation = useNavigation();
+
+  // const route = useRoute();
+  // const reset = route.params.paramKey; // undefined
+
+  // useEffect(() => {
+  //   setinfoInput(reset);
+  //   console.log("infoInput dps do reset: " + infoInput);
+  // }, []);
+  
+  
+  // setinfoInput(reset);
+  
 
   const handleAdultos = (qtdAdultos) => {
     const updatedinfoInput = [...infoInput];
