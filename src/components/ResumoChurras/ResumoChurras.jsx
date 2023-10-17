@@ -6,50 +6,86 @@ const windowWidth = Dimensions.get('window').width;
 
 export default function ResumoChurras({resumo}){
 
-
-    let selecionado = [];
-
-    // const tamanho = Object.keys(resumo[0].cBovinas.selected).length
-    // const tamanho = resumo[0].cBovinas.selected.length();
-
-    const Adultos = resumo[0].qtdAdultos;
-    const Jovens = resumo[0].qtdJovens;
-    const Criancas = resumo[0].qtdCriancas;
+    let BovinasSelec = [];
+    let SuinasSelec  = [];
+    let FrangoSelec  = [];
+    let BebidasAlcSelec = [];
+    let BebidasSelec = [];
+    let AcompSelec   = [];
+    let SuprimSelec  = [];
+    const Adultos   = resumo[0].qtdAdultos;
+    const Jovens    = resumo[0].qtdJovens;
+    const Criancas  = resumo[0].qtdCriancas;
     const totalConv = resumo[0].qtdAdultos + resumo[0].qtdJovens + resumo[0].qtdCriancas;
 
-    for (let x = 0; x < 1 ; x++){
-         if (resumo[x].cBovinas.selected == true){
-            selecionado.push(resumo[x].cBovinas.label)
-         }
-         if (resumo[x].cSuinas.selected == true){
-            selecionado.push(resumo[x].cSuinas.label)
-         }
-         if (resumo[x].cFrango.selected == true){
-            selecionado.push(resumo[x].cFrango.label)
-         }
-         if (resumo[x].Bebidas.selected == true){
-            selecionado.push(resumo[x].Bebidas.label)
-         }
-         if (resumo[x].Acomp.selected == true){
-            selecionado.push(resumo[x].Acomp.label)
-         }
-         if (resumo[x].Suprim.selected == true){
-            selecionado.push(resumo[x].Suprim.label)
-         }
-    }
-    
-    
 
+// dummyResumo = [
+//     {
+//         qtdAdultos: "0",
+//         qtdJovens: "0",
+//         qtdCriancas: "0",
+//         cBovinas: [
+//             {label: "a", selected: true},
+//             {},
+//             {}
+//         ],
+//         cSuinas: [],
+//         cFrango: [],
+//         Bebidas: [],
+//         Acomp: [],
+//         Suprim: []
+//     },
+// ];
+
+// Algúm erro aparente aqui "Cannot Read Property Of Undefined"
+    for (let x = 0; x <= 5; x++){
+        // Lista de checkboxes que possuem 3 opções diferentes
+        if (x <= 2){
+            if (resumo[0].cFrango[x].selected === true){
+                FrangoSelec.push(resumo[0].cFrango[x].label)
+            }
+        }
+        if (x <= 4){
+            // Lista de checkboxes que possuem 5 opções diferentes
+            if (resumo[0].cBovinas[x].selected === true){
+                BovinasSelec.push(resumo[0].cBovinas[x].label);
+            }
+            if (resumo[0].cSuinas[x].selected === true){
+                SuinasSelec.push(resumo[0].cSuinas[x].label);
+            }
+            if (resumo[0].Suprim[x].selected === true){
+                SuprimSelec.push(resumo[0].Suprim[x].label);
+            }
+            if (resumo[0].Bebidas[x].selected === true){
+                if (resumo[0].Bebidas[x].label === 'Caipirinha [300ml]'|| 
+                    resumo[0].Bebidas[x].label === 'Cerveja [lata]'){
+                    BebidasAlcSelec.push(resumo[0].Bebidas[x].label);
+                } else {
+                    BebidasSelec.push(resumo[0].Bebidas[x].label);
+                }
+            }
+        }
+        if (x <= 5){
+            // Lista de checkboxes que possuem 6 opções diferentes
+            if (resumo[0].Acomp[x].selected === true){
+                AcompSelec.push(resumo[0].Acomp[x].label);
+            }
+        }
+    }
+
+    console.log(BovinasSelec[0]);
+    console.log(SuinasSelec[0]);
+    console.log(FrangoSelec[0]);
+    console.log(BebidasAlcSelec[0]);
+    console.log(BebidasSelec[0]);
+    console.log(AcompSelec[0]);
+    console.log(SuprimSelec[0]);
+    
     return(
         <ScrollView style={styles.container}>
 
             {/* Titulo do campo 1 */}
-            <View style={ [styles.viewTitle] }>
-                {/* <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.label).join(',')}</Text>
-                <Text style={[globalStyles.text]}>{resumo[0].cSuinas.map(item => item.selected).join(',')}</Text> */}
-                {for (i = 0; i < selecionado.length(); i++) {
-                    console.log(selecionado[i])
-                })}
+            <View style={ [styles.viewTitle] }>                
                 <Text style={ [globalStyles.text, styles.title] }>Participantes: {totalConv}</Text>
             </View>
             {/* Informações do campo 1 */}

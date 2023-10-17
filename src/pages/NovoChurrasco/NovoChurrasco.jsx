@@ -8,7 +8,6 @@ import { StatusBar } from 'expo-status-bar';
 import { globalStyles } from '../../styles/globalStyles';
 import SliderInput from '../../components/SliderInput/SliderInput';
 import CheckBoxes from '../../components/CheckBoxes/CheckBoxes';
-import { resetInput }  from '../../../App' ;
 
 const Icon_Edit = () => <Icon name="pencil-square-o" size={32} color="#fff" style={ {margin: 10} }/>;
 
