@@ -23,7 +23,7 @@ export default function ResumoChurras(){
     const Criancas  = resumo[0].qtdCriancas;
     const totalConv = resumo[0].qtdAdultos + resumo[0].qtdJovens + resumo[0].qtdCriancas;
 
-    for (let x = 0; x <= 2; x++){
+    for (let x = 0; x < resumo[0].cFrango.length; x++){
         // Lista de checkboxes que possuem 3 opções diferentes
         if (resumo[0].cFrango[0] != undefined){
             if (resumo[0].cFrango[x].selected === true){
@@ -32,23 +32,29 @@ export default function ResumoChurras(){
         }
     
     }
-    for (let x = 0; x <= 4; x++){ 
+    for (let x = 0; x < resumo[0].cBovinas.length; x++){ 
         // Lista de checkboxes que possuem 5 opções diferentes
         if (resumo[0].cBovinas[0] != undefined){
             if (resumo[0].cBovinas[x].selected === true){
                 BovinasSelec.push(resumo[0].cBovinas[x].label);
             }
         }
+    }
+    for (let x = 0; x < resumo[0].cSuinas.length; x++){ 
         if (resumo[0].cSuinas[0] != undefined){
             if (resumo[0].cSuinas[x].selected === true){
                 SuinasSelec.push(resumo[0].cSuinas[x].label);
             }
         }
+    }
+    for (let x = 0; x < resumo[0].Suprim.length; x++){
         if (resumo[0].Suprim[0] != undefined){
             if (resumo[0].Suprim[x].selected === true){
                 SuprimSelec.push(resumo[0].Suprim[x].label);
             }
         }
+    }
+    for (let x = 0; x < resumo[0].Bebidas.length; x++){
         if (resumo[0].Bebidas[0] != undefined){
             if (resumo[0].Bebidas[x].selected === true){
                 if (resumo[0].Bebidas[x].label === 'Caipirinha [300ml]'|| 
@@ -59,6 +65,8 @@ export default function ResumoChurras(){
                 }
             }
         }
+    }
+    for (let x = 0; x < resumo[0].Acomp.length; x++){
         if (resumo[0].Acomp[0] != undefined){
             if (resumo[0].Acomp[x].selected === true){
                 AcompSelec.push(resumo[0].Acomp[x].label);
