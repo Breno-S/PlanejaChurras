@@ -17,21 +17,25 @@ const infoInput = {
 
 const qtdConvidados = infoInput.qtdAdultos + infoInput.qtdJovens + infoInput.qtdCriancas;
 
+// bebidas
 const alcoolPessoa = 1500;
 const notAlcoolPessoa = 1000;
 const aguaPessoa = 500;
 
+// suprimentos
 const coposPessoa = 5;
 const talheresPessoa = 2;
 const pratosPessoa = 3;
 const guardanaposPessoa = 3;
 
+// acompanhamentos
 const arrozPessoa = 60; // gramas
 const paoDeAlhoPessoa = 4;
 const queijoCoalhoPessoa = 4;
 const farofaProntaPessoa = 100; //gramas
 const paoFrancesPessoa = 200; //gramas (4 pães)  
 
+// carnes
 const totalCarne = (infoInput.qtdAdultos*400 + infoInput.qtdJovens*300 + infoInput.qtdCriancas*200);
 
 const totalCarvão = totalCarne * 1.5;
@@ -41,13 +45,14 @@ const totalAlcool = alcoolPessoa * infoInput.qtdAdultos;
 const totalNotAlcool = notAlcoolPessoa * qtdConvidados;
 const totalAgua = aguaPessoa * qtdConvidados;
 
-
 const tiposCarnes = getTiposCarnes(infoInput);
 const [comprarBovinas, comprarSuinas, comprarFrango] = getQtdCarnes(tiposCarnes);
 
+// alterações no objeto de quantidades
 dividirCarnes(comprarBovinas, comprarSuinas, comprarFrango);
 dividirBebidas();
 dividirAcompanhamentos();
+dividirSuprimento();
 
 console.log(listaCompras);
 
