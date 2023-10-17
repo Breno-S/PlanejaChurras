@@ -29,8 +29,8 @@ const guardanaposPessoa = 3;
 const arrozPessoa = 60; // gramas
 const paoDeAlhoPessoa = 4;
 const queijoCoalhoPessoa = 4;
-const FarofaProntaPessoa = 100; //gramas
-const paoFrancesPessoa = 4;  
+const farofaProntaPessoa = 100; //gramas
+const paoFrancesPessoa = 200; //gramas (4 pães)  
 
 const totalCarne = (infoInput.qtdAdultos*400 + infoInput.qtdJovens*300 + infoInput.qtdCriancas*200);
 
@@ -47,7 +47,7 @@ const [comprarBovinas, comprarSuinas, comprarFrango] = getQtdCarnes(tiposCarnes)
 
 dividirCarnes(comprarBovinas, comprarSuinas, comprarFrango);
 dividirBebidas();
-
+dividirAcompanhamentos();
 
 console.log(listaCompras);
 
@@ -169,5 +169,29 @@ function dividirBebidas() {
     // Água
     if (selecionouAgua == 1) {
         listaCompras.Água = totalAgua;
+    }
+}
+
+function dividirAcompanhamentos() {
+    for(let i = 0; i < infoInput.Acomp.length; i++) {
+        switch (infoInput.Acomp[i]) {
+            case "Arroz":
+                listaCompras.Arroz = arrozPessoa*qtdConvidados;
+                break;
+            case "Pão de Alho":
+                listaCompras["Pão de Alho"] = paoDeAlhoPessoa*qtdConvidados;
+                break;
+            case "Queijo Coalho":
+                listaCompras["Queijo Coalho"] = queijoCoalhoPessoa*qtdConvidados;
+                break;
+            case "Farofa Pronta":
+                listaCompras["Farofa Pronta"] = farofaProntaPessoa*qtdConvidados;                
+                break;
+            case "Pão Francês":
+                listaCompras["Pão Francês"] = paoFrancesPessoa*qtdConvidados;
+                break;
+            default:
+                break;
+        }
     }
 }
