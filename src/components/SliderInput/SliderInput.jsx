@@ -20,9 +20,9 @@ export default function SliderInput({ type, onValueChange }) {
   return (
     <View style={styles.container}>
       <View style={styles.hr} />
-      <View style={{ flexDirection: "row", marginBottom: 20, marginTop: 10 }}>
-        <Text style={[styles.text, { marginLeft: 20 }]}>{type}</Text>
-        <Text style={[styles.text, { marginLeft: 310 }]}>{sliderValue}</Text>
+      <View style={{ flexDirection: "row", marginBottom: 20, marginTop: 10, width: windowWidth * 0.85 }}>
+        <Text style={[styles.text, { marginLeft: 20, width: '100%', alignSelf:'flex-start' }]}>{type}</Text>
+        <Text style={[styles.text, { width: '100%', alignSelf: 'flex-end'}]}>{sliderValue}</Text>
       </View>
       <View style={styles.sliderBody}>
         <Slider
