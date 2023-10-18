@@ -1,3 +1,5 @@
+import { getPreco } from "../sqlite/functions";
+
 function gerarListaCompras(infoInput){
 	let listaCompras = {};
 
@@ -61,7 +63,21 @@ function gerarListaCompras(infoInput){
 		}
 	}
 
+	// Criar um novo objeto transformando a quantidade em um objeto com quantidade e preço
+	let novoListaCompras = {};
+	for (let item in listaCompras) {
+		if (listaCompras.hasOwnProperty(item)) {
+			novoListaCompras[`${item}`] = {
+				quantidade: listaCompras[item],
+				preco: getPreco(item)
+			};
+		}
+	}
+
 	// console.log(listaCompras);
+	// for (let item in novoListaCompras) {
+	// 	novoListaCompras[item].preco = getPreco(`${item}`);
+	// }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -180,7 +196,7 @@ function gerarListaCompras(infoInput){
 				if (infoInput.Bebidas[i] == "Água") {
 					continue;
 				} else {
-					eval(`listaCompras['${infoInput.Bebidas[i]}'] = totalNotAlcool / (optBebidas)`);
+					listaCompras[`${infoInput.Bebidas[i]}`] = totalNotAlcool / (optBebidas);
 				}
 			}
 		}
@@ -251,7 +267,7 @@ function gerarListaCompras(infoInput){
 		return Math.round(valor / 10) * 10;
 	}
 
-	return listaCompras;
+	return novoListaCompras;
 }
 
 export default gerarListaCompras;

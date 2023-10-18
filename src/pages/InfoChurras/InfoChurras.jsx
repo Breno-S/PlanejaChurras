@@ -22,7 +22,8 @@ export default function InfoChurras({  }) {
   const navigation = useNavigation();
 
   const [infoInput, setInfoInput] = useState([
-    {
+    { 
+      nomeChurras: info[0].nomeChurras || '',
       qtdAdultos: info[0].qtdAdultos || '',
       qtdJovens: info[0].qtdJovens || '',
       qtdCriancas: info[0].qtdCriancas || '',
@@ -109,16 +110,17 @@ export default function InfoChurras({  }) {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        <Text style={ [globalStyles.text, styles.title] }>INFORMAÇÕES DO CHURRAS</Text>
+        <Text style={ [globalStyles.text, styles.title] }>INFORMAÇÕES DO{'\n'}{info[0].nomeChurras}</Text>
 
         {/* === Mostragem de Dados Temporária  === */}
-        <Text style={styles.titleContent}>
-        {/* QTD ADULTOS: {info[0].qtdAdultos}{'\n'} */}
+        {/* <Text style={styles.titleContent}> */}
+        {/* {info[0].nomeChurras} */}
+        {/* NOME CHURRAS: {info[0].nomeChurras}{'\n'} */}
         {/* QTD JOVENS: {info[0].Suprim}{'\n'} */}
         {/* {console.log(info[0].Suprim)}{'\n\n'} */}
         {/* SUPRIM:{'\n'}{info[0].Suprim.map(item => item.label).join('\n')}{'\n\n'}
         SELECIONADAS:{'\n'}{info[0].Suprim.map(item => item.selected).join('\n')}{'\n'} */}
-        </Text>
+        {/* </Text> */}
         {/* === Deletar se Necessário === */}
         
         <View style={styles.underline}></View>

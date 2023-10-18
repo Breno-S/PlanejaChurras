@@ -3,13 +3,13 @@ import ResumoChurras from '../../components/ResumoChurras/ResumoChurras';
 import { globalStyles } from '../../styles/globalStyles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
+import { nomeChurrasco} from '../../components/ResumoChurras/ResumoChurras'
 import { salvaChurras } from '../../services/sqlite/functions';
 
 export default function DetalheChurras() {
 
     const route = useRoute();
     const { infoInput } = route.params || {};
-
 
     return (
         <ScrollView style={styles.container}>

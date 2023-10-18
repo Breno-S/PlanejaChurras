@@ -3,15 +3,16 @@ import { globalStyles } from "../../styles/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
 import gerarListaCompras from "../../services/calculos/calculoQuantidade";
+import { fetchPrice, getPreco } from "../../services/sqlite/functions";
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function ResumoChurras(){
-
+    
     const route = useRoute();
     const resumo = route.params.infoInput || {};
-
-
+    
+    let nomeChurras = resumo[0].nomeChurras;
     let BovinasSelec = [];
     let SuinasSelec  = [];
     let FrangoSelec  = [];
@@ -58,7 +59,7 @@ export default function ResumoChurras(){
     for (let x = 0; x < resumo[0].Bebidas.length; x++){
         if (resumo[0].Bebidas[0] != undefined){
             if (resumo[0].Bebidas[x].selected === true){
-                if (resumo[0].Bebidas[x].label === 'Caipirinha [300ml]'|| 
+                if (resumo[0].Bebidas[x].label === 'Caipirinha [300 ml]'|| 
                     resumo[0].Bebidas[x].label === 'Cerveja [lata]'){
                     BebidasAlcSelec.push(resumo[0].Bebidas[x].label);
                 } else {
@@ -88,17 +89,19 @@ export default function ResumoChurras(){
         qtdCriancas: Criancas,
     };
 
-    console.log('enviaDados: '+ enviaDados);
-    const listaCompras = gerarListaCompras(enviaDados);
     console.log(listaCompras);
-    
+    // console.log('enviaDados: '+ enviaDados);
+    let listaCompras = gerarListaCompras(enviaDados);
+    console.log("esta é a lista de compras: ", listaCompras);
+
     return(
         <ScrollView style={styles.container}>
-
+            
             {/* Titulo do campo 1 */}
             <View style={ [styles.viewTitle] }>                
-                <Text style={ [globalStyles.text, styles.title] }>Participantes:{totalConv}</Text>
-                <Text style={ [globalStyles.text, styles.title] }>LISTA:{'\n\n'}{listaCompras['Arroz']}</Text>
+                <Text style={ [globalStyles.text, styles.title] }>Nome do Churrasco: {nomeChurras}{'\n'}</Text>
+                <Text style={ [globalStyles.text, styles.title] }>Participantes: {totalConv}</Text>
+                {/* <Text style={ [globalStyles.text, styles.title] }>LISTA:{'\n\n'}{listaCompras['Arroz']}</Text> */}
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>
@@ -111,7 +114,7 @@ export default function ResumoChurras(){
 
             {/* |||||||||||||||||||||||||||| TITULO  CAMPO 2 CARNES |||||||||||||||||||||||||||||||||||||| */}
             <View style={ [styles.viewTitle] }>
-                <Text style={ [globalStyles.text, styles.title] }>Carnes:{totalConv}</Text>
+                <Text style={ [globalStyles.text, styles.title] }>Carnes:</Text>
             </View>
 
             {/* |||||||||||||||||||||||||||| INFORMAÇÕES CAMPO 2 CARNES ||||||||||||||||||||||||||||||||||*/}
@@ -131,8 +134,8 @@ export default function ResumoChurras(){
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }></Text>
                                 </View>
                             )    
                         }
@@ -153,8 +156,8 @@ export default function ResumoChurras(){
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>{}</Text>
                                 </View>
                             )    
                         }
@@ -211,16 +214,16 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
                     {/* ================================= SELECIONADOS BEBICAS ALCOOLICAS  ===================================== */}
-                    {resumo[0].Bebidas.map((item, index) => {
-                        if (item.selected) {
+                    {BebidasAlcSelec.map((item, index) => {
+                        // if (item.selected) {
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item}</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
                             )    
-                        }
+                        // }
                     })}
                 </View>
 
@@ -232,16 +235,16 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
                     {/* ================================= SELECIONADOS BEBIDAS NAO ALCOOLICAS ===================================== */}
-                    {resumo[0].Bebidas.map((item, index) => {
-                        if (item.selected) {
+                    {BebidasSelec.map((item, index) => {
+                        // if (item.selected) {
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item}</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
                             )    
-                        }
+                        // }
                     })}
                 </View>
 
@@ -263,6 +266,12 @@ export default function ResumoChurras(){
             {/* Informações do campo 4 ACOMPANHAMENTOS*/}
             <View style={styles.cardAllSelected}>
                 <View style={styles.section}>
+                    {/* ================================= CABEÇALHO ACOMPANHAMENTOS ===================================== */}
+                    <View style={ [styles.header] }>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'left'}  ] }>PRODUTOS</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
+                    </View>
                     {resumo[0].Acomp.map((item, index) => {
                         if (item.selected) {
                             return(
@@ -294,6 +303,12 @@ export default function ResumoChurras(){
             </View>
             {/* Informações do campo 5 SUPRIMENTOS*/}
             <View style={styles.cardAllSelected}>
+                {/* ================================= CABEÇALHO SUPRIMENTOS ===================================== */}
+                <View style={ [styles.header] }>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'left'}  ] }>PRODUTOS</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
+                        <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
+                    </View>
                 <View style={styles.section}>
                     {resumo[0].Suprim.map((item, index) => {
                         if (item.selected) {

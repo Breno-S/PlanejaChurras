@@ -18,6 +18,7 @@ export default function NovoChurrasco(){
 
   const [infoInput, setinfoInput] = useState([
     {
+      nomeChurras: "Novo Churrasco",
       qtdAdultos: "0",
       qtdJovens: "0",
       qtdCriancas: "0",
@@ -29,6 +30,12 @@ export default function NovoChurrasco(){
       Suprim: []
     },
   ]);
+
+  const handleNomeChurras = (nomeChurras) => {
+    const updatedinfoInput = [...infoInput];
+    updatedinfoInput[0].nomeChurras = nomeChurras;
+    setinfoInput(updatedinfoInput);
+  };
 
   const handleAdultos = (qtdAdultos) => {
     const updatedinfoInput = [...infoInput];
@@ -91,7 +98,7 @@ export default function NovoChurrasco(){
     <ScrollView style={styles.scrollView}> 
       <View style={styles.container}>
         <View style={ {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'} }>
-          <TextInput ref={textInputRef} style={ [globalStyles.text, styles.title] }>Nome do Churrasco</TextInput>
+          <TextInput ref={textInputRef} onChangeText={handleNomeChurras} style={ [globalStyles.text, styles.title] }>Novo Churrasco</TextInput>
             <TouchableOpacity onPress={handleIconPress}>
               <Icon_Edit />
             </TouchableOpacity>

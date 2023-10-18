@@ -10,11 +10,11 @@ export default function CheckBoxes({type, onValueChange}){
   
 
   const [cBovinas, setcBovinas] = useState([ 
-    {label:'Fraldinha [kg]' , selected: false},
-    {label:'Contrafilé [kg]', selected: false},
-    {label:'Alcatra [kg]'   , selected: false},
-    {label:'Picanha [kg]'   , selected: false},
-    {label:'Cupim [kg]'     , selected: false}
+    {label:'Fraldinha' , selected: false},
+    {label:'Contrafilé', selected: false},
+    {label:'Alcatra'   , selected: false},
+    {label:'Picanha'   , selected: false},
+    {label:'Cupim'     , selected: false}
   ]);
 
   const toggleCBovinasCheckbox = (index) => {
@@ -26,11 +26,11 @@ export default function CheckBoxes({type, onValueChange}){
 
               
   const [cSuinas, setcSuinas] = useState([
-    { label: 'Pernil [kg]'  , selected: false },
-    { label: 'Lombo [kg]'   , selected: false },
-    { label: 'Bisteca [kg]' , selected: false },
-    { label: 'Linguiça [kg]', selected: false },
-    { label: 'Panceta [kg]' , selected: false }
+    { label: 'Pernil'  , selected: false },
+    { label: 'Lombo'   , selected: false },
+    { label: 'Bisteca Suína' , selected: false },
+    { label: 'Linguiça', selected: false },
+    { label: 'Panceta' , selected: false }
   ]);
 
   const toggleCSuinasCheckbox = (index) => {
@@ -41,9 +41,9 @@ export default function CheckBoxes({type, onValueChange}){
   };
   
   const [cFrango, setcFrango] = useState([
-    { label: 'Coxa [kg]'   , selected: false },
-    { label: 'Asa [kg]'    , selected: false },
-    { label: 'Coração [kg]', selected: false }
+    { label: 'Coxa'   , selected: false },
+    { label: 'Asa'    , selected: false },
+    { label: 'Coração', selected: false }
   ]);
 
   const toggleCFrangoCheckbox = (index) => {

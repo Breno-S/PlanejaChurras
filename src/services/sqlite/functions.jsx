@@ -1,5 +1,28 @@
 import db from '../../database';
 
+function fetchPrice(productName) {
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "SELECT preco_unitario FROM Produto WHERE nome_produto LIKE ?",
+                [productName],
+                (_, resultSet) => {
+                    if (resultSet.rows.length > 0) {
+                        const preco = resultSet.rows.item(0).preco_unitario;
+                        resolve(preco);
+                    } else {
+                        reject(`Produto '${productName}' não encontrado no banco de dados.`);
+                    }
+                },
+                (_, error) => {
+                    reject(`Erro obtendo preço de '${productName}': ${error}`);
+                }
+            );
+        });
+    });
+}
+
+
 function salvaChurras(dados) {
 	console.log(dados);
 	// db.transaction(tx => {
@@ -11,6 +34,14 @@ function salvaChurras(dados) {
 	// });
 }
 
+async function getPreco(nome) {
+	await fetchPrice(nome).then(result => {
+		return result;
+	})
+}
+
 export {
-	salvaChurras
+	salvaChurras,
+	fetchPrice,
+	getPreco,
 }
