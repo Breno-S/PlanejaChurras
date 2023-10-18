@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-nati
 import { globalStyles } from "../../styles/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
+import gerarListaCompras from "../../services/calculos/calcQuantidade";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -21,7 +22,7 @@ export default function ResumoChurras(){
     const Adultos   = resumo[0].qtdAdultos;
     const Jovens    = resumo[0].qtdJovens;
     const Criancas  = resumo[0].qtdCriancas;
-    const totalConv = resumo[0].qtdAdultos + resumo[0].qtdJovens + resumo[0].qtdCriancas;
+    const totalConv = parseInt(resumo[0].qtdAdultos) + parseInt(resumo[0].qtdJovens) + parseInt(resumo[0].qtdCriancas);
 
     for (let x = 0; x < resumo[0].cFrango.length; x++){
         // Lista de checkboxes que possuem 3 opções diferentes
@@ -74,12 +75,30 @@ export default function ResumoChurras(){
         }
     }
 
+    enviaDados = {
+        cBovinas: BovinasSelec, 
+        cSuinas: SuinasSelec,
+        cFrango: FrangoSelec,  
+        BebidasAlc: BebidasAlcSelec, 
+        Bebidas: BebidasSelec, 
+        Acomp: AcompSelec,   
+        Suprim: SuprimSelec,
+        qtdAdultos: Adultos,   
+        qtdJovens: Jovens,    
+        qtdCriancas: Criancas,
+    };
+
+    console.log('enviaDados: '+ enviaDados);
+    const listaCompras = gerarListaCompras(enviaDados);
+    console.log(listaCompras);
+    
     return(
         <ScrollView style={styles.container}>
 
             {/* Titulo do campo 1 */}
             <View style={ [styles.viewTitle] }>                
-                <Text style={ [globalStyles.text, styles.title] }>Participantes: {totalConv}</Text>
+                <Text style={ [globalStyles.text, styles.title] }>Participantes:{totalConv}</Text>
+                <Text style={ [globalStyles.text, styles.title] }>LISTA:{'\n\n'}{listaCompras.Arroz}</Text>
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>
