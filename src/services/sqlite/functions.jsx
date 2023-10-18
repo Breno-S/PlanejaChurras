@@ -5,7 +5,7 @@ function fetchPrice(productName) {
         db.transaction(tx => {
             tx.executeSql(
                 "SELECT preco_unitario FROM Produto WHERE nome_produto LIKE ?",
-                [productName],
+                ['%'+productName+'%'],
                 (_, resultSet) => {
                     if (resultSet.rows.length > 0) {
                         const preco = resultSet.rows.item(0).preco_unitario;
@@ -39,6 +39,17 @@ async function getPreco(nome) {
 		return result;
 	})
 }
+
+// async function getPreco(nome) {
+//     try {
+//         const result = await fetchPrice(nome);
+//         return result;
+//     } catch (error) {
+//         // Lidar com o erro aqui, se necessário.
+//         console.error(error);
+//     }
+// }
+
 
 export {
 	salvaChurras,

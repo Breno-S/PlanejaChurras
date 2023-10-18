@@ -2,12 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { useCallback, useState, useEffect } from 'react';
 import { useFonts, Karantina_400Regular } from '@expo-google-fonts/karantina';
+import { useNavigation } from '@react-navigation/native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function CheckBoxes({type, onValueChange}){
-  
+  const navigation  = useNavigation();
 
   const [cBovinas, setcBovinas] = useState([ 
     {label:'Fraldinha' , selected: false},
@@ -98,6 +99,61 @@ export default function CheckBoxes({type, onValueChange}){
     onValueChange(updatedSuprimentos);
   };
 
+   // Este useEffect será acionado quando a tela é montada e quando você volta para ela
+   useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      // Reseta os estados quando a tela perde o foco (quando você sai dela)
+      if (type === "Carnes Bovinas") {
+        setcBovinas([
+          { label: 'Fraldinha', selected: false },
+          { label: 'Contrafilé', selected: false },
+          { label: 'Alcatra', selected: false },
+          { label: 'Picanha', selected: false },
+          { label: 'Cupim', selected: false }
+        ]);
+      } else if (type === "Carnes Suínas") {
+        setcSuinas([
+          { label: 'Pernil', selected: false },
+          { label: 'Lombo', selected: false },
+          { label: 'Bisteca Suína', selected: false },
+          { label: 'Linguiça', selected: false },
+          { label: 'Panceta', selected: false }
+        ]);
+      } else if (type === "Carnes de Frango") {
+        setcFrango([
+          { label: 'Coxa', selected: false },
+          { label: 'Asa', selected: false },
+          { label: 'Coração', selected: false }
+        ]);
+      } else if (type === "Bebidas") {
+        setBebidas([
+          { label: 'Água [2L]', selected: false }, //2L
+          { label: 'Refrigerante [2L]', selected: false }, //2L
+          { label: 'Suco [1L]', selected: false }, //1L
+          { label: 'Cerveja [lata]', selected: false }, //lata
+          { label: 'Caipirinha [300 ml]', selected: false } //300
+        ]);
+      } else if (type === "Acompanhamentos") {
+        setAcompanhamentos([
+          { label: 'Pão de Alho', selected: false },
+          { label: 'Queijo Coalho', selected: false },
+          { label: 'Farofa Pronta', selected: false },
+          { label: 'Pão Francês', selected: false },
+          { label: 'Arroz', selected: false }
+        ]);
+      } else if (type === "Suprimentos") {
+        setSuprimentos([
+          { label: 'Carvão', selected: false },
+          { label: 'Copos', selected: false },
+          { label: 'Guardanapos', selected: false },
+          { label: 'Pratos', selected: false },
+          { label: 'Talheres', selected: false }
+        ]);
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
 
   switch(type){

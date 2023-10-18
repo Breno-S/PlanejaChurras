@@ -1,12 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { useCallback, useState, useEffect } from "react";
+import { useNavigation } from '@react-navigation/native';
 import { useFonts, Karantina_400Regular } from "@expo-google-fonts/karantina";
 import Slider from "@react-native-community/slider";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function SliderInput({ type, onValueChange }) {
+  const navigation = useNavigation();
   const [sliderValue, setSliderValue] = useState(0);
 
   const handleSliderChange = (value) => {
@@ -16,6 +18,15 @@ export default function SliderInput({ type, onValueChange }) {
       onValueChange(value);
     }
   }
+
+  // Use useEffect para redefinir o valor quando a tela é desfocada
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      setSliderValue(0); // Ou qualquer valor padrão desejado
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

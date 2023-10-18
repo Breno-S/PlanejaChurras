@@ -134,8 +134,8 @@ export default function ResumoChurras(){
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }></Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
                             )    
                         }
@@ -156,8 +156,8 @@ export default function ResumoChurras(){
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>{}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
                             )    
                         }
@@ -177,7 +177,7 @@ export default function ResumoChurras(){
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
                             )    
@@ -219,7 +219,7 @@ export default function ResumoChurras(){
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item}`].quantidade / 1000}L</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
                             )    
@@ -240,7 +240,7 @@ export default function ResumoChurras(){
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item}`].quantidade / 1000}L</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
                             )    
@@ -274,13 +274,25 @@ export default function ResumoChurras(){
                     </View>
                     {resumo[0].Acomp.map((item, index) => {
                         if (item.selected) {
-                            return(
-                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
-                                </View>
-                            )
+                            if (item.label === "Pão Francês"){
+                                return(
+                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade / 50} uni.
+                                        </Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                    </View>
+                                )
+                            } else {
+                                return(
+                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g
+                                        </Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                    </View>
+                                )
+                            }
                         }
                     })}
                 </View>
@@ -312,13 +324,23 @@ export default function ResumoChurras(){
                 <View style={styles.section}>
                     {resumo[0].Suprim.map((item, index) => {
                         if (item.selected) {
-                            return(
+                            if (item.label === 'Carvão'){
+                                return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>10kg</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade / 1000}kg</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
                                 </View>
-                            )
+                                )
+                            }else{
+                                return(
+                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade} uni.</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                    </View>
+                                )
+                            }
                         }
                     })}
                 </View>
@@ -333,7 +355,10 @@ export default function ResumoChurras(){
                     </View>
                 </View>
             </View>
-
+            
+            <TouchableOpacity style={ styles.newButton} onPress={null}>
+                <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>Salvar{'\n'}Evento</Text>
+            </TouchableOpacity>
         </ScrollView>
     );
 }
@@ -425,5 +450,14 @@ const styles = StyleSheet.create({
         padding: 5,
         width: windowWidth * 0.9
     },
+    newButton: {
+        margin: 32,
+        alignSelf: 'center',
+        backgroundColor: '#EF820D',
+        borderRadius: 5,
+        padding: 10,
+        paddingHorizontal: 30,
+        elevation: 2,
+      },
 
 })

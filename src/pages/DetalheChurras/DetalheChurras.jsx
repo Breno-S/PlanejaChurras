@@ -23,9 +23,9 @@ export default function DetalheChurras() {
                 <ResumoChurras resumo={infoInput}/>
             </View>
 
-            <TouchableOpacity onPress={null}>
+            {/* <TouchableOpacity onPress={null}>
                 <Text style={ [globalStyles.text] }>CONFIRMAR</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
         </ScrollView>
     );

@@ -16,6 +16,7 @@ const windowWidth = Dimensions.get('window').width;
 export default function NovoChurrasco(){
   const navigation = useNavigation();
 
+  
   const [infoInput, setinfoInput] = useState([
     {
       nomeChurras: "Novo Churrasco",
@@ -30,6 +31,28 @@ export default function NovoChurrasco(){
       Suprim: []
     },
   ]);
+
+    // Este useEffect será acionado quando a tela for montada e quando você voltar para ela
+    // useEffect(() => {
+    //   const unsubscribe = navigation.addListener('blur', () => {
+    //     // Reseta os valores quando a tela é desfocada (quando você sai dela)
+    //     setinfoInput({
+    //       // nomeChurras: "Novo Churrasco",
+    //       qtdAdultos: "0",
+    //       qtdJovens: "0",
+    //       qtdCriancas: "0",
+    //       cBovinas: [],
+    //       cSuinas: [],
+    //       cFrango: [],
+    //       Bebidas: [],
+    //       Acomp: [],
+    //       Suprim: []
+    //     });
+    //   });
+  
+    //   return unsubscribe;
+    // }, [navigation]);
+
 
   const handleNomeChurras = (nomeChurras) => {
     const updatedinfoInput = [...infoInput];

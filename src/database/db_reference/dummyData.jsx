@@ -82,32 +82,32 @@ const dummyDataProdutos = [
     },
     // Bebidas Não Alcoólicas
     {
-        nome_produto: 'Água',
+        nome_produto: 'Água [2L]',
         preco_unitario: 3.50,
         categoria: 'Bebidas Não Alcoólicas',
         medida: 'litros'
     },
     {
-        nome_produto: 'Refrigerante',
+        nome_produto: 'Refrigerante [2L]',
         preco_unitario: 5.49,
         categoria: 'Bebidas Não Alcoólicas',
         medida: 'litros'
     },
     {
-        nome_produto: 'Suco',
+        nome_produto: 'Suco [1L]',
         preco_unitario: 4.99,
         categoria: 'Bebidas Não Alcoólicas',
         medida: 'litros'
     },
     // Bebidas Alcoólicas
     {
-        nome_produto: 'Cerveja',
+        nome_produto: 'Cerveja [lata]',
         preco_unitario: 8.99,
         categoria: 'Bebidas Alcoólicas',
         medida: 'litros'
     },
     {
-        nome_produto: 'Caipirinha',
+        nome_produto: 'Caipirinha [300 ml]',
         preco_unitario: 38.54,
         categoria: 'Bebidas Alcoólicas',
         medida: 'litros'
