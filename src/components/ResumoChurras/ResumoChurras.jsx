@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-nati
 import { globalStyles } from "../../styles/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
-import gerarListaCompras from "../../services/calculos/calcQuantidade";
+import gerarListaCompras from "../../services/calculos/calculoQuantidade";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -98,7 +98,7 @@ export default function ResumoChurras(){
             {/* Titulo do campo 1 */}
             <View style={ [styles.viewTitle] }>                
                 <Text style={ [globalStyles.text, styles.title] }>Participantes:{totalConv}</Text>
-                <Text style={ [globalStyles.text, styles.title] }>LISTA:{'\n\n'}{listaCompras.Arroz}</Text>
+                <Text style={ [globalStyles.text, styles.title] }>LISTA:{'\n\n'}{listaCompras['Arroz']}</Text>
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>

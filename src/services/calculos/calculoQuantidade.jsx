@@ -1,6 +1,4 @@
-// TUDO MEDIDO EM GRAMAS E MILILITROS, SUPRIMENTOS SÃO DESCARTÁVEIS
-
-export default function gerarListaCompras(infoInput){
+function gerarListaCompras(infoInput){
 	let listaCompras = {};
 
 	// const infoInput = {
@@ -145,19 +143,19 @@ export default function gerarListaCompras(infoInput){
 		// Dividir o total de cada carne para cada uma das carnes da respectiva categoria
 		if (optBovinas = infoInput.cBovinas.length) {
 			for (let i = 0; i < optBovinas; i++) {
-			    eval(`listaCompras.${infoInput.cBovinas[i]} = comprarBovinas / optBovinas`);
+			    listaCompras[`${infoInput.cBovinas[i]}`] = comprarBovinas / optBovinas;
 			}
 		}
 
 		if (optSuinas = infoInput.cSuinas.length) {
 			for (let i = 0; i < optSuinas; i++) {
-				eval(`listaCompras.${infoInput.cSuinas[i]} = comprarSuinas / optSuinas`);
+				listaCompras[`${infoInput.cSuinas[i]}`] = comprarSuinas / optSuinas;
 			}
 		}
 
 		if (optFrango = infoInput.cFrango.length) {
 			for (let i = 0; i < optFrango; i++) {
-				eval(`listaCompras.${infoInput.cFrango[i]} = comprarFrango / optFrango`);
+				listaCompras[`${infoInput.cFrango[i]}`] = comprarFrango / optFrango;
 			}
 		}
 	}
@@ -170,7 +168,7 @@ export default function gerarListaCompras(infoInput){
 		// Dividir o total de bebidas alcoólicas entre as opções selecionadas
 		if (optBebidasAlc = infoInput.BebidasAlc.length) {
 			for (let i = 0; i < optBebidasAlc; i++) {
-				eval(`listaCompras.${infoInput.BebidasAlc[i]} = totalAlcool / optBebidasAlc`);
+				listaCompras[`${infoInput.BebidasAlc[i]}`] = totalAlcool / optBebidasAlc;
 			}
 		}
 
@@ -182,14 +180,14 @@ export default function gerarListaCompras(infoInput){
 				if (infoInput.Bebidas[i] == "Água") {
 					continue;
 				} else {
-					eval(`listaCompras.${infoInput.Bebidas[i]} = totalNotAlcool / (optBebidas)`);
+					eval(`listaCompras['${infoInput.Bebidas[i]}'] = totalNotAlcool / (optBebidas)`);
 				}
 			}
 		}
 
 		// Água
 		if (selecionouAgua == 1) {
-			listaCompras.Água = totalAgua;
+			listaCompras['Água'] = totalAgua;
 		}
 	}
 
@@ -201,7 +199,7 @@ export default function gerarListaCompras(infoInput){
 		for(let i = 0; i < infoInput.Acomp.length; i++) {
 			switch (infoInput.Acomp[i]) {
 				case "Arroz":
-					listaCompras.Arroz = arrozPessoa*qtdConvidados;
+					listaCompras['Arroz'] = arrozPessoa*qtdConvidados;
 					break;
 				case "Pão de Alho":
 					listaCompras["Pão de Alho"] = paoDeAlhoPessoa*qtdConvidados;
@@ -229,19 +227,19 @@ export default function gerarListaCompras(infoInput){
 		for(let i = 0; i < infoInput.Suprim.length; i++) {
 			switch (infoInput.Suprim[i]) {
 				case "Carvão":
-					listaCompras.Carvão = totalCarvão;
+					listaCompras['Carvão'] = totalCarvão;
 					break;
 				case "Copos":
-					listaCompras.Copos = coposPessoa*qtdConvidados;
+					listaCompras['Copos'] = coposPessoa*qtdConvidados;
 					break;
 				case "Guardanapos":
-					listaCompras.Guardanapos = guardanaposPessoa*qtdConvidados;
+					listaCompras['Guardanapos'] = guardanaposPessoa*qtdConvidados;
 					break;
 				case "Pratos":
-					listaCompras.Pratos = pratosPessoa*qtdConvidados;                
+					listaCompras['Pratos'] = pratosPessoa*qtdConvidados;                
 					break;
 				case "Talheres":
-					listaCompras.Talheres = talheresPessoa*qtdConvidados;
+					listaCompras['Talheres'] = talheresPessoa*qtdConvidados;
 					break;
 				default:
 					break;
@@ -255,3 +253,5 @@ export default function gerarListaCompras(infoInput){
 
 	return listaCompras;
 }
+
+export default gerarListaCompras;
