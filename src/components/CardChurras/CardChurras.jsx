@@ -24,8 +24,8 @@ export default function CardChurras( { params } ) {
       
           {/* Parte Direita */}
           <View style={ [styles.halfRight] }>
-            <Text style={ [globalStyles.text, styles.cardInfo] }>Preço Total: <Text style={ {color: '#EF820D'} }>R${params.preco_total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</Text></Text>
-            <Text style={ [globalStyles.text, styles.cardInfo] }>Preço por Pessoa: <Text style={ {color: '#EF820D'} }>R${params.preco_pessoa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</Text></Text>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Preço Total: <Text style={ {color: '#EF820D'} }>R${params.preco_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, minimumFractionDigits: 2 })}</Text></Text>
+            <Text style={ [globalStyles.text, styles.cardInfo] }>Preço por Pessoa: <Text style={ {color: '#EF820D'} }>R${params.preco_pessoa.toLocaleString('pt-BR', { minimumFractionDigits: 2, minimumFractionDigits: 2 })}</Text></Text>
           </View>
 
         </View>

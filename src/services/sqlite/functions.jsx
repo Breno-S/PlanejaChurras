@@ -34,21 +34,21 @@ function salvaChurras(dados) {
 	// });
 }
 
-async function getPreco(nome) {
-	await fetchPrice(nome).then(result => {
-		return result;
-	})
-}
-
 // async function getPreco(nome) {
-//     try {
-//         const result = await fetchPrice(nome);
-//         return result;
-//     } catch (error) {
-//         // Lidar com o erro aqui, se necessário.
-//         console.error(error);
-//     }
+// 	await fetchPrice(nome).then(result => {
+// 		return result;
+// 	})
 // }
+
+async function getPreco(nome) {
+    try {
+        const result = await fetchPrice(nome);
+        return result;
+    } catch (error) {
+        // Lidar com o erro aqui, se necessário.
+        console.error('Erro ao Pegar Preço: '+error);
+    }
+}
 
 
 export {

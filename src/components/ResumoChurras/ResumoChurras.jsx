@@ -1,3 +1,4 @@
+import { useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
@@ -11,6 +12,7 @@ export default function ResumoChurras(){
     
     const route = useRoute();
     const resumo = route.params.infoInput || {};
+
     
     let nomeChurras = resumo[0].nomeChurras;
     let BovinasSelec = [];
@@ -88,12 +90,62 @@ export default function ResumoChurras(){
         qtdJovens: Jovens,    
         qtdCriancas: Criancas,
     };
-
-    console.log(listaCompras);
-    // console.log('enviaDados: '+ enviaDados);
+    
     let listaCompras = gerarListaCompras(enviaDados);
-    console.log("esta é a lista de compras: ", listaCompras);
+    // console.log("esta é a lista de compras: ", listaCompras);
+    
 
+    const obterPrecos = async (produto) => {
+        const selectedItems = produto.filter(item => item.selected);
+        const prices = {};
+
+        if (selectedItems.length === 0) {
+            return prices;
+        }
+
+        for(let item of selectedItems){
+            try{
+                const price = await fetchPrice(item.label);
+                prices[item.label] = price;
+                // console.log(prices);
+            }
+            catch (error){
+                console.error(error)
+            }
+        }
+        return prices;
+    }
+
+    const [pricescBovinas, setpricescBovinas] = useState({});
+    const [pricescSuinas, setpricescSuinas] = useState({});
+    const [pricescFrango, setpricescFrango] = useState({});
+    const [pricesBebidas, setPricesBebidas] = useState({});
+    const [pricesAcomp, setPricesAcomp] = useState({});
+    const [pricesSuprim, setPricesSuprim] = useState({});
+
+    const [pricesTotalCarnes, setpricesTotalCarnes] = useState(0.0);
+    const [pricesTotalBebidas, setPricesTotalBebidas] = useState(0.0);
+    const [pricesTotalAcomp, setPricesTotalAcomp] = useState(0.0);
+    const [pricesTotalSuprim, setPricesTotalSuprim] = useState(0.0);
+    
+
+    useEffect(() => {
+        // Busque os preços das carnes bovinas
+        const fetchData = async () => {
+            try{
+                const valoresCarnes = await obterPrecos(resumo[0].cBovinas);
+                setpricescBovinas(valoresCarnes);
+                console.log('Valores: ', valoresCarnes);
+            }catch (error){
+                console.error('Erro ao obter os preços:', error);
+            }
+        }
+        fetchData();
+    }, [resumo[0].cBovinas]);
+
+    console.log(pricescBovinas);
+    
+    
     return(
         <ScrollView style={styles.container}>
             
@@ -101,7 +153,6 @@ export default function ResumoChurras(){
             <View style={ [styles.viewTitle] }>                
                 <Text style={ [globalStyles.text, styles.title] }>Nome do Churrasco: {nomeChurras}{'\n'}</Text>
                 <Text style={ [globalStyles.text, styles.title] }>Participantes: {totalConv}</Text>
-                {/* <Text style={ [globalStyles.text, styles.title] }>LISTA:{'\n\n'}{listaCompras['Arroz']}</Text> */}
             </View>
             {/* Informações do campo 1 */}
             <View style={styles.campo1}>
@@ -129,17 +180,21 @@ export default function ResumoChurras(){
                     </View>
                     {/* ============================= SELECIONADOS ================================ */}
                     
+                    
                     {resumo[0].cBovinas.map((item, index) => {
                         if (item.selected) {
+                            const price = pricescBovinas[item.label] || 0;
+                            setpricesTotalCarnes((prevPrice) => prevPrice + price);
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$39,99</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade / 1000).toLocaleString('pt-BR', {maximumFractionDigits: 2 })}</Text>
                                 </View>
                             )    
                         }
                     })}
+                    
 
                 </View>
 

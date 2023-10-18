@@ -110,7 +110,7 @@ export default function InfoChurras({  }) {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        <Text style={ [globalStyles.text, styles.title] }>INFORMAÇÕES DO{'\n'}{info[0].nomeChurras}</Text>
+        <Text style={ [globalStyles.text, styles.title] }>INFORMAÇÕES DO CHURRAS{'\n'}"{(info[0].nomeChurras).toUpperCase()}"</Text>
 
         {/* === Mostragem de Dados Temporária  === */}
         {/* <Text style={styles.titleContent}> */}
@@ -123,7 +123,6 @@ export default function InfoChurras({  }) {
         {/* </Text> */}
         {/* === Deletar se Necessário === */}
         
-        <View style={styles.underline}></View>
         <View style={[styles.underlineGray, { width: windowWidth }]}></View>
         <View style={styles.content}>
           <Text style={styles.titleContent}>Informações do Anfitrião</Text>
@@ -202,15 +201,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    marginTop: 40,
     borderBottomWidth: 1,
-    borderBottomColor: "#fff",
-  },
-  underline: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#fff",
-    width: 240,
-    marginTop: 5,
+    borderBottomColor: '#fff',
+    margin: 20,
+    textAlign: 'center',
   },
   underlineGray: {
     borderBottomWidth: 1,
