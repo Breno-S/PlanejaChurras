@@ -61,8 +61,8 @@ export default function ResumoChurras(){
     for (let x = 0; x < resumo[0].Bebidas.length; x++){
         if (resumo[0].Bebidas[0] != undefined){
             if (resumo[0].Bebidas[x].selected === true){
-                if (resumo[0].Bebidas[x].label === 'Caipirinha [300 ml]'|| 
-                    resumo[0].Bebidas[x].label === 'Cerveja [lata]'){
+                if (resumo[0].Bebidas[x].label === 'Caipirinha'|| 
+                    resumo[0].Bebidas[x].label === 'Cerveja'){
                     BebidasAlcSelec.push(resumo[0].Bebidas[x].label);
                 } else {
                     BebidasSelec.push(resumo[0].Bebidas[x].label);
@@ -92,7 +92,7 @@ export default function ResumoChurras(){
     };
     
     let listaCompras = gerarListaCompras(enviaDados);
-    // console.log("esta é a lista de compras: ", listaCompras);
+    console.log("esta é a lista de compras: ", listaCompras);
     
 
     const obterPrecos = async (produto) => {
@@ -270,7 +270,6 @@ export default function ResumoChurras(){
                     {resumo[0].cBovinas.map((item, index) => {
                         if (item.selected) {
                             const price = pricescBovinas[item.label] || 0;
-                            // setPricesTotalCarnes((prevState) => prevState + (price * listaCompras[`${item.label}`].quantidade / 1000));
                             return(
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
@@ -358,6 +357,7 @@ export default function ResumoChurras(){
                     </View>
                     {/* ================================= SELECIONADOS BEBICAS ALCOOLICAS  ===================================== */}
                     {BebidasAlcSelec.map((item, index) => {
+                        console.log(item);
                         const price = pricesBebidas[item] || 0;
                         // if (item.selected) {
                             return(
@@ -380,6 +380,7 @@ export default function ResumoChurras(){
                     </View>
                     {/* ================================= SELECIONADOS BEBIDAS NAO ALCOOLICAS ===================================== */}
                     {BebidasSelec.map((item, index) => {
+                        console.log(listaCompras[`${item}`].quantidade);
                         // if (item.selected) {
                             const price = pricesBebidas[item] || 0;
                             return(

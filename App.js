@@ -64,6 +64,7 @@ export default function App() {
           headerTitleStyle: [globalStyles.text,  { fontSize: 40 }],
           headerLeft: () => null,
           headerRight: () => <ButtonCardapio />,
+          unmountOnBlur: true,
         }}
         initialRouteName="HomePage"
         // propriedade que define o Drawer customizado

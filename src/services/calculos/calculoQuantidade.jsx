@@ -215,6 +215,8 @@ function gerarListaCompras(infoInput){
 	}
 
 	function dividirBebidas() {
+		console.log(infoInput.Bebidas);
+		console.log(infoInput.BebidasAlc);
 		if (infoInput.Bebidas.length == 0 && infoInput.BebidasAlc.length == 0) {
 			return;
 		}
@@ -229,12 +231,12 @@ function gerarListaCompras(infoInput){
 		const selecionouAgua = (infoInput.Bebidas.includes("Água")) ? 1 : 0;
 
 		// Dividir o total de bebidas não alcoólicas entre as opções selecionadas
-		if (optBebidas = infoInput.Bebidas.length - selecionouAgua) {
+		if (optBebidas = infoInput.Bebidas.length) {
 			for (let i = 0; i < optBebidas; i++) {
 				if (infoInput.Bebidas[i] == "Água") {
 					continue;
 				} else {
-					listaCompras[`${infoInput.Bebidas[i]}`] = totalNotAlcool / (optBebidas);
+					listaCompras[`${infoInput.Bebidas[i]}`] = totalNotAlcool / (optBebidas - selecionouAgua);
 				}
 			}
 		}

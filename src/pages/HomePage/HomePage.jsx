@@ -22,7 +22,7 @@ export default function HomePage( { navigation } ) {
       tx.executeSql("SELECT * FROM Churras INNER JOIN Local_Churras ON pk_churras = fk_churras",
         [],
         (_, resultSet) => {
-          console.log("INNER JOIN funcionou", resultSet.rows._array);
+          // console.log("INNER JOIN funcionou", resultSet.rows._array);
           setAllChurras(resultSet.rows._array);
           setIsLoading(false);
         },
