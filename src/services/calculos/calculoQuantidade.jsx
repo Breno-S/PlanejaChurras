@@ -64,6 +64,8 @@ function gerarListaCompras(infoInput){
 	}
 
 	// Criar um novo objeto transformando a quantidade em um objeto com quantidade e preço
+
+	// ================================= OLD =====================================
 	let novoListaCompras = {};
 	for (let item in listaCompras) {
 		if (listaCompras.hasOwnProperty(item)) {
@@ -73,6 +75,42 @@ function gerarListaCompras(infoInput){
 			};
 		}
 	}
+	// ================================= OLD =====================================
+
+	// ================================= NEW =====================================
+	// let novoListaCompras = {};
+
+	// async function calcularPrecos() {
+	// 	for (let item in listaCompras) {
+	// 		if (listaCompras.hasOwnProperty(item)) {
+	// 			try {
+	// 				console.log('item:', item);
+					
+	// 				const price = await getPreco(item);
+	// 				console.log('price:', price);
+	// 				console.log('quantidade: ', listaCompras[`${item}`])
+	// 				novoListaCompras[`${item}`] = {
+	// 					quantidade: listaCompras[`${item}`],
+	// 					preco: price
+	// 				};
+					
+	// 			} catch (error) {
+	// 				console.error(error);
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	// Chame a função para calcular os preços
+	// calcularPrecos().then(() => {
+	// // O novoListaCompras estará pronto aqui
+	// // console.log('novoListaCompras',novoListaCompras);
+	// return novoListaCompras;
+	// }).catch(error => {
+	// console.error(error);
+	// });
+
+	// ================================= NEW =====================================
 
 	// console.log(listaCompras);
 	// for (let item in novoListaCompras) {

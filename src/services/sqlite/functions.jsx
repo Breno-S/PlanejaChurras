@@ -1,6 +1,6 @@
 import db from '../../database';
 
-function fetchPrice(productName) {
+async function fetchPrice(productName) {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
@@ -40,10 +40,17 @@ function salvaChurras(dados) {
 // 	})
 // }
 
-async function getPreco(nome) {
+
+const getPreco = async (nome) => {
+    // console.log('nome', nome);
     try {
-        const result = await fetchPrice(nome);
-        return result;
+        await fetchPrice(nome)
+        .then((resolve => {
+            // console.log(resolve);
+            return resolve;
+        }))
+        .catch(error => console.log(error));
+        // return result;
     } catch (error) {
         // Lidar com o erro aqui, se necessário.
         console.error('Erro ao Pegar Preço: '+error);
