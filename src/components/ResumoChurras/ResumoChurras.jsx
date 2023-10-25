@@ -5,6 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
 import gerarListaCompras from "../../services/calculos/calculoQuantidade";
 import { fetchPrice, getPreco } from "../../services/sqlite/functions";
+import { salvaChurras } from '../../services/sqlite/functions';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -12,6 +13,16 @@ export default function ResumoChurras(){
     
     const route = useRoute();
     const resumo = route.params.infoInput || {};
+
+    if (resumo[0].qtdAdultos == ''){
+        resumo[0].qtdAdultos = '0';
+    }
+    if (resumo[0].qtdJovens == ''){
+        resumo[0].qtdJovens = '0';
+    }
+    if (resumo[0].qtdCriancas == ''){
+        resumo[0].qtdCriancas = '0';
+    }
 
     
     let nomeChurras = resumo[0].nomeChurras;
@@ -127,6 +138,8 @@ export default function ResumoChurras(){
     const [pricesTotalBebidas, setPricesTotalBebidas] = useState(0.0);
     const [pricesTotalAcomp, setPricesTotalAcomp] = useState(0.0);
     const [pricesTotalSuprim, setPricesTotalSuprim] = useState(0.0);
+
+    const [pricesTotalChurras, setPricesTotalChurras] = useState(0.0);
     
     const fetchData = async () => {
         try{
@@ -186,41 +199,56 @@ export default function ResumoChurras(){
                         buffer_Bebidas[`${item.label}`] = (valUni * (qtd_gramas))
                     }
                     
-                    console.log(item.label, buffer_Bebidas[`${item.label}`]);
+                    // console.log(item.label, buffer_Bebidas[`${item.label}`]);
                     setPricesTotalBebidas((prevState) => prevState + buffer_Bebidas[`${item.label}`]);
                 }
             })
 
             setPricesSuprim(await obterPrecos(resumo[0].Suprim));
-            let buffer_Suprim = await obterPrecos(resumo[0].Suprim);
-
+            let buffer_Suprim = await obterPrecos(resumo[0].Suprim)
+            // console.log('bufferSuprim:',buffer_Suprim);
+            
             listaCompras[0].Suprim.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = item.quantidade;
+                    const qtd_Suprim = item.quantidade;
                     const valUni = buffer_Suprim[`${item.label}`];
                     if (buffer_Suprim.hasOwnProperty(item.label)) {
-                        buffer_Suprim[`${item.label}`] = (valUni * (qtd_gramas ))
+                        buffer_Suprim[`${item.label}`] = (valUni * (qtd_Suprim))
                     }
-                    
-                    setPricesTotalSuprim((prevState) => prevState + buffer_Suprim[item.label]);
+                    setPricesTotalSuprim((prevState) => prevState + buffer_Suprim[`${item.label}`]);
                 }
             })
+            
+
 
             setPricesAcomp(await obterPrecos(resumo[0].Acomp));
             let buffer_Acomp = await obterPrecos(resumo[0].Acomp);
+            // console.log('ANTES bufferAcomp:',buffer_Acomp);
 
             listaCompras[0].Acomp.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = item.quantidade;
+                    const qtd_Acomp = item.quantidade;
                     const valUni = buffer_Acomp[`${item.label}`];
                     if (buffer_Acomp.hasOwnProperty(item.label)) {
-                        buffer_Acomp[`${item.label}`] = (valUni * (qtd_gramas))
+                        if (item.label == 'Pão de Alho' || item.label == 'Pão Francês' || item.label == 'Arroz'){
+                            buffer_Acomp[`${item.label}`] = (valUni * (qtd_Acomp / 1000));
+                        } else {
+                            buffer_Acomp[`${item.label}`] = (valUni * (qtd_Acomp));
+                        }
+                        // console.log(buffer_Acomp[`${item.label}`],' = valUni:',valUni,'* qtdAcomp:',qtd_Acomp)
+                        // console.log('DEPOIS bufferAcomp:',buffer_Acomp);
                     }
                     
                     setPricesTotalAcomp((prevState) => prevState + buffer_Acomp[item.label]);
                 }
             })
+
         
+        setPricesTotalChurras(pricesTotalCarnes + pricesTotalBebidas + pricesTotalAcomp + pricesTotalSuprim);
+        listaCompras[0].precoTotal = pricesTotalChurras;
+        listaCompras[0].precoPessoa = pricesTotalChurras / listaCompras[0].qtdAdultos;
+
+
         } catch (error){
             console.error('Erro ao obter os preços:', error);
         }
@@ -230,6 +258,7 @@ export default function ResumoChurras(){
         fetchData();
     }, []);
     
+    // console.log('Lista De Compras: ',listaCompras[0]);
     
     return(
         <ScrollView style={styles.container}>
@@ -541,7 +570,7 @@ export default function ResumoChurras(){
                 </View>
             </View>
             
-            <TouchableOpacity style={ styles.newButton} onPress={null}>
+            <TouchableOpacity style={ styles.newButton} onPress={salvaChurras(listaCompras)}>
                 <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>Salvar{'\n'}Evento</Text>
             </TouchableOpacity>
         </ScrollView>

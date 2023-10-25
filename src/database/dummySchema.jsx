@@ -24,7 +24,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Produto (pk_produto INTEGER PRIMARY KEY AUTOINCREMENT, nome_produto VARCHAR(64), preco_unitario DECIMAL(8,2), categoria VARCHAR(24) NOT NULL, medida VARCHAR(10) NOT NULL, CONSTRAINT unique_produto UNIQUE (nome_produto, categoria));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Produto (pk_produto INTEGER PRIMARY KEY AUTOINCREMENT, nome_produto VARCHAR(64), preco_unitario DECIMAL(8,2), categoria VARCHAR(24) , medida VARCHAR(10) , CONSTRAINT unique_produto UNIQUE (nome_produto, categoria));",
 			[],
 			// (_, resultSet) => console.log("Tabela 'Produto' criada"),
 			(_, resultSet) => null,
@@ -60,7 +60,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Churras (pk_churras INTEGER PRIMARY KEY AUTOINCREMENT, nome_churras VARCHAR(128) NOT NULL, qtd_adultos TINYINT(2) NOT NULL, qtd_jovens TINYINT(2) NOT NULL, qtd_criancas TINYINT(2) NOT NULL, preco_total DECIMAL(10, 2), preco_pessoa DECIMAL(10, 2), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP); CREATE TRIGGER update_churras_modtime AFTER UPDATE ON Churras FOR EACH ROW BEGIN UPDATE Churras SET updated_at = CURRENT_TIMESTAMP WHERE pk_churras = OLD.pk_churras; END;",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Churras (pk_churras INTEGER PRIMARY KEY AUTOINCREMENT, nome_churras VARCHAR(128) , qtd_adultos TINYINT(2) , qtd_jovens TINYINT(2) , qtd_criancas TINYINT(2) , preco_total DECIMAL(10, 2), preco_pessoa DECIMAL(10, 2), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP); CREATE TRIGGER update_churras_modtime AFTER UPDATE ON Churras FOR EACH ROW BEGIN UPDATE Churras SET updated_at = CURRENT_TIMESTAMP WHERE pk_churras = OLD.pk_churras; END;",
 			[],
 			// (_, resultSet) => console.log("Tabela 'Churras' criada"),
 			(_, resultSet) => null,
@@ -96,7 +96,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Info_Churras (pk_info_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, nome_anfitriao VARCHAR(64) NOT NULL, telefone VARCHAR(16) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Info_Churras (pk_info_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) , nome_anfitriao VARCHAR(64) , telefone VARCHAR(16) , FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			// (_, resultSet) => console.log("Tabela 'Info_Churras' criada"),
 			(_, resultSet) => null,
@@ -133,7 +133,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Local_Churras (pk_local_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, cep VARCHAR(9) NOT NULL, logradouro VARCHAR(64) NOT NULL, numero VARCHAR(8) NOT NULL, complemento VARCHAR(8), municipio VARCHAR(32) NOT NULL, estado VARCHAR(20) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Local_Churras (pk_local_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) , cep VARCHAR(9) , logradouro VARCHAR(64) , numero VARCHAR(8) , complemento VARCHAR(8), municipio VARCHAR(32) , estado VARCHAR(20) , FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			// (_, resultSet) => console.log("Tabela 'Local_Churras' criada"),
 			(_, resultSet) => null,
@@ -169,7 +169,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) NOT NULL, fk_produto INT(11) NOT NULL, quantidade DECIMAL(8, 2) NOT NULL, FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) , fk_produto INT(11) , quantidade DECIMAL(8, 2) , FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
 			[],
 			// (_, resultSet) => console.log("Tabela 'Item_Churras' criada"),
 			(_, resultSet) => null,

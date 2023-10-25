@@ -15,7 +15,11 @@ export default function SliderInput({ type, onValueChange }) {
     setSliderValue(value);
 
     if(onValueChange) {
-      onValueChange(value);
+      //if (value == null || value == undefined){
+      //  onValueChange(0);
+      //} else {
+        onValueChange(value);
+      //}
     }
   }
 
@@ -39,9 +43,10 @@ export default function SliderInput({ type, onValueChange }) {
         <Slider
           minimumValue={0}
           maximumValue={50}
+          // lowerLimit={0}
           value={sliderValue}
-          onValueChange={handleSliderChange}
           step={1}
+          onValueChange={handleSliderChange}
           minimumTrackTintColor="#EF820D"
           maximumTrackTintColor="#000"
           style={styles.slider}
