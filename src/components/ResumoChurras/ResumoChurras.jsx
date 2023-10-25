@@ -91,8 +91,9 @@ export default function ResumoChurras(){
         qtdCriancas: Criancas,
     };
     
-    let listaCompras = gerarListaCompras(enviaDados);
-    console.log("esta é a lista de compras: ", listaCompras);
+    // let listaCompras = gerarListaCompras(enviaDados);
+    let listaCompras = gerarListaCompras(resumo);
+    // console.log(listaCompras[0].cBovinas);
     
 
     const obterPrecos = async (produto) => {
@@ -107,7 +108,6 @@ export default function ResumoChurras(){
             try{
                 const price = await fetchPrice(item.label);
                 prices[item.label] = price;
-                // console.log(prices);
             }
             catch (error){
                 console.error(error)
@@ -133,9 +133,9 @@ export default function ResumoChurras(){
             setPricescBovinas(await obterPrecos(resumo[0].cBovinas));
             let buffer_cBovinas = await obterPrecos(resumo[0].cBovinas);
 
-            resumo[0].cBovinas.map(async (item, index) => {
+            listaCompras[0].cBovinas.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = listaCompras[`${item.label}`].quantidade;
+                    const qtd_gramas = item.quantidade;
                     const valUni = buffer_cBovinas[`${item.label}`];
                     if (buffer_cBovinas.hasOwnProperty(item.label)) {
                         buffer_cBovinas[`${item.label}`] = (valUni * (qtd_gramas / 1000.00))
@@ -148,9 +148,9 @@ export default function ResumoChurras(){
             setPricescSuinas(await obterPrecos(resumo[0].cSuinas));
             let buffer_cSuinas = await obterPrecos(resumo[0].cSuinas);
             
-            resumo[0].cSuinas.map(async (item, index) => {
+            listaCompras[0].cSuinas.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = listaCompras[`${item.label}`].quantidade;
+                    const qtd_gramas = item.quantidade;
                     const valUni = buffer_cSuinas[`${item.label}`];
                     if (buffer_cSuinas.hasOwnProperty(item.label)) {
                         buffer_cSuinas[`${item.label}`] = (valUni * (qtd_gramas / 1000.00))
@@ -163,9 +163,9 @@ export default function ResumoChurras(){
             setPricescFrango(await obterPrecos(resumo[0].cFrango));
             let buffer_cFrango = await obterPrecos(resumo[0].cFrango);
 
-            resumo[0].cFrango.map(async (item, index) => {
+            listaCompras[0].cFrango.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = listaCompras[`${item.label}`].quantidade;
+                    const qtd_gramas = item.quantidade;
                     const valUni = buffer_cFrango[`${item.label}`];
                     if (buffer_cFrango.hasOwnProperty(item.label)) {
                         buffer_cFrango[`${item.label}`] = (valUni * (qtd_gramas / 1000.00))
@@ -178,27 +178,28 @@ export default function ResumoChurras(){
             setPricesBebidas(await obterPrecos(resumo[0].Bebidas));
             let buffer_Bebidas = await obterPrecos(resumo[0].Bebidas);
 
-            resumo[0].Bebidas.map(async (item, index) => {
+            listaCompras[0].Bebidas.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = listaCompras[`${item.label}`].quantidade;
+                    const qtd_gramas = item.quantidade;
                     const valUni = buffer_Bebidas[`${item.label}`];
                     if (buffer_Bebidas.hasOwnProperty(item.label)) {
-                        buffer_Bebidas[`${item.label}`] = (valUni * (qtd_gramas / 1000.00))
+                        buffer_Bebidas[`${item.label}`] = (valUni * (qtd_gramas))
                     }
                     
-                    setPricesTotalBebidas((prevState) => prevState + buffer_Bebidas[item.label]);
+                    console.log(item.label, buffer_Bebidas[`${item.label}`]);
+                    setPricesTotalBebidas((prevState) => prevState + buffer_Bebidas[`${item.label}`]);
                 }
             })
 
             setPricesSuprim(await obterPrecos(resumo[0].Suprim));
             let buffer_Suprim = await obterPrecos(resumo[0].Suprim);
 
-            resumo[0].Suprim.map(async (item, index) => {
+            listaCompras[0].Suprim.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = listaCompras[`${item.label}`].quantidade;
+                    const qtd_gramas = item.quantidade;
                     const valUni = buffer_Suprim[`${item.label}`];
                     if (buffer_Suprim.hasOwnProperty(item.label)) {
-                        buffer_Suprim[`${item.label}`] = (valUni * (qtd_gramas / 1000))
+                        buffer_Suprim[`${item.label}`] = (valUni * (qtd_gramas ))
                     }
                     
                     setPricesTotalSuprim((prevState) => prevState + buffer_Suprim[item.label]);
@@ -208,12 +209,12 @@ export default function ResumoChurras(){
             setPricesAcomp(await obterPrecos(resumo[0].Acomp));
             let buffer_Acomp = await obterPrecos(resumo[0].Acomp);
 
-            resumo[0].Acomp.map(async (item, index) => {
+            listaCompras[0].Acomp.map(async (item, index) => {
                 if (item.selected) {
-                    const qtd_gramas = listaCompras[`${item.label}`].quantidade;
+                    const qtd_gramas = item.quantidade;
                     const valUni = buffer_Acomp[`${item.label}`];
                     if (buffer_Acomp.hasOwnProperty(item.label)) {
-                        buffer_Acomp[`${item.label}`] = (valUni * (qtd_gramas / 1000.00))
+                        buffer_Acomp[`${item.label}`] = (valUni * (qtd_gramas))
                     }
                     
                     setPricesTotalAcomp((prevState) => prevState + buffer_Acomp[item.label]);
@@ -228,8 +229,6 @@ export default function ResumoChurras(){
     useEffect(() => {   
         fetchData();
     }, []);
-
-    // console.log(pricescBovinas);
     
     
     return(
@@ -267,14 +266,15 @@ export default function ResumoChurras(){
                     {/* ============================= SELECIONADOS ================================ */}
                     
                     
-                    {resumo[0].cBovinas.map((item, index) => {
+                    {listaCompras[0].cBovinas.map((item, index) => {
                         if (item.selected) {
+                            // console.log("item: ", item);
                             const price = pricescBovinas[item.label] || 0;
                             return(
-                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade}g</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                 </View>
                             )    
                         }
@@ -291,14 +291,14 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
                     {/* ================================= SELECIONADO ===================================== */}
-                    {resumo[0].cSuinas.map((item, index) => {
+                    {listaCompras[0].cSuinas.map((item, index) => {
                         if (item.selected) {
                             const price = pricescSuinas[item.label] || 0;
                             return(
-                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade}g</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                 </View>
                             )    
                         }
@@ -313,14 +313,14 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
                     {/* ================================= SELECIONADOS ===================================== */}
-                    {resumo[0].cFrango.map((item, index) => {
+                    {listaCompras[0].cFrango.map((item, index) => {
                         if (item.selected) {
                             const price = pricescFrango[item.label] || 0;
                             return(
-                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{(item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}g</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {maximumFractionDigits: 2})}</Text>
                                 </View>
                             )    
                         }
@@ -331,7 +331,7 @@ export default function ResumoChurras(){
 
                 {/* ================================= TOTAL CARNES ===================================== */}
                 <View style={styles.section}>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R${(pricesTotalCarnes).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                     </View>
@@ -356,19 +356,20 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
                     {/* ================================= SELECIONADOS BEBICAS ALCOOLICAS  ===================================== */}
-                    {BebidasAlcSelec.map((item, index) => {
-                        console.log(item);
-                        const price = pricesBebidas[item] || 0;
-                        // if (item.selected) {
-                            return(
-                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item}`].quantidade / 1000}L</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
-                                </View>
-                            )    
-                        // }
+
+                    {listaCompras[0].Bebidas.map((item, index) => {
+                        if (item.alcoholic){
+                            const price = pricesBebidas[item.label] || 0;
+                                return(
+                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade} uni.</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                    </View>
+                                )
+                        }            
                     })}
+
                 </View>
 
                 <View style={styles.section}>
@@ -379,18 +380,28 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
                     {/* ================================= SELECIONADOS BEBIDAS NAO ALCOOLICAS ===================================== */}
-                    {BebidasSelec.map((item, index) => {
-                        console.log(listaCompras[`${item}`].quantidade);
-                        // if (item.selected) {
-                            const price = pricesBebidas[item] || 0;
+                    {/* {BebidasSelec.map((item, index) => {
+                        const price = pricesBebidas[item.label] || 0;
+                        // return(
+                        //     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        //         <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item} {(item == "Água") ? "": ((item == "Refrigerante") ? "[2L]": "[1L]")}</Text>
+                        //         <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{(item == "Água") ? listaCompras[`${item}`].quantidade : ((item == "Refrigerante") ? listaCompras[`${item}`].quantidade/2 : listaCompras[`${item}`].quantidade)} {(item == "Água") ? "L": "uni."}</Text>
+                        //         <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item}`].quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                        //     </View>
+                        // )    
+                        
+                    })} */}
+                    {listaCompras[0].Bebidas.map((item, index) => {
+                        if (item.alcoholic == false){
+                            const price = pricesBebidas[item.label] || 0;
                             return(
-                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item}`].quantidade / 1000}L</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade} {item.label == 'Água' ? "L" : "uni."}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                 </View>
-                            )    
-                        // }
+                            )
+                        }            
                     })}
                 </View>
 
@@ -398,7 +409,7 @@ export default function ResumoChurras(){
 
                 {/* ================================= TOTAL BEBIDAS ===================================== */}
                 <View style={styles.section}>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R${(pricesTotalBebidas).toLocaleString("pt-BR", {maximumFractionDigits: 2, minimumFractionDigits: 2})}</Text>
                     </View>
@@ -418,36 +429,63 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'center'}] }>QTD</Text>
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
-                    {resumo[0].Acomp.map((item, index) => {
-                        if (item.selected) {
+                    {
+                        listaCompras[0].Acomp.map((item, index) => {
                             const price = pricesAcomp[item.label] || 0;
-                            if (item.label === "Pão Francês"){
-                                return(
-                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade / 50} uni.</Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
-                                    </View>
-                                )
-                            } else {
-                                return(
-                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade}g
-                                        </Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
-                                    </View>
-                                )
+                            switch (item.label) {
+                                case "Arroz":
+                                    return(
+                                        <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                            <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade / 1000} uni.</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                        </View>
+                                    );
+                                case "Pão Francês":
+                                    return(
+                                        <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                            <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade}g{'\n'}({item.quantidade / 50} uni.)</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                        </View>
+                                    );
+                                case "Farofa Pronta":
+                                    return(
+                                        <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                            <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade} uni.</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade ).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                        </View>
+                                    );
+                                case "Queijo Coalho":
+                                    return(
+                                        <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                            <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade} uni.</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                        </View>
+                                    );
+                                case "Pão de Alho":
+                                    return(
+                                        <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                            <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade}g{'\n'}({item.quantidade / 80} uni.)</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                        </View>
+                                    );
+                                default:
+                                    break;
                             }
-                        }
-                    })}
+                                
+                        })
+                    }
                 </View>
 
                 <View style={styles.linhaBlack}></View>
 
                 {/* ================================= TOTAL ACOMPANHAMENTOS ===================================== */}
                 <View style={styles.section}>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R${(pricesTotalAcomp).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                     </View>
@@ -468,23 +506,23 @@ export default function ResumoChurras(){
                         <Text style={ [globalStyles.text, styles.infoTitle, {textAlign: 'right'} ] }>PREÇO</Text>
                     </View>
                 <View style={styles.section}>
-                    {resumo[0].Suprim.map((item, index) => {
+                    {listaCompras[0].Suprim.map((item, index) => {
                         if (item.selected) {
                             const price = pricesSuprim[item.label] || 0;
                             if (item.label === 'Carvão'){
                                 return(
-                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade / 1000}kg</Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade} uni.</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                 </View>
                                 )
                             }else{
                                 return(
-                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.label}</Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{listaCompras[`${item.label}`].quantidade} uni.</Text>
-                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * listaCompras[`${item.label}`].quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade} uni.</Text>
+                                        <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                     </View>
                                 )
                             }
@@ -496,7 +534,7 @@ export default function ResumoChurras(){
 
                 {/* ================================= TOTAL SUPRIMENTOS ===================================== */}
                 <View style={styles.section}>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'left'}] }>Total:</Text>
                         <Text style={ [globalStyles.text, styles.info, {width: '50%', textAlign: 'right'}] }>R${(pricesTotalSuprim).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                     </View>

@@ -82,7 +82,7 @@ const dummyDataProdutos = [
     },
     // Bebidas Não Alcoólicas
     {
-        nome_produto: 'Água [2L]',
+        nome_produto: 'Água',
         preco_unitario: 3.50,
         categoria: 'Bebidas Não Alcoólicas',
         medida: 'litros'
@@ -91,33 +91,33 @@ const dummyDataProdutos = [
         nome_produto: 'Refrigerante [2L]',
         preco_unitario: 5.49,
         categoria: 'Bebidas Não Alcoólicas',
-        medida: 'litros'
+        medida: 'unidades'
     },
     {
         nome_produto: 'Suco [1L]',
         preco_unitario: 4.99,
         categoria: 'Bebidas Não Alcoólicas',
-        medida: 'litros'
+        medida: 'unidades'
     },
     // Bebidas Alcoólicas
     {
-        nome_produto: 'Cerveja [lata]',
-        preco_unitario: 8.99,
+        nome_produto: 'Cerveja [lata 350mL]',
+        preco_unitario: 3.99,
         categoria: 'Bebidas Alcoólicas',
-        medida: 'litros'
+        medida: 'unidades'
     },
     {
-        nome_produto: 'Caipirinha [300 ml]',
+        nome_produto: 'Caipirinha [1L]',
         preco_unitario: 38.54,
         categoria: 'Bebidas Alcoólicas',
-        medida: 'litros'
+        medida: 'unidades'
     },
     // Acompanhamentos
     {
-        nome_produto: 'Arroz',
+        nome_produto: 'Arroz [1kg]',
         preco_unitario: 5.90,
         categoria: 'Acompanhamentos',
-        medida: 'quilos'
+        medida: 'unidades'
     },
     {
         nome_produto: 'Pão de Alho',
@@ -126,16 +126,16 @@ const dummyDataProdutos = [
         medida: 'quilos'
     },
     {
-        nome_produto: 'Queijo Coalho',
-        preco_unitario: 53.90,
+        nome_produto: 'Queijo Coalho [pacote 7 espetos]',
+        preco_unitario: 20.00,
         categoria: 'Acompanhamentos',
-        medida: 'quilos'
+        medida: 'unidades'
     },
     {
-        nome_produto: 'Farofa Pronta',
-        preco_unitario: 18.98,
+        nome_produto: 'Farofa Pronta [500g]',
+        preco_unitario: 15.00,
         categoria: 'Acompanhamentos',
-        medida: 'quilos'
+        medida: 'unidades'
     },
     {
         nome_produto: 'Pão Francês',
@@ -145,25 +145,25 @@ const dummyDataProdutos = [
     },
     // Suprimentos
     {
-        nome_produto: 'Carvão',
+        nome_produto: 'Carvão [1kg]',
         preco_unitario: 10.00,
         categoria: 'Suprimentos',
         medida: 'quilos'
     },
     {
-        nome_produto: 'Copos Descartáveis (50 unidades)',
+        nome_produto: 'Copos Descartáveis [kit 50 unid.]',
         preco_unitario: 7.58,
         categoria: 'Suprimentos',
         medida: 'unidades'
     },
     {
-        nome_produto: 'Pratos Descartáveis (50 unidades)',
+        nome_produto: 'Pratos Descartáveis [kit 50 unid.]',
         preco_unitario: 16.50,
         categoria: 'Suprimentos',
         medida: 'quilos'
     },
     {
-        nome_produto: 'Guardanapos Descartáveis (50 unidades)',
+        nome_produto: 'Guardanapos Descartáveis [kit 50 unid.]',
         preco_unitario: 1.59,
         categoria: 'Suprimentos',
         medida: 'unidades'

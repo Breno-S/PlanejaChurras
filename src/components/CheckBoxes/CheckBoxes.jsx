@@ -11,11 +11,11 @@ export default function CheckBoxes({type, onValueChange}){
   const navigation  = useNavigation();
 
   const [cBovinas, setcBovinas] = useState([ 
-    {label:'Fraldinha' , selected: false},
-    {label:'Contrafilé', selected: false},
-    {label:'Alcatra'   , selected: false},
-    {label:'Picanha'   , selected: false},
-    {label:'Cupim'     , selected: false}
+    {label:'Fraldinha' , value:'Fraldinha' , selected: false},
+    {label:'Contrafilé', value:'Contrafilé', selected: false},
+    {label:'Alcatra'   , value:'Alcatra'   , selected: false},
+    {label:'Picanha'   , value:'Picanha'   , selected: false},
+    {label:'Cupim'     , value:'Cupim'     , selected: false}
   ]);
 
   const toggleCBovinasCheckbox = (index) => {
@@ -27,11 +27,11 @@ export default function CheckBoxes({type, onValueChange}){
 
               
   const [cSuinas, setcSuinas] = useState([
-    { label: 'Pernil'       , selected: false },
-    { label: 'Lombo'        , selected: false },
-    { label: 'Bisteca Suína', selected: false },
-    { label: 'Linguiça'     , selected: false },
-    { label: 'Panceta'      , selected: false }
+    { label: 'Pernil'       , value: 'Pernil'       , selected: false },
+    { label: 'Lombo'        , value: 'Lombo'        , selected: false },
+    { label: 'Bisteca Suína', value: 'Bisteca Suína', selected: false },
+    { label: 'Linguiça'     , value: 'Linguiça'     , selected: false },
+    { label: 'Panceta'      , value: 'Panceta'      , selected: false }
   ]);
 
   const toggleCSuinasCheckbox = (index) => {
@@ -42,9 +42,9 @@ export default function CheckBoxes({type, onValueChange}){
   };
   
   const [cFrango, setcFrango] = useState([
-    { label: 'Coxa'   , selected: false },
-    { label: 'Asa'    , selected: false },
-    { label: 'Coração', selected: false }
+    { label: 'Coxa'   , value: 'Coxa'   , selected: false },
+    { label: 'Asa'    , value: 'Asa'    , selected: false },
+    { label: 'Coração', value: 'Coração', selected: false }
   ]);
 
   const toggleCFrangoCheckbox = (index) => {
@@ -55,11 +55,11 @@ export default function CheckBoxes({type, onValueChange}){
   };
 
   const [Bebidas, setBebidas] = useState([
-    { label: 'Água'          , selected: false },
-    { label: 'Refrigerante'  , selected: false },
-    { label: 'Suco'          , selected: false },
-    { label: 'Cerveja'       , selected: false },
-    { label: 'Caipirinha'    , selected: false }
+    { label: 'Água'          , value: 'Água'                , alcoholic: false , selected: false },
+    { label: 'Refrigerante'  , value: 'Refrigerante [2L]'   , alcoholic: false , selected: false },
+    { label: 'Suco'          , value: 'Suco [1L]'           , alcoholic: false , selected: false },
+    { label: 'Cerveja'       , value: 'Cerveja [lata 350mL]', alcoholic: true  , selected: false },
+    { label: 'Caipirinha'    , value: 'Caipirinha [1L]'     , alcoholic: true  , selected: false }
   ]);
 
   const toggleBebidasCheckbox = (index) => {
@@ -70,11 +70,11 @@ export default function CheckBoxes({type, onValueChange}){
   };
 
   const [Acompanhamentos, setAcompanhamentos] = useState([
-    { label: 'Pão de Alho'   , selected: false },
-    { label: 'Queijo Coalho' , selected: false },
-    { label: 'Farofa Pronta' , selected: false },
-    { label: 'Pão Francês'   , selected: false },
-    { label: 'Arroz'         , selected: false }
+    { label: 'Pão de Alho'   , value: 'Pão de Alho'                     , selected: false },
+    { label: 'Queijo Coalho' , value: 'Queijo Coalho [pacote 7 espetos]', selected: false },
+    { label: 'Farofa Pronta' , value: 'Farofa Pronta [500g]'            , selected: false },
+    { label: 'Pão Francês'   , value: 'Pão Francês'                     , selected: false },
+    { label: 'Arroz'         , value: 'Arroz [1kg]'                     , selected: false }
   ]);
 
   const toggleAcompanhamentosCheckbox = (index) => {
@@ -85,11 +85,11 @@ export default function CheckBoxes({type, onValueChange}){
   };
 
   const [Suprimentos, setSuprimentos] = useState([
-    { label: 'Carvão'     , selected: false },
-    { label: 'Copos'      , selected: false },
-    { label: 'Guardanapos', selected: false },
-    { label: 'Pratos'     , selected: false },
-    { label: 'Talheres'   , selected: false }
+    { label: 'Carvão'     , value: 'Carvão [1kg]'                               , selected: false },
+    { label: 'Copos'      , value: 'Copos Descartáveis [kit 50 uni.)'           , selected: false },
+    { label: 'Guardanapos', value: 'Guardanapos Descartáveis [kit 50 unid.]'     , selected: false },
+    { label: 'Pratos'     , value: 'Pratos Descartáveis [kit 50 uni.]'          , selected: false },
+    { label: 'Talheres'   , value: 'Kit 50 Talheres Descartáveis (garfo e faca)', selected: false }
   ]);
 
   const toggleSuprimentosCheckbox = (index) => {
