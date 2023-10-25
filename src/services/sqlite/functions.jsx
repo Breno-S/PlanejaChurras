@@ -27,7 +27,7 @@ function salvaChurras(dados) {
     let idChurras = 0;
 	db.transaction(tx => {
 		tx.executeSql("INSERT INTO Churras (nome_churras, qtd_adultos, qtd_jovens, qtd_criancas, preco_total, preco_pessoa) VALUES (?, ?, ?, ?, ?, ?);",
-			[dados.nome_churras, dados.qtd_adultos, dados.qtd_jovens, dados.qtd_criancas, dados.precoTotal, dados.precoPessoa],
+			[dados.nomeChurras, dados.qtdAdultos, dados.qtdJovens, dados.qtdCriancas, dados.precoTotal, dados.precoPessoa],
 			(_, resultSet) => {
                 console.log("Registro adicionado à tabela 'Churras'");
                 idChurras = resultSet.insertId;
@@ -52,7 +52,127 @@ function salvaChurras(dados) {
 		)
 	});
 
-    dados[0].cBovinas.map((item, index) => {
+    dados.cBovinas.map((item, index) => {
+        if(item.selected) {
+            //buscar o id do produto
+            let idProduto = 0;
+            db.transaction(tx => {
+            tx.executeSql("SELECT pk_produto FROM Produto WHERE nome_produto = ?;",
+                [item.value],
+                (_, resultSet) => {
+                    console.log("Produto encontrado:", item.value);
+                    idProduto = resultSet.rows._array;
+                },
+                (_, error) => console.error("Produto não encontrado", error)
+            )
+            });
+            
+            db.transaction(tx => {
+            tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
+                [idChurras, idProduto, item.quantidade],
+                (_, resultSet) => console.log("Registro adicionado à tabela 'Info_Churras'"),
+                (_, error) => console.error("Erro criando registro em 'Info_Churras'", error)
+            )
+            }); 
+        }
+    })
+    dados.cSuinas.map((item, index) => {
+        if(item.selected) {
+            //buscar o id do produto
+            let idProduto = 0;
+            db.transaction(tx => {
+            tx.executeSql("SELECT pk_produto FROM Produto WHERE nome_produto = ?;",
+                [item.value],
+                (_, resultSet) => {
+                    console.log("Produto encontrado:", item.value);
+                    idProduto = resultSet.rows._array;
+                },
+                (_, error) => console.error("Produto não encontrado", error)
+            )
+            });
+            
+            db.transaction(tx => {
+            tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
+                [idChurras, idProduto, item.quantidade],
+                (_, resultSet) => console.log("Registro adicionado à tabela 'Info_Churras'"),
+                (_, error) => console.error("Erro criando registro em 'Info_Churras'", error)
+            )
+            }); 
+        }
+    })
+    dados.cFrango.map((item, index) => {
+        if(item.selected) {
+            //buscar o id do produto
+            let idProduto = 0;
+            db.transaction(tx => {
+            tx.executeSql("SELECT pk_produto FROM Produto WHERE nome_produto = ?;",
+                [item.value],
+                (_, resultSet) => {
+                    console.log("Produto encontrado:", item.value);
+                    idProduto = resultSet.rows._array;
+                },
+                (_, error) => console.error("Produto não encontrado", error)
+            )
+            });
+            
+            db.transaction(tx => {
+            tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
+                [idChurras, idProduto, item.quantidade],
+                (_, resultSet) => console.log("Registro adicionado à tabela 'Info_Churras'"),
+                (_, error) => console.error("Erro criando registro em 'Info_Churras'", error)
+            )
+            }); 
+        }
+    })
+    dados.Bebidas.map((item, index) => {
+        if(item.selected) {
+            //buscar o id do produto
+            let idProduto = 0;
+            db.transaction(tx => {
+            tx.executeSql("SELECT pk_produto FROM Produto WHERE nome_produto = ?;",
+                [item.value],
+                (_, resultSet) => {
+                    console.log("Produto encontrado:", item.value);
+                    idProduto = resultSet.rows._array;
+                },
+                (_, error) => console.error("Produto não encontrado", error)
+            )
+            });
+            
+            db.transaction(tx => {
+            tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
+                [idChurras, idProduto, item.quantidade],
+                (_, resultSet) => console.log("Registro adicionado à tabela 'Info_Churras'"),
+                (_, error) => console.error("Erro criando registro em 'Info_Churras'", error)
+            )
+            }); 
+        }
+    })
+    dados.Suprim.map((item, index) => {
+        if(item.selected) {
+            //buscar o id do produto
+            let idProduto = 0;
+            db.transaction(tx => {
+            tx.executeSql("SELECT pk_produto FROM Produto WHERE nome_produto = ?;",
+                [item.value],
+                (_, resultSet) => {
+                    console.log("Produto encontrado:", item.value);
+                    idProduto = resultSet.rows._array;
+                },
+                (_, error) => console.error("Produto não encontrado", error)
+            )
+            });
+            
+            db.transaction(tx => {
+            tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
+                [idChurras, idProduto, item.quantidade],
+                (_, resultSet) => console.log("Registro adicionado à tabela 'Info_Churras'"),
+                (_, error) => console.error("Erro criando registro em 'Info_Churras'", error)
+            )
+            }); 
+        }
+    })
+    dados.Acomp.map((item, index) => {
         if(item.selected) {
             //buscar o id do produto
             let idProduto = 0;

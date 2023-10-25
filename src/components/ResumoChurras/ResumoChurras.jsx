@@ -26,81 +26,12 @@ export default function ResumoChurras(){
 
     
     let nomeChurras = resumo[0].nomeChurras;
-    let BovinasSelec = [];
-    let SuinasSelec  = [];
-    let FrangoSelec  = [];
-    let BebidasAlcSelec = [];
-    let BebidasSelec = [];
-    let AcompSelec   = [];
-    let SuprimSelec  = [];
     const Adultos   = resumo[0].qtdAdultos;
     const Jovens    = resumo[0].qtdJovens;
     const Criancas  = resumo[0].qtdCriancas;
     const totalConv = parseInt(resumo[0].qtdAdultos) + parseInt(resumo[0].qtdJovens) + parseInt(resumo[0].qtdCriancas);
 
-    for (let x = 0; x < resumo[0].cFrango.length; x++){
-        // Lista de checkboxes que possuem 3 opções diferentes
-        if (resumo[0].cFrango[0] != undefined){
-            if (resumo[0].cFrango[x].selected === true){
-                FrangoSelec.push(resumo[0].cFrango[x].label)
-            }
-        }
     
-    }
-    for (let x = 0; x < resumo[0].cBovinas.length; x++){ 
-        // Lista de checkboxes que possuem 5 opções diferentes
-        if (resumo[0].cBovinas[0] != undefined){
-            if (resumo[0].cBovinas[x].selected === true){
-                BovinasSelec.push(resumo[0].cBovinas[x].label);
-            }
-        }
-    }
-    for (let x = 0; x < resumo[0].cSuinas.length; x++){ 
-        if (resumo[0].cSuinas[0] != undefined){
-            if (resumo[0].cSuinas[x].selected === true){
-                SuinasSelec.push(resumo[0].cSuinas[x].label);
-            }
-        }
-    }
-    for (let x = 0; x < resumo[0].Suprim.length; x++){
-        if (resumo[0].Suprim[0] != undefined){
-            if (resumo[0].Suprim[x].selected === true){
-                SuprimSelec.push(resumo[0].Suprim[x].label);
-            }
-        }
-    }
-    for (let x = 0; x < resumo[0].Bebidas.length; x++){
-        if (resumo[0].Bebidas[0] != undefined){
-            if (resumo[0].Bebidas[x].selected === true){
-                if (resumo[0].Bebidas[x].label === 'Caipirinha'|| 
-                    resumo[0].Bebidas[x].label === 'Cerveja'){
-                    BebidasAlcSelec.push(resumo[0].Bebidas[x].label);
-                } else {
-                    BebidasSelec.push(resumo[0].Bebidas[x].label);
-                }
-            }
-        }
-    }
-    for (let x = 0; x < resumo[0].Acomp.length; x++){
-        if (resumo[0].Acomp[0] != undefined){
-            if (resumo[0].Acomp[x].selected === true){
-                AcompSelec.push(resumo[0].Acomp[x].label);
-            }
-        }
-    }
-
-    enviaDados = {
-        cBovinas: BovinasSelec, 
-        cSuinas: SuinasSelec,
-        cFrango: FrangoSelec,  
-        BebidasAlc: BebidasAlcSelec, 
-        Bebidas: BebidasSelec, 
-        Acomp: AcompSelec,   
-        Suprim: SuprimSelec,
-        qtdAdultos: Adultos,   
-        qtdJovens: Jovens,    
-        qtdCriancas: Criancas,
-    };
     
     // let listaCompras = gerarListaCompras(enviaDados);
     let listaCompras = gerarListaCompras(resumo);
@@ -570,7 +501,7 @@ export default function ResumoChurras(){
                 </View>
             </View>
             
-            <TouchableOpacity style={ styles.newButton} onPress={salvaChurras(listaCompras)}>
+            <TouchableOpacity style={ styles.newButton} onPress={() => salvaChurras(listaCompras[0])}>
                 <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>Salvar{'\n'}Evento</Text>
             </TouchableOpacity>
         </ScrollView>

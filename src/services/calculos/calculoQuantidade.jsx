@@ -3,6 +3,10 @@ import { getPreco } from "../sqlite/functions";
 function gerarnovoResumo(dados){
 	let novoResumo = dados;
 
+	const nomeChurras = dados[0].nomeChurras;
+	// const precoPessoa = 0;
+	// const precoTotal = 0;
+
 	// const dados = {
 	// 	qtdAdultos: 1,
 	// 	qtdJovens: 1,
