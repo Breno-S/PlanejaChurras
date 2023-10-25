@@ -5,7 +5,7 @@
 
 ## Sobre o projeto
 
-
+Nosso projeto, o PlanejaChurras ,  é um aplicativo mobile de calculadora de churrasco feita para ajudar os amantes de churrasco da geração digital ou qualquer um que precise de auxílio para planejar sua confraternização.  
 
 ## Objetivo
 
