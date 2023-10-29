@@ -120,8 +120,9 @@ export default function NovoChurrasco(){
   return(
     <ScrollView style={styles.scrollView}> 
       <View style={styles.container}>
-        <View style={ {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'} }>
-          <TextInput ref={textInputRef} onChangeText={handleNomeChurras} style={ [globalStyles.text, styles.title] }>Novo Churrasco</TextInput>
+        <View style={ {flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginLeft: 20} }>
+          <Text style={ [globalStyles.text, {fontSize: 30}] }>Nome: </Text>
+          <TextInput ref={textInputRef} onChangeText={handleNomeChurras} style={ [globalStyles.text, {fontSize: 30, flex: 1}] }>Novo Churrasco</TextInput>
             <TouchableOpacity onPress={handleIconPress}>
               <Icon_Edit />
             </TouchableOpacity>
