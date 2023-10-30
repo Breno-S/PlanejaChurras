@@ -10,6 +10,19 @@ import { salvaChurras } from '../../services/sqlite/functions';
 const windowWidth = Dimensions.get('window').width;
 
 export default function ResumoChurras(){
+    const [pricescBovinas, setPricescBovinas] = useState({});
+    const [pricescSuinas, setPricescSuinas] = useState({});
+    const [pricescFrango, setPricescFrango] = useState({});
+    const [pricesBebidas, setPricesBebidas] = useState({});
+    const [pricesAcomp, setPricesAcomp] = useState({});
+    const [pricesSuprim, setPricesSuprim] = useState({});
+
+    const [pricesTotalCarnes, setPricesTotalCarnes] = useState(0.0);
+    const [pricesTotalBebidas, setPricesTotalBebidas] = useState(0.0);
+    const [pricesTotalAcomp, setPricesTotalAcomp] = useState(0.0);
+    const [pricesTotalSuprim, setPricesTotalSuprim] = useState(0.0);
+
+    const [pricesTotalChurras, setPricesTotalChurras] = useState(0.0);
     
     const route = useRoute();
     const resumo = route.params.infoInput || {};
@@ -54,36 +67,20 @@ export default function ResumoChurras(){
         }
         return prices;
     }
-
-    const [pricescBovinas, setPricescBovinas] = useState({});
-    const [pricescSuinas, setPricescSuinas] = useState({});
-    const [pricescFrango, setPricescFrango] = useState({});
-    const [pricesBebidas, setPricesBebidas] = useState({});
-    const [pricesAcomp, setPricesAcomp] = useState({});
-    const [pricesSuprim, setPricesSuprim] = useState({});
-
-    const [pricesTotalCarnes, setPricesTotalCarnes] = useState(0.0);
-    const [pricesTotalBebidas, setPricesTotalBebidas] = useState(0.0);
-    const [pricesTotalAcomp, setPricesTotalAcomp] = useState(0.0);
-    const [pricesTotalSuprim, setPricesTotalSuprim] = useState(0.0);
-
-    const [pricesTotalChurras, setPricesTotalChurras] = useState(0.0);
     
     const fetchData = async () => {
         try{
-            console.log(await obterPrecos(resumo[0].cBovinas));
             setPricescBovinas(await obterPrecos(resumo[0].cBovinas));
             let buffer_cBovinas = await obterPrecos(resumo[0].cBovinas);
 
             resumo[0].cBovinas.map(async (item, index) => {
                 const qtd_gramas = item.quantidade;
                 const valUni = buffer_cBovinas[item.label];
-                if (buffer_cBovinas.hasOwnProperty(item.label)) {
-                    buffer_cBovinas[item.label] = (valUni * (qtd_gramas / 1000.00))
-                }
+                buffer_cBovinas[item.label] = (valUni * (qtd_gramas / 1000.00))
                 
                 setPricesTotalCarnes((prevState) => prevState + buffer_cBovinas[item.label]);
             })
+
             
             setPricescSuinas(await obterPrecos(resumo[0].cSuinas));
             let buffer_cSuinas = await obterPrecos(resumo[0].cSuinas);
@@ -91,55 +88,48 @@ export default function ResumoChurras(){
             resumo[0].cSuinas.map(async (item, index) => {
                 const qtd_gramas = item.quantidade;
                 const valUni = buffer_cSuinas[item.label];
-                if (buffer_cSuinas.hasOwnProperty(item.label)) {
-                    buffer_cSuinas[item.label] = (valUni * (qtd_gramas / 1000.00))
-                }
+                buffer_cSuinas[item.label] = (valUni * (qtd_gramas / 1000.00))
                 
                 setPricesTotalCarnes((prevState) => prevState + buffer_cSuinas[item.label]);
             })
 
+            
             setPricescFrango(await obterPrecos(resumo[0].cFrango));
             let buffer_cFrango = await obterPrecos(resumo[0].cFrango);
 
             resumo[0].cFrango.map(async (item, index) => {
                 const qtd_gramas = item.quantidade;
                 const valUni = buffer_cFrango[item.label];
-                if (buffer_cFrango.hasOwnProperty(item.label)) {
-                    buffer_cFrango[item.label] = (valUni * (qtd_gramas / 1000.00))
-                }
+                buffer_cFrango[item.label] = (valUni * (qtd_gramas / 1000.00))
                 
                 setPricesTotalCarnes((prevState) => prevState + buffer_cFrango[item.label]);
             })
             
+
             setPricesBebidas(await obterPrecos(resumo[0].Bebidas));
             let buffer_Bebidas = await obterPrecos(resumo[0].Bebidas);
 
             resumo[0].Bebidas.map(async (item, index) => {
                 const qtd_gramas = item.quantidade;
                 const valUni = buffer_Bebidas[item.label];
-                if (buffer_Bebidas.hasOwnProperty(item.label)) {
-                    buffer_Bebidas[item.label] = (valUni * (qtd_gramas))
-                }
+                buffer_Bebidas[item.label] = (valUni * (qtd_gramas))
                 
                 // console.log(item.label, buffer_Bebidas[item.label]);
                 setPricesTotalBebidas((prevState) => prevState + buffer_Bebidas[item.label]);
             })
+
 
             setPricesSuprim(await obterPrecos(resumo[0].Suprim));
             let buffer_Suprim = await obterPrecos(resumo[0].Suprim)
             // console.log('bufferSuprim:',buffer_Suprim);
             
             resumo[0].Suprim.map(async (item, index) => {
-                if (item.selected) {
-                    const qtd_Suprim = item.quantidade;
-                    const valUni = buffer_Suprim[item.label];
-                    if (buffer_Suprim.hasOwnProperty(item.label)) {
-                        buffer_Suprim[item.label] = (valUni * (qtd_Suprim))
-                    }
-                    setPricesTotalSuprim((prevState) => prevState + buffer_Suprim[item.label]);
-                }
+                const qtd_Suprim = item.quantidade;
+                const valUni = buffer_Suprim[item.label];
+                buffer_Suprim[item.label] = (valUni * (qtd_Suprim))
+                
+                setPricesTotalSuprim((prevState) => prevState + buffer_Suprim[item.label]);
             })
-            
 
 
             setPricesAcomp(await obterPrecos(resumo[0].Acomp));
@@ -147,28 +137,23 @@ export default function ResumoChurras(){
             // console.log('ANTES bufferAcomp:',buffer_Acomp);
 
             resumo[0].Acomp.map(async (item, index) => {
-                if (item.selected) {
-                    const qtd_Acomp = item.quantidade;
-                    const valUni = buffer_Acomp[item.label];
-                    if (buffer_Acomp.hasOwnProperty(item.label)) {
-                        if (item.label == 'Pão de Alho' || item.label == 'Pão Francês' || item.label == 'Arroz'){
-                            buffer_Acomp[item.label] = (valUni * (qtd_Acomp / 1000));
-                        } else {
-                            buffer_Acomp[item.label] = (valUni * (qtd_Acomp));
-                        }
-                        // console.log(buffer_Acomp[item.label],' = valUni:',valUni,'* qtdAcomp:',qtd_Acomp)
-                        // console.log('DEPOIS bufferAcomp:',buffer_Acomp);
-                    }
-                    
-                    setPricesTotalAcomp((prevState) => prevState + buffer_Acomp[item.label]);
+                const qtd_Acomp = item.quantidade;
+                const valUni = buffer_Acomp[item.label];
+                if (item.label == 'Pão de Alho' || item.label == 'Pão Francês' || item.label == 'Arroz'){
+                    buffer_Acomp[item.label] = (valUni * (qtd_Acomp / 1000));
+                } else {
+                    buffer_Acomp[item.label] = (valUni * (qtd_Acomp));
                 }
+                // console.log(buffer_Acomp[item.label],' = valUni:',valUni,'* qtdAcomp:',qtd_Acomp)
+                // console.log('DEPOIS bufferAcomp:',buffer_Acomp);
+                
+                setPricesTotalAcomp((prevState) => prevState + buffer_Acomp[item.label]);
             })
 
-        
-        setPricesTotalChurras(pricesTotalCarnes + pricesTotalBebidas + pricesTotalAcomp + pricesTotalSuprim);
-        resumo[0].precoTotal = pricesTotalChurras;
-        resumo[0].precoPessoa = pricesTotalChurras / resumo[0].qtdAdultos;
-
+            
+            setPricesTotalChurras(pricesTotalCarnes + pricesTotalBebidas + pricesTotalAcomp + pricesTotalSuprim);
+            resumo[0].precoTotal = pricesTotalChurras;
+            resumo[0].precoPessoa = pricesTotalChurras / resumo[0].qtdAdultos;
 
         } catch (error){
             console.error('Erro ao obter os preços:', error);
@@ -179,7 +164,7 @@ export default function ResumoChurras(){
         fetchData();
     }, []);
     
-    // console.log('Lista De Compras: ',resumo[0]);
+    console.log('Preco total: ', resumo[0].precoTotal);
     
     return(
         <ScrollView style={styles.container}>

@@ -205,25 +205,25 @@ function salvaChurras(dados) {
 // }
 
 
-const getPreco = async (nome) => {
-    // console.log('nome', nome);
-    try {
-        await fetchPrice(nome)
-        .then((resolve => {
-            // console.log(resolve);
-            return resolve;
-        }))
-        .catch(error => console.log(error));
-        // return result;
-    } catch (error) {
-        // Lidar com o erro aqui, se necessário.
-        console.error('Erro ao Pegar Preço: '+error);
-    }
-}
+// const getPreco = async (nome) => {
+//     // console.log('nome', nome);
+//     try {
+//         await fetchPrice(nome)
+//         .then((resolve => {
+//             // console.log(resolve);
+//             return resolve;
+//         }))
+//         .catch(error => console.log(error));
+//         // return result;
+//     } catch (error) {
+//         // Lidar com o erro aqui, se necessário.
+//         console.error('Erro ao Pegar Preço: '+error);
+//     }
+// }
 
 
 export {
 	salvaChurras,
 	fetchPrice,
-	getPreco,
+	// getPreco,
 }

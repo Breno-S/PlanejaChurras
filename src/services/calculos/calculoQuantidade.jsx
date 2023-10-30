@@ -1,5 +1,3 @@
-import { getPreco } from "../sqlite/functions";
-
 async function addQuantidade(resumo) {
 	const qtdConvidados = parseInt(resumo[0].qtdAdultos) + parseInt(resumo[0].qtdJovens) + parseInt(resumo[0].qtdCriancas);
 
