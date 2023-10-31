@@ -18,41 +18,30 @@ export default function HomePage( { navigation } ) {
   }
 
   useEffect(() => {
+    // Exemplo de consulta calculando o preço do churrasco além de retornar todos os dados usados nos cards
     db.transaction(tx => {
-      tx.executeSql("SELECT * FROM Churras INNER JOIN Local_Churras ON pk_churras = fk_churras",
+      tx.executeSql(
+        "SELECT Churras.pk_churras, Churras.nome_churras, Churras.qtd_adultos, Churras.qtd_jovens, Churras.qtd_criancas, Local_Churras.logradouro, Local_Churras.numero, SUM(Produto.preco_unitario * Item_Churras.quantidade) AS preco_total, SUM(Produto.preco_unitario * Item_Churras.quantidade)/(qtd_adultos) AS preco_pessoa FROM Churras INNER JOIN Local_Churras ON Local_Churras.fk_churras = Churras.pk_churras INNER JOIN Item_Churras ON Item_Churras.fk_churras = Churras.pk_churras INNER JOIN Produto ON Item_Churras.fk_produto = Produto.pk_produto WHERE pk_churras = 1 GROUP BY Churras.pk_churras",
         [],
         (_, resultSet) => {
           // console.log("INNER JOIN funcionou", resultSet.rows._array);
           setAllChurras(resultSet.rows._array);
           setIsLoading(false);
         },
-        (_, error) => console.error("Erro no SELECT em 'Churras'", error)
+        (_, error) => console.error("Erro no INNER JOIN", error)
       )
     });
 
-    // Exemplo de consulta calculando o preço do churrasco além de retornar todos os dados usados nos cards
-    // db.transaction(tx => {
-    //   tx.executeSql("SELECT Churras.pk_churras, Churras.nome_churras, Churras.qtd_adultos, Churras.qtd_jovens, Churras.qtd_criancas, Local_Churras.logradouro, Local_Churras.numero, SUM(Produto.preco_unitario * Item_Churras.quantidade) AS preco_total, SUM(Produto.preco_unitario * Item_Churras.quantidade)/(qtd_adultos) AS preco_pessoa FROM Churras INNER JOIN Local_Churras ON Local_Churras.fk_churras = Churras.pk_churras INNER JOIN Item_Churras ON Item_Churras.fk_churras = Churras.pk_churras INNER JOIN Produto ON Item_Churras.fk_produto = Produto.pk_produto WHERE pk_churras = 1 GROUP BY Churras.pk_churras",
-    //     [],
-    //     (_, resultSet) => {
-    //       console.log("INNER JOIN funcionou", resultSet.rows._array);
-    //       setAllChurras(resultSet.rows._array);
-    //       setIsLoading(false);
-    //     },
-    //     (_, error) => console.error("Erro no INNER JOIN", error)
-    //   )
-    // });
-
     // Exemplo de consulta obtendo os produtos do churrasco
-    // db.transaction(tx => {
-    //   tx.executeSql("SELECT Produto.nome_produto FROM Produto INNER JOIN Item_Churras ON Item_Churras.fk_produto = Produto.pk_produto INNER JOIN Churras on Item_Churras.fk_churras = Churras.pk_churras WHERE pk_churras = 1",
-    //     [],
-    //     (_, resultSet) => {
-    //       console.log("INNER JOIN funcionou", resultSet.rows._array);
-    //     },
-    //     (_, error) => console.error("Erro no SELECT em 'Churras'", error)
-    //   )
-    // });
+    db.transaction(tx => {
+      tx.executeSql("SELECT Churras.pk_churras, Produto.nome_produto FROM Produto INNER JOIN Item_Churras ON Item_Churras.fk_produto = Produto.pk_produto INNER JOIN Churras on Item_Churras.fk_churras = Churras.pk_churras",
+        [],
+        (_, resultSet) => {
+          console.log("INNER JOIN funcionou", resultSet.rows._array);
+        },
+        (_, error) => console.error("Erro no SELECT em 'Churras'", error)
+      )
+    });
 
     setIsLoading(false);
     

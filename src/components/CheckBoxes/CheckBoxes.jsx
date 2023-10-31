@@ -86,10 +86,10 @@ export default function CheckBoxes({type, onValueChange}){
 
   const [Suprimentos, setSuprimentos] = useState([
     { label: 'Carvão'     , value: 'Carvão [1kg]'                               , selected: false },
-    { label: 'Copos'      , value: 'Copos Descartáveis [kit 50 uni.)'           , selected: false },
+    { label: 'Copos'      , value: 'Copos Descartáveis [kit 50 unid.]'           , selected: false },
     { label: 'Guardanapos', value: 'Guardanapos Descartáveis [kit 50 unid.]'     , selected: false },
-    { label: 'Pratos'     , value: 'Pratos Descartáveis [kit 50 uni.]'          , selected: false },
-    { label: 'Talheres'   , value: 'Kit 50 Talheres Descartáveis (garfo e faca)', selected: false }
+    { label: 'Pratos'     , value: 'Pratos Descartáveis [kit 50 unid.]'          , selected: false },
+    { label: 'Talheres'   , value: 'Talheres Descartáveis (garfo e faca) [kit 50 unid.]', selected: false }
   ]);
 
   const toggleSuprimentosCheckbox = (index) => {

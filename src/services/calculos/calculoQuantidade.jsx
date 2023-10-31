@@ -14,10 +14,10 @@ async function addQuantidade(resumo) {
 
 	// acompanhamentos
 	const arrozPessoa = 60; // gramas
-	const paoDeAlhoPessoa = 160; // gramas
+	const paoDeAlhoPessoa = 160; // gramas (2 pães)
 	const queijoCoalhoPessoa = 1; // espeto
 	const farofaProntaPessoa = 100; // gramas
-	const paoFrancesPessoa = 200; // gramas (4 pães)  
+	const paoFrancesPessoa = 100; // gramas (2 pães)  
 
 	// carnes
 	const totalCarne = (resumo[0].qtdAdultos*400 + resumo[0].qtdJovens*300 + resumo[0].qtdCriancas*200);
@@ -150,7 +150,7 @@ async function addQuantidade(resumo) {
 		}
 
 		for (let i = 0; i < resumo[0].cBovinas.length; i++) {
-			resumo[0].cBovinas[i].quantidade = comprarBovinas / resumo[0].cBovinas.length;
+			resumo[0].cBovinas[i].quantidade = comprarBovinas / resumo[0].cBovinas.length / 1000;
 		}
 
 		// suinas
@@ -161,7 +161,7 @@ async function addQuantidade(resumo) {
 		}
 
 		for (let i = 0; i < resumo[0].cSuinas.length; i++) {
-			resumo[0].cSuinas[i].quantidade = comprarSuinas / resumo[0].cSuinas.length;
+			resumo[0].cSuinas[i].quantidade = comprarSuinas / resumo[0].cSuinas.length / 1000;
 		}
 
 		// frango
@@ -172,7 +172,7 @@ async function addQuantidade(resumo) {
 		}
 
 		for (let i = 0; i < resumo[0].cFrango.length; i++) {
-			resumo[0].cFrango[i].quantidade = comprarFrango / resumo[0].cFrango.length;
+			resumo[0].cFrango[i].quantidade = comprarFrango / resumo[0].cFrango.length / 1000;
 		}
 	}
 
@@ -265,19 +265,19 @@ async function addQuantidade(resumo) {
 			if (resumo[0].Acomp[i].selected == true) {
 				switch (resumo[0].Acomp[i].label) {
 					case "Arroz":
-						resumo[0].Acomp[i].quantidade = arredondarParaCimaMult(arrozPessoa*qtdConvidados, 1000); // pacote de 1000g
+						resumo[0].Acomp[i].quantidade = arredondarParaCimaMult(arrozPessoa*qtdConvidados, 1000) / 1000; // kg
 						break;
 					case "Pão de Alho":
-						resumo[0].Acomp[i].quantidade = paoDeAlhoPessoa*qtdConvidados; //g
+						resumo[0].Acomp[i].quantidade = paoDeAlhoPessoa*qtdConvidados / 1000; // kg
 						break;
 					case "Queijo Coalho":
 						resumo[0].Acomp[i].quantidade = Math.ceil(queijoCoalhoPessoa*qtdConvidados / 7); // pacote de 7 uni.
 						break;
 					case "Farofa Pronta":
-						resumo[0].Acomp[i].quantidade = arredondarParaCimaMult(farofaProntaPessoa*qtdConvidados, 500) / 500; // pacote de 500g
+						resumo[0].Acomp[i].quantidade = arredondarParaCimaMult(farofaProntaPessoa*qtdConvidados, 500) / 500; // arredondado para multiplos de 500 (para dividir em pacotes de 500g)
 						break;
 					case "Pão Francês":
-						resumo[0].Acomp[i].quantidade = paoFrancesPessoa*qtdConvidados; //g
+						resumo[0].Acomp[i].quantidade = paoFrancesPessoa*qtdConvidados / 1000; // kg
 						break;
 					default:
 						break;
@@ -297,7 +297,7 @@ async function addQuantidade(resumo) {
 			if (resumo[0].Suprim[i].selected == true) {
 				switch (resumo[0].Suprim[i].label) {
 					case "Carvão":
-						resumo[0].Suprim[i].quantidade = Math.ceil(totalCarvão / 1000); // pacote de 1kg
+						resumo[0].Suprim[i].quantidade = Math.ceil(totalCarvão / 1000); // kg
 						break;
 					case "Copos":
 						resumo[0].Suprim[i].quantidade = arredondarParaCimaMult(coposPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
