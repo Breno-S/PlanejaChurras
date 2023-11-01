@@ -482,14 +482,14 @@ export default function ResumoChurras(){
 
             <View style={ [styles.viewTitle] }>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <Text style={ [globalStyles.text, styles.title, {width: '50%', textAlign: 'left'}] }>Total:</Text>
+                    <Text style={ [globalStyles.text, styles.title, {width: '50%', textAlign: 'left'}] }>Preço Total:</Text>
                     <Text style={ [globalStyles.text, styles.title, {width: '50%', textAlign: 'right'}] }>R${(pricesTotalCarnes + pricesTotalBebidas + pricesTotalAcomp + pricesTotalSuprim).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                 </View>
             </View>
 
             <View style={ [styles.viewTitle] }>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <Text style={ [globalStyles.text, styles.title, {width: '50%', textAlign: 'left'}] }>Total:</Text>
+                    <Text style={ [globalStyles.text, styles.title, {width: '50%', textAlign: 'left'}] }>Preço/Adulto:</Text>
                     <Text style={ [globalStyles.text, styles.title, {width: '50%', textAlign: 'right'}] }>R${((pricesTotalCarnes + pricesTotalBebidas + pricesTotalAcomp + pricesTotalSuprim) / resumo[0].qtdAdultos).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                 </View>
             </View>

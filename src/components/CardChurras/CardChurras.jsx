@@ -35,7 +35,7 @@ export default function CardChurras( { params } ) {
               <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Adultos: <Text style={ {color: '#EF820D'} }>{params.qtd_adultos}</Text></Text>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Jovens: <Text style={ {color: '#EF820D'} }>{params.qtd_jovens}</Text></Text>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Crianças: <Text style={ {color: '#EF820D'} }>{params.qtd_criancas}</Text></Text>
-              <Text style={ [globalStyles.text, styles.cardInfo] }>Local: <Text style={ {color: '#EF820D'} }>{params.logradouro}, {params.numero}</Text></Text>
+              <Text style={ [globalStyles.text, styles.cardInfo] }>Local: <Text style={ {color: '#EF820D'} }>{params.logradouro}{params.numero ? ", " + params.numero : ""}</Text></Text>
             </View>
         
             {/* Parte Direita */}

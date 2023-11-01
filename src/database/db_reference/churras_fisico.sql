@@ -23,7 +23,8 @@ CREATE TABLE Item_Churras (
     fk_produto INT(11) NOT NULL,
     quantidade DECIMAL(8, 2) NOT NULL,
     PRIMARY KEY (pk_item_churras),
-    FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras)
+    FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras),
+    FOREIGN KEY(fk_produto) REFERENCES Produto (pk_produto)
 );
 
 CREATE TABLE Info_Churras (
