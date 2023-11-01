@@ -3,13 +3,15 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-nati
 import { globalStyles } from "../../styles/globalStyles";
 import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
 import addQuantidade from "../../services/calculos/calculoQuantidade";
-import { fetchPrice, getPreco } from "../../services/sqlite/functions";
+import { fetchPrice } from "../../services/sqlite/functions";
 import { salvaChurras } from '../../services/sqlite/functions';
 
 const windowWidth = Dimensions.get('window').width;
-
 export default function ResumoChurras(){
+    const navigation = useNavigation();
+
     const [pricescBovinas, setPricescBovinas] = useState({});
     const [pricescSuinas, setPricescSuinas] = useState({});
     const [pricescFrango, setPricescFrango] = useState({});
@@ -158,6 +160,11 @@ export default function ResumoChurras(){
             console.error('Erro ao obter os preços:', error);
         }
     }
+
+    const handleSalva = (dados) => {
+        salvaChurras(dados);
+        navigation.navigate('HomePage');
+      }
     
     useEffect(() => {   
         fetchData();
@@ -252,7 +259,7 @@ export default function ResumoChurras(){
                                 <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                     <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
                                     <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade < 1 ? (item.quantidade * 1000) + "g" : item.quantidade + "kg"}</Text>
-                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {maximumFractionDigits: 2})}</Text>
+                                    <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {maximumFractionDigits: 2})}</Text>
                                 </View>
                             )    
                         }
@@ -473,7 +480,7 @@ export default function ResumoChurras(){
                 </View>
             </View>
             
-            <TouchableOpacity style={ styles.newButton} onPress={() => salvaChurras(resumo[0])}>
+            <TouchableOpacity style={ styles.newButton} onPress={() => handleSalva(resumo[0])}>
                 <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>Salvar{'\n'}Evento</Text>
             </TouchableOpacity>
         </ScrollView>

@@ -143,14 +143,19 @@ async function addQuantidade(resumo) {
 
 	// Dividir o total de cada carne para cada uma das carnes da respectiva categoria
 	function dividirCarnes(comprarBovinas, comprarSuinas, comprarFrango) {
+		let qtd = 0;
+
 		for (let i = 0; i < resumo[0].cBovinas.length; i++) {
 			if (resumo[0].cBovinas[i].selected == false) {
 				resumo[0].cBovinas.splice(i, 1);
 			}
 		}
 
+		qtd = comprarBovinas / resumo[0].cBovinas.length;
+		qtd = arredondar(qtd) / 1000;
+
 		for (let i = 0; i < resumo[0].cBovinas.length; i++) {
-			resumo[0].cBovinas[i].quantidade = comprarBovinas / resumo[0].cBovinas.length / 1000;
+			resumo[0].cBovinas[i].quantidade = qtd;
 		}
 
 		// suinas
@@ -160,8 +165,11 @@ async function addQuantidade(resumo) {
 			}
 		}
 
+		qtd = comprarSuinas / resumo[0].cSuinas.length;
+		qtd = arredondar(qtd) / 1000;
+		
 		for (let i = 0; i < resumo[0].cSuinas.length; i++) {
-			resumo[0].cSuinas[i].quantidade = comprarSuinas / resumo[0].cSuinas.length / 1000;
+			resumo[0].cSuinas[i].quantidade = qtd;
 		}
 
 		// frango
@@ -171,8 +179,11 @@ async function addQuantidade(resumo) {
 			}
 		}
 
+		qtd = comprarFrango / resumo[0].cFrango.length;
+		qtd = arredondar(qtd) / 1000;
+		
 		for (let i = 0; i < resumo[0].cFrango.length; i++) {
-			resumo[0].cFrango[i].quantidade = comprarFrango / resumo[0].cFrango.length / 1000;
+			resumo[0].cFrango[i].quantidade = qtd;
 		}
 	}
 
@@ -321,14 +332,12 @@ async function addQuantidade(resumo) {
 	}
 
 	// Arredondar valores maiores que 100
-	function arredondarQuantidades(categoria) {
-		categoria.map((item, index) => {
-			if (item.hasOwnProperty("quantidade")) {
-				if (item.quantidade > 100) {
-					const qtd = arredondar(item.quantidade);
-					delete categoria[index].quantidade;
-					categoria[index].quantidade = qtd;
-				}
+	function arredondarQuantidades(arrayCategoria) {
+		arrayCategoria.map((item, index) => {
+			if (item.quantidade > 100) {
+				const qtd = arredondar(item.quantidade);
+				delete arrayCategoria[index].quantidade;
+				arrayCategoria[index].quantidade = qtd;
 			}
 		});
 	}
