@@ -24,6 +24,10 @@ async function fetchPrice(productName) {
 
 
 function salvaChurras(dados) {
+    if (dados.qtdAdultos == 0) {
+        return;
+    }
+
     let idChurras = 0;
 	db.transaction(tx => {
 		tx.executeSql("INSERT INTO Churras (nome_churras, qtd_adultos, qtd_jovens, qtd_criancas, preco_total, preco_pessoa) VALUES (?, ?, ?, ?, ?, ?);",
