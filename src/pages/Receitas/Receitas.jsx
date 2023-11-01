@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import { useFonts, Karantina_400Regular } from '@expo-google-fonts/karantina';
+import { globalStyles } from '../../styles/globalStyles';
 
 export default function Receitas({ }) {
   const windowWidth = Dimensions.get('window').width;
@@ -21,9 +21,7 @@ export default function Receitas({ }) {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        <Text style={styles.title}>RECEITAS</Text>
-        <View style={styles.underline}></View>
-        <View style={[styles.underlineGray, { width: windowWidth }]}></View>
+      <Text style={ [globalStyles.text, styles.title] }>RECEITAS</Text>
 
         <View style={styles.content}>
           <View style={[styles.list, { width: windowWidth }]}>
@@ -54,11 +52,12 @@ export default function Receitas({ }) {
             >
               <Text
                 style={[
+                  globalStyles.text,
                   styles.textButton,
                   isSuinasSelected && styles.selectedButtonText,
                 ]}
               >
-                SUINAS
+                SUÍNAS
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -342,30 +341,18 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   title: {
-    fontFamily: 'Karantina_400Regular',
-    fontSize: 30,
-    color: '#fff',
-    marginTop: 40,
-    letterSpacing: 2,
-    fontWeight: 'bold',
-  },
-  underline: {
+    fontSize: 40,
     borderBottomWidth: 1,
     borderBottomColor: '#fff',
-    width: 100,
-    marginTop: 5,
+    margin: 20,
+    alignSelf: 'center',
   },
-  underlineGray: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#282C2D',
-    marginTop: 20,
+  content: {
+    margin: 20,
   },
-  content: {},
   list: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 50
-
   },
   menuItem: {
     flex: 1, // Para dividir igualmente dentro da largura
@@ -377,7 +364,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   menuContent: {
-    marginTop: 40,
     alignItems: 'center',
   },
   menuView: {
@@ -385,8 +371,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     padding: 20,
     borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 10
+    margin: 10,
   },
   menuTitle: {
     color: '#EF820D',

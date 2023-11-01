@@ -75,7 +75,6 @@ export default function App() {
         <Drawer.Screen name="Receitas" component={Receitas} options={ {title: "PLANEJA CHURRAS",} }/>
         <Drawer.Screen name="InfoChurras" component={InfoChurras} options={ {title: "PLANEJA CHURRAS",} }/>
         <Drawer.Screen name="DetalheChurras" component={DetalheChurras} options={ {title: "PLANEJA CHURRAS",} }/>
-        {/* <Drawer.Screen name="" component={null} options={ {title: "", headerTitleStyle: {color: '#fff'} } }/> */}
       </Drawer.Navigator>
     </NavigationContainer>
   );
