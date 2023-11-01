@@ -169,7 +169,7 @@ const dummyDataProdutos = [
         medida: 'unidades'
     },
     {
-        nome_produto: 'Kit 50 Talheres Descartáveis (garfo e faca)',
+        nome_produto: 'Talheres Descartáveis (garfo e faca) [kit 50 unid.]',
         preco_unitario: 19.50,
         categoria: 'Suprimentos',
         medida: 'unidades'

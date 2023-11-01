@@ -1,5 +1,5 @@
 /*
-* ESTE ARQUIVO CRIA UM ESQUEMA PARA SER UTILIZADO DURANTE O DESENVOLVIMENTO DO APLICATIVO 
+* ESTE ARQUIVO CRIA UM ESQUEMA PARA SER UTILIZADO DURANTE O DESENVOLVIMENTO DO APLICATIVO
 */
 
 import db from ".";
@@ -69,16 +69,7 @@ export default function createDummySchema() {
 	});
 
 	// Popular tabela
-	for (let i = 0; i < 3; i++) {
-		db.transaction(tx => {
-			tx.executeSql("INSERT INTO Churras (nome_churras, qtd_adultos, qtd_jovens, qtd_criancas, preco_total, preco_pessoa) VALUES (?, ?, ?, ?, ?, ?);",
-				[...Object.values(dummyDataChurras)],
-				// (_, resultSet) => console.log("Registro adicionado à tabela 'Churras'"),
-				(_, resultSet) => null,
-				(_, error) => console.error("Erro criando registro em 'Churras'", error)
-			)
-		});
-	}
+	
 
 /******************************************************************************/
 /*************************** INFO_CHURRAS *************************************/
@@ -105,17 +96,7 @@ export default function createDummySchema() {
 	});
 
 	// Popular tabela
-	for (let i = 0; i < 3; i++) {
-		db.transaction(tx => {
-			tx.executeSql("INSERT INTO Info_Churras (fk_churras, nome_anfitriao, telefone) VALUES (?, ?, ?);",
-				[i+1, dummyDataInfo_Churras.nome_anfitriao, dummyDataInfo_Churras.telefone],
-				// (_, resultSet) => console.log("Registro adicionado à tabela 'Info_Churras'"),
-				(_, resultSet) => null,
-				(_, error) => console.error("Erro criando registro em 'Info_Churras'", error)
-			)
-		});
-
-	}
+	
 
 /******************************************************************************/
 /*************************** LOCAL_CHURRAS ************************************/
@@ -142,16 +123,7 @@ export default function createDummySchema() {
 	});
 
 	// Popular tabela
-	for (let i = 0; i < 3; i++) {
-		db.transaction(tx => {
-			tx.executeSql("INSERT INTO Local_Churras (fk_churras, cep, logradouro, numero, complemento, municipio, estado) VALUES (?, ?, ?, ?, ?, ?, ?);",
-				[i+1, dummyDataLocal_Churras.cep, dummyDataLocal_Churras.logradouro, dummyDataLocal_Churras.numero, dummyDataLocal_Churras.complemento, dummyDataLocal_Churras.municipio, dummyDataLocal_Churras.estado],
-				// (_, resultSet) => console.log("Registro adicionado à tabela 'Local_Churras'"),
-				(_, resultSet) => null,
-				(_, error) => console.error("Erro criando registro em 'Local_Churras'", error)
-			)
-		});
-	}
+	
 
 /******************************************************************************/
 /*************************** ITEM_CHURRAS *************************************/
@@ -169,7 +141,7 @@ export default function createDummySchema() {
 ////////////////////////// SOMENTE PARA TESTES
 
 	db.transaction(tx => {
-		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) , fk_produto INT(11) , quantidade DECIMAL(8, 2) , FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras));",
+		tx.executeSql("CREATE TABLE IF NOT EXISTS Item_Churras (pk_item_churras INTEGER PRIMARY KEY AUTOINCREMENT, fk_churras INT(11) , fk_produto INT(11) , quantidade DECIMAL(8, 2) , FOREIGN KEY(fk_churras) REFERENCES Churras (pk_churras), FOREIGN KEY(fk_produto) REFERENCES Produto (pk_produto));",
 			[],
 			// (_, resultSet) => console.log("Tabela 'Item_Churras' criada"),
 			(_, resultSet) => null,
@@ -178,16 +150,5 @@ export default function createDummySchema() {
 	});
 
 	// Popular tabela
-	for (let i = 0; i < 3; i++) {
-		for (let j = 0; j < dummyDataItem_Churras.length; j++) {
-			db.transaction(tx => {
-				tx.executeSql("INSERT INTO Item_Churras (fk_churras, fk_produto, quantidade) VALUES (?, ?, ?);",
-					[i+1, dummyDataItem_Churras[j].fk_produto, dummyDataItem_Churras[j].quantidade],
-					// (_, resultSet) => console.log("Registro adicionado à tabela 'Item_Churras'"),
-					(_, resultSet) => null,
-					(_, error) => console.error("Erro criando registro em 'Item_Churras'", error)
-				)
-			});
-		}
-	}
+	
 }

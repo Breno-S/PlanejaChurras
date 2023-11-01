@@ -5,9 +5,8 @@ import {
   Dimensions,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
-import { useFonts, Karantina_400Regular } from "@expo-google-fonts/karantina";
 import { React, useState, useEffect } from "react";
 import Input from "../../components/Input/Input";
 import { useNavigation } from "@react-navigation/native";
@@ -189,13 +188,13 @@ export default function InfoChurras({  }) {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: "#191B1B",
+    backgroundColor: "#000",
   },
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
-    backgroundColor: "#191B1B",
+    backgroundColor: "#000",
     borderTopColor: "#282C2D",
     borderTopWidth: 1,
   },

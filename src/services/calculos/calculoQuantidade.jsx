@@ -1,22 +1,5 @@
-import { getPreco } from "../sqlite/functions";
-
-function gerarnovoResumo(dados){
-	let novoResumo = dados;
-
-	// const dados = {
-	// 	qtdAdultos: 1,
-	// 	qtdJovens: 1,
-	// 	qtdCriancas: 1,
-	// 	cBovinas: ["Alcatra", "Picanha"],
-	// 	cSuinas: [],
-	// 	cFrango: ["Coxa", "Coração"],
-	// 	Bebidas: ["Refrigerante", "Suco", "Água"],
-	// 	BebidasAlc: ["Cerveja", "Caipirinha"],
-	// 	Acomp: [],
-	// 	Suprim: []
-	// };
-
-	const qtdConvidados = parseInt(novoResumo[0].qtdAdultos) + parseInt(novoResumo[0].qtdJovens) + parseInt(novoResumo[0].qtdCriancas);
+async function addQuantidade(resumo) {
+	const qtdConvidados = parseInt(resumo[0].qtdAdultos) + parseInt(resumo[0].qtdJovens) + parseInt(resumo[0].qtdCriancas);
 
 	// bebidas
 	const alcoolPessoa = 1500;
@@ -27,56 +10,43 @@ function gerarnovoResumo(dados){
 	const coposPessoa = 5;
 	const talheresPessoa = 2; 
 	const pratosPessoa = 3;
-	const guardanaposPessoa = 3;
+	const guardanaposPessoa = 4;
 
 	// acompanhamentos
 	const arrozPessoa = 60; // gramas
-	const paoDeAlhoPessoa = 160; // gramas
+	const paoDeAlhoPessoa = 160; // gramas (2 pães)
 	const queijoCoalhoPessoa = 1; // espeto
 	const farofaProntaPessoa = 100; // gramas
-	const paoFrancesPessoa = 200; // gramas (4 pães)  
+	const paoFrancesPessoa = 100; // gramas (2 pães)  
 
 	// carnes
-	const totalCarne = (novoResumo[0].qtdAdultos*400 + novoResumo[0].qtdJovens*300 + novoResumo[0].qtdCriancas*200);
+	const totalCarne = (resumo[0].qtdAdultos*400 + resumo[0].qtdJovens*300 + resumo[0].qtdCriancas*200);
 
 	const totalCarvão = totalCarne * 1.5;
 
-	const totalAlcool = alcoolPessoa * parseInt(novoResumo[0].qtdAdultos);
+	const totalAlcool = alcoolPessoa * parseInt(resumo[0].qtdAdultos);
 	const totalNotAlcool = notAlcoolPessoa * qtdConvidados;
 	const totalAgua = aguaPessoa * qtdConvidados;
 
-	const tiposCarnes = getTiposCarnes(novoResumo);
+	const tiposCarnes = getTiposCarnes(resumo);
 	const [comprarBovinas, comprarSuinas, comprarFrango] = getQtdCarnes(tiposCarnes);
 
-	// Preencher a lista de compras
+	// Adicionar a quantidade de cada categoria
 	dividirCarnes(comprarBovinas, comprarSuinas, comprarFrango);
 	dividirBebidas();
 	dividirAcompanhamentos();
 	dividirSuprimentos();
 
-	// Arredondar valores maiores que 100
-	// for (const key in novoResumo) {
-	// 	if (Object.hasOwnProperty.call(novoResumo, key)) {
-    //         if (novoResumo[key] > 100) {
-    //             novoResumo[key] = arredondar(novoResumo[key]);
-    //         }
-	// 	}
-	// }
-
-	// Criar um novo objeto transformando a quantidade em um objeto com quantidade e preço
-	// let novonovoResumo = {};
-	// for (let item in novoResumo) {
-	// 	if (novoResumo.hasOwnProperty(item)) {
-	// 		novonovoResumo[`${item}`] = {
-	// 			quantidade: novoResumo[item],
-	// 			preco: getPreco(item)
-	// 		};
-	// 	}
-	// }
+	arredondarQuantidades(resumo[0].cBovinas);
+	arredondarQuantidades(resumo[0].cSuinas);
+	arredondarQuantidades(resumo[0].cFrango);
+	arredondarQuantidades(resumo[0].Bebidas);
+	arredondarQuantidades(resumo[0].Acomp);
+	arredondarQuantidades(resumo[0].Suprim);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-	function getTiposCarnes(novoResumo) {
+	function getTiposCarnes(resumo) {
 		// 1: bovina / 2: suina / 4: frango /
 		// 3: bovina + suina / 5: bovina+frango / 6: suina+frango 
 		// 7: bovina + suina + frango
@@ -85,22 +55,22 @@ function gerarnovoResumo(dados){
 		let selecionouSuina  = false;
 		let selecionouFrango = false;
 
-		for (let i = 0; i < novoResumo[0].cBovinas.length; i++) {
-			if (novoResumo[0].cBovinas[i].selected == true) {
+		for (let i = 0; i < resumo[0].cBovinas.length; i++) {
+			if (resumo[0].cBovinas[i].selected == true) {
 				selecionouBovina = true;
 				break;
 			}			
 		}
 
-		for (let i = 0; i < novoResumo[0].cSuinas.length; i++) {
-			if (novoResumo[0].cSuinas[i].selected == true) {
+		for (let i = 0; i < resumo[0].cSuinas.length; i++) {
+			if (resumo[0].cSuinas[i].selected == true) {
 				selecionouSuina = true;
 				break;
 			}			
 		}
 
-		for (let i = 0; i < novoResumo[0].cFrango.length; i++) {
-			if (novoResumo[0].cFrango[i].selected == true) {
+		for (let i = 0; i < resumo[0].cFrango.length; i++) {
+			if (resumo[0].cFrango[i].selected == true) {
 				selecionouFrango = true;
 				break;
 			}			
@@ -171,117 +141,126 @@ function gerarnovoResumo(dados){
 		return [comprarBovinas, comprarSuinas, comprarFrango];
 	}
 
+	// Dividir o total de cada carne para cada uma das carnes da respectiva categoria
 	function dividirCarnes(comprarBovinas, comprarSuinas, comprarFrango) {
-		// Dividir o total de cada carne para cada uma das carnes da respectiva categoria
-		let optBovinas = 0;
-		for (let i = 0; i < novoResumo[0].cBovinas.length; i++) {
-			if (novoResumo[0].cBovinas[i].selected == true) {
-				// console.log(novoResumo[0].cBovinas[i].value);
-				optBovinas += 1;
+		let qtd = 0;
+
+		for (let i = 0; i < resumo[0].cBovinas.length; i++) {
+			if (resumo[0].cBovinas[i].selected == false) {
+				resumo[0].cBovinas.splice(i, 1);
 			}
 		}
 
-		for (let i = 0; i < novoResumo[0].cBovinas.length; i++) {
-			if (novoResumo[0].cBovinas[i].selected == true) {
-				// console.log(novoResumo[0].cBovinas[i].value);
-				novoResumo[0].cBovinas[i].quantidade = comprarBovinas / optBovinas;
-			}
+		qtd = comprarBovinas / resumo[0].cBovinas.length;
+		qtd = arredondar(qtd) / 1000;
+
+		for (let i = 0; i < resumo[0].cBovinas.length; i++) {
+			resumo[0].cBovinas[i].quantidade = qtd;
 		}
 
 		// suinas
-		let optSuinas = 0;
-		for (let i = 0; i < novoResumo[0].cSuinas.length; i++) {
-			if (novoResumo[0].cSuinas[i].selected == true) {
-				// console.log(novoResumo[0].cSuinas[i].value);
-				optSuinas += 1;
+		for (let i = 0; i < resumo[0].cSuinas.length; i++) {
+			if (resumo[0].cSuinas[i].selected == false) {
+				resumo[0].cSuinas.splice(i, 1);
 			}
 		}
 
-		for (let i = 0; i < novoResumo[0].cSuinas.length; i++) {
-			if (novoResumo[0].cSuinas[i].selected == true) {
-				// console.log(novoResumo[0].cSuinas[i].value);
-				novoResumo[0].cSuinas[i].quantidade = comprarSuinas / optSuinas;
-			}
+		qtd = comprarSuinas / resumo[0].cSuinas.length;
+		qtd = arredondar(qtd) / 1000;
+		
+		for (let i = 0; i < resumo[0].cSuinas.length; i++) {
+			resumo[0].cSuinas[i].quantidade = qtd;
 		}
 
 		// frango
-		let optFrango = 0;
-		for (let i = 0; i < novoResumo[0].cFrango.length; i++) {
-			if (novoResumo[0].cFrango[i].selected == true) {
-				// console.log(novoResumo[0].cFrango[i].value);
-				optFrango += 1;
+		for (let i = 0; i < resumo[0].cFrango.length; i++) {
+			if (resumo[0].cFrango[i].selected == false) {
+				resumo[0].cFrango.splice(i, 1);
 			}
 		}
 
-		for (let i = 0; i < novoResumo[0].cFrango.length; i++) {
-			if (novoResumo[0].cFrango[i].selected == true) {
-				// console.log(novoResumo[0].cFrango[i].value);
-				novoResumo[0].cFrango[i].quantidade = comprarFrango / optFrango;
-			}
+		qtd = comprarFrango / resumo[0].cFrango.length;
+		qtd = arredondar(qtd) / 1000;
+		
+		for (let i = 0; i < resumo[0].cFrango.length; i++) {
+			resumo[0].cFrango[i].quantidade = qtd;
 		}
 	}
 
 	function dividirBebidas() {
-		if (novoResumo[0].Bebidas.length == 0) {
+		if (resumo[0].Bebidas.length == 0) {
 			return;
 		}
 
 		let optBebidasAlc = 0;
-		for (let i = 0; i < novoResumo[0].Bebidas.length; i++) {
-			if (novoResumo[0].Bebidas[i].alcoholic == true && novoResumo[0].Bebidas[i].selected == true) {
+		let selecionouSuco = false;
+		let selecionouRefrigerante = false;
+		let selecionouAgua = false;
+
+		for (let i = 0; i < resumo[0].Bebidas.length; i++) {
+			if (resumo[0].Bebidas[i].selected == false) {
+				resumo[0].Bebidas.splice(i, 1);
+			}
+			else if (resumo[0].Bebidas[i].alcoholic == true) {
 				optBebidasAlc += 1;
+			}
+			else if (resumo[0].Bebidas[i].label == "Suco") {
+				selecionouSuco = true;
+			}
+			else if (resumo[0].Bebidas[i].label == "Refrigerante") {
+				selecionouRefrigerante = true;
+			}
+			else if (resumo[0].Bebidas[i].label == "Água") {
+				selecionouAgua = true;
 			}
 		}
 
 		if (optBebidasAlc == 2) {
-			for (let i = 0; i < novoResumo[0].Bebidas.length; i++) {
-				if (novoResumo[0].Bebidas[i].label == "Cerveja") {
-					novoResumo[0].Bebidas[i].quantidade = arredondarParaCimaMult(totalAlcool * 0.7, 350) / 350; // arredondado para multiplos de 350 (para dividir em latas de 350 ml)
+			for (let i = 0; i < resumo[0].Bebidas.length; i++) {
+				if (resumo[0].Bebidas[i].label == "Cerveja") {
+					resumo[0].Bebidas[i].quantidade = arredondarParaCimaMult(totalAlcool * 0.7, 350) / 350; // arredondado para multiplos de 350 (para dividir em latas de 350 ml)
 				}
-				if (novoResumo[0].Bebidas[i].label == "Caipirinha") {
-					novoResumo[0].Bebidas[i].quantidade = Math.ceil((totalAlcool * 0.3) / 1000);
+				if (resumo[0].Bebidas[i].label == "Caipirinha") {
+					resumo[0].Bebidas[i].quantidade = Math.ceil((totalAlcool * 0.3) / 1000);
 				}
 			}
-		} else {
-			for (let i = 0; i < novoResumo[0].Bebidas.length; i++) {
-				if (novoResumo[0].Bebidas[i].alcoholic == true && novoResumo[0].Bebidas[i].selected == true) {
-					novoResumo[0].Bebidas[i].quantidade = totalAlcool / optBebidasAlc;
+		} else if (optBebidasAlc == 1){
+			for (let i = 0; i < resumo[0].Bebidas.length; i++) {
+				if (resumo[0].Bebidas[i].label == "Cerveja") {
+					resumo[0].Bebidas[i].quantidade = arredondarParaCimaMult(totalAlcool, 350) / 350; // arredondado para multiplos de 350 (para dividir em latas de 350 ml)
+				}
+				else if (resumo[0].Bebidas[i].label == "Caipirinha") {
+					resumo[0].Bebidas[i].quantidade = Math.ceil((totalAlcool * 0.3) / 1000);
 				}
 			}
 		}
 
 		// NOT ALCOHOL
-		let selecionouSuco = false;
-		let selecionouRefrigerante = false ;
-
-		for (let i = 0; i < novoResumo[0].Bebidas.length; i++) {
-			if (novoResumo[0].Bebidas[i].label == "Suco" && novoResumo[0].Bebidas[i].selected == true) {
-				selecionouSuco = true;
-			}
-			else if (novoResumo[0].Bebidas[i].label == "Refrigerante" && novoResumo[0].Bebidas[i].selected == true) {
-				selecionouRefrigerante = true;
-			}
-		
-			
-		} 
-
 		if (selecionouSuco && selecionouRefrigerante) {
-			for (let i = 0; i < novoResumo[0].Bebidas.length; i++) {
-				if (novoResumo[0].Bebidas[i].label == "Suco" && novoResumo[0].Bebidas[i].selected == true) {
-					novoResumo[0].Bebidas[i].quantidade = arredondarParaCimaPar((totalNotAlcool * 0.7) / 1000);// arredondado para multiplos de 2 (para dividir em garrafas de 2 litros)
+			for (let i = 0; i < resumo[0].Bebidas.length; i++) {
+				if (resumo[0].Bebidas[i].label == "Suco") {
+					resumo[0].Bebidas[i].quantidade = Math.ceil((totalNotAlcool * 0.3) / 1000); // litros
 				}
-				else if (novoResumo[0].Bebidas[i].label == "Refrigerante" && novoResumo[0].Bebidas[i].selected == true) {
-					novoResumo[0].Bebidas[i].quantidade = Math.ceil((totalNotAlcool * 0.3) / 1000); // litros
-				} else if ((novoResumo[0].Bebidas[i].alcoholic == false) && (novoResumo[0].Bebidas[i].selected == true) && (novoResumo[0].Bebidas[i].label == "Água")) {
-					novoResumo[0].Bebidas[i].quantidade = totalAgua / 1000;
+				else if (resumo[0].Bebidas[i].label == "Refrigerante") {
+					resumo[0].Bebidas[i].quantidade = arredondarParaCimaPar((totalNotAlcool * 0.7) / 1000) / 2;// arredondado para multiplos de 2 (para dividir em garrafas de 2 litros)
 				}
 			}
-		} else {
-			for (let i = 0; i < novoResumo[0].Bebidas.length; i++) {
-				if ((novoResumo[0].Bebidas[i].alcoholic == false) && (novoResumo[0].Bebidas[i].selected == true) && (novoResumo[0].Bebidas[i].label != "Água")) {
-					novoResumo[0].Bebidas[i].quantidade = totalNotAlcool;
-				} else if ((novoResumo[0].Bebidas[i].alcoholic == false) && (novoResumo[0].Bebidas[i].selected == true) && (novoResumo[0].Bebidas[i].label == "Água")) {
-					novoResumo[0].Bebidas[i].quantidade = totalAgua;
+		} else if (selecionouSuco || selecionouRefrigerante) {
+			for (let i = 0; i < resumo[0].Bebidas.length; i++) {
+				if ((resumo[0].Bebidas[i].alcoholic == false) && (resumo[0].Bebidas[i].label == "Suco")) {
+					resumo[0].Bebidas[i].quantidade = Math.ceil((totalNotAlcool) / 1000);
+				}
+				else if ((resumo[0].Bebidas[i].alcoholic == false) && (resumo[0].Bebidas[i].label == "Refrigerante")) {
+					resumo[0].Bebidas[i].quantidade = arredondarParaCimaPar((totalNotAlcool) / 1000) / 2;
+				}
+			}
+		}
+
+		// Água
+		if (selecionouAgua) {
+			for (let i = 0; i < resumo[0].Bebidas.length; i++) {
+				if (resumo[0].Bebidas[i].label == "Água") {
+					resumo[0].Bebidas[i].quantidade = totalAgua / 1000; // preço calculado em litros
 				}
 			}
 		}
@@ -289,69 +268,84 @@ function gerarnovoResumo(dados){
 
 
 	function dividirAcompanhamentos() {
-		if (novoResumo[0].Acomp.length == 0) {
+		if (resumo[0].Acomp.length == 0) {
 			return;
 		}
 
-		for(let i = 0; i < novoResumo[0].Acomp.length; i++) {
-			if (novoResumo[0].Acomp[i].selected == true) {
-				switch (novoResumo[0].Acomp[i].label) {
+		for(let i = 0; i < resumo[0].Acomp.length; i++) {
+			if (resumo[0].Acomp[i].selected == true) {
+				switch (resumo[0].Acomp[i].label) {
 					case "Arroz":
-						novoResumo[0].Acomp[i].quantidade = arredondarParaCimaMult(arrozPessoa*qtdConvidados, 1000); // pacote de 1000g
+						resumo[0].Acomp[i].quantidade = arredondarParaCimaMult(arrozPessoa*qtdConvidados, 1000) / 1000; // kg
 						break;
 					case "Pão de Alho":
-						novoResumo[0].Acomp[i].quantidade = paoDeAlhoPessoa*qtdConvidados; //g
+						resumo[0].Acomp[i].quantidade = paoDeAlhoPessoa*qtdConvidados / 1000; // kg
 						break;
 					case "Queijo Coalho":
-						novoResumo[0].Acomp[i].quantidade = Math.ceil(queijoCoalhoPessoa*qtdConvidados / 7); // pacote de 7 uni.
+						resumo[0].Acomp[i].quantidade = Math.ceil(queijoCoalhoPessoa*qtdConvidados / 7); // pacote de 7 uni.
 						break;
 					case "Farofa Pronta":
-						novoResumo[0].Acomp[i].quantidade = arredondarParaCimaMult(farofaProntaPessoa*qtdConvidados, 500) / 500; // pacote de 500g
+						resumo[0].Acomp[i].quantidade = arredondarParaCimaMult(farofaProntaPessoa*qtdConvidados, 500) / 500; // arredondado para multiplos de 500 (para dividir em pacotes de 500g)
 						break;
 					case "Pão Francês":
-						novoResumo[0].Acomp[i].quantidade = paoFrancesPessoa*qtdConvidados; //g
+						resumo[0].Acomp[i].quantidade = paoFrancesPessoa*qtdConvidados / 1000; // kg
 						break;
 					default:
 						break;
 				}
+			} else {
+				resumo[0].Acomp.splice(i, 1);
 			}
 		}
 	}
 
 	function dividirSuprimentos() {
-		if (novoResumo[0].Suprim.length == 0) {
+		if (resumo[0].Suprim.length == 0) {
 			return;
 		}
 
-		for(let i = 0; i < novoResumo[0].Suprim.length; i++) {
-			if (novoResumo[0].Suprim[i].selected == true) {
-				switch (novoResumo[0].Suprim[i].label) {
+		for(let i = 0; i < resumo[0].Suprim.length; i++) {
+			if (resumo[0].Suprim[i].selected == true) {
+				switch (resumo[0].Suprim[i].label) {
 					case "Carvão":
-						novoResumo[0].Suprim[i].quantidade = Math.ceil(totalCarvão / 1000); // pacote de 1kg
+						resumo[0].Suprim[i].quantidade = Math.ceil(totalCarvão / 1000); // kg
 						break;
 					case "Copos":
-						novoResumo[0].Suprim[i].quantidade = arredondarParaCimaMult(coposPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
+						resumo[0].Suprim[i].quantidade = arredondarParaCimaMult(coposPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
 						break;
 					case "Guardanapos":
-						novoResumo[0].Suprim[i].quantidade = arredondarParaCimaMult(guardanaposPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
+						resumo[0].Suprim[i].quantidade = arredondarParaCimaMult(guardanaposPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
 						break;
 					case "Pratos":
-						novoResumo[0].Suprim[i].quantidade = arredondarParaCimaMult(pratosPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
+						resumo[0].Suprim[i].quantidade = arredondarParaCimaMult(pratosPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
 						break;
 					case "Talheres":
-						novoResumo[0].Suprim[i].quantidade = arredondarParaCimaMult(talheresPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
+						resumo[0].Suprim[i].quantidade = arredondarParaCimaMult(talheresPessoa*qtdConvidados, 50) / 50; // pacote de 50 unidades
 						break;
 					default:
 						break;
 				}
+			} else {
+				resumo[0].Suprim.splice(i, 1);
 			}
 		}
+	}
+
+	// Arredondar valores maiores que 100
+	function arredondarQuantidades(arrayCategoria) {
+		arrayCategoria.map((item, index) => {
+			if (item.quantidade > 100) {
+				const qtd = arredondar(item.quantidade);
+				delete arrayCategoria[index].quantidade;
+				arrayCategoria[index].quantidade = qtd;
+			}
+		});
 	}
 
 	function arredondar(valor) {
 		return Math.round(valor / 10) * 10;
 	}
-	// q situação ein rapaziada X_X
+
 	function arredondarParaCimaMult(numero, multiplo) {
 		var numeroArredondado = Math.ceil(numero);
 		var resultado = Math.ceil(numeroArredondado / multiplo) * multiplo;
@@ -368,8 +362,6 @@ function gerarnovoResumo(dados){
 		}
 		return numeroArredondado;
 	}
-
-	// return novonovoResumo;
-	return novoResumo;
 }
-export default gerarnovoResumo;
+
+export default addQuantidade;

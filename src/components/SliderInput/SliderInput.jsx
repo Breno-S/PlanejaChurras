@@ -1,8 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { useFonts, Karantina_400Regular } from "@expo-google-fonts/karantina";
 import Slider from "@react-native-community/slider";
 
 const windowWidth = Dimensions.get("window").width;
@@ -15,11 +13,7 @@ export default function SliderInput({ type, onValueChange }) {
     setSliderValue(value);
 
     if(onValueChange) {
-      //if (value == null || value == undefined){
-      //  onValueChange(0);
-      //} else {
         onValueChange(value);
-      //}
     }
   }
 
