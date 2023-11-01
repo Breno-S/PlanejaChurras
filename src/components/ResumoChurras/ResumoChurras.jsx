@@ -376,16 +376,16 @@ export default function ResumoChurras(){
                                     return(
                                         <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                             <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
-                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade / 1000} uni.</Text>
-                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade} uni.</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                         </View>
                                     );
                                 case "Pão Francês":
                                     return(
                                         <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                             <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
-                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade}g{'\n'}({item.quantidade / 50} uni.)</Text>
-                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade < 1 ? (item.quantidade * 1000) + "g" : item.quantidade + "kg"}{'\n'}({item.quantidade*1000/50} uni.)</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                         </View>
                                     );
                                 case "Farofa Pronta":
@@ -408,8 +408,8 @@ export default function ResumoChurras(){
                                     return(
                                         <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                             <Text adjustsFontSizeToFit={true} numberOfLines={2} style={ [globalStyles.text, styles.info, {textAlign: 'left'}  ] }>{item.value}</Text>
-                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade}g{'\n'}({item.quantidade / 80} uni.)</Text>
-                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade / 1000).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'center'}] }>{item.quantidade < 1 ? (item.quantidade * 1000) + "g" : item.quantidade + "kg"}{'\n'}({item.quantidade * 1000 / 80} uni.)</Text>
+                                            <Text style={ [globalStyles.text, styles.info, {textAlign: 'right'} ] }>R$ {(price * item.quantidade).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</Text>
                                         </View>
                                     );
                                 default:

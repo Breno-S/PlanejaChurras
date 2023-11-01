@@ -10,7 +10,7 @@ async function addQuantidade(resumo) {
 	const coposPessoa = 5;
 	const talheresPessoa = 2; 
 	const pratosPessoa = 3;
-	const guardanaposPessoa = 3;
+	const guardanaposPessoa = 4;
 
 	// acompanhamentos
 	const arrozPessoa = 60; // gramas
