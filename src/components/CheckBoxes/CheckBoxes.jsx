@@ -1,7 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { useCallback, useState, useEffect } from 'react';
-import { useFonts, Karantina_400Regular } from '@expo-google-fonts/karantina';
+import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 

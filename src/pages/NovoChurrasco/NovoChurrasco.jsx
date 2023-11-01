@@ -1,10 +1,8 @@
-import { useCallback, useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
-import { useRoute } from "@react-navigation/native";
 import { TextInput } from 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import { globalStyles } from '../../styles/globalStyles';
 import SliderInput from '../../components/SliderInput/SliderInput';
 import CheckBoxes from '../../components/CheckBoxes/CheckBoxes';
@@ -31,28 +29,6 @@ export default function NovoChurrasco(){
       Suprim: []
     },
   ]);
-
-    // Este useEffect será acionado quando a tela for montada e quando você voltar para ela
-    // useEffect(() => {
-    //   const unsubscribe = navigation.addListener('blur', () => {
-    //     // Reseta os valores quando a tela é desfocada (quando você sai dela)
-    //     setinfoInput({
-    //       // nomeChurras: "Novo Churrasco",
-    //       qtdAdultos: "0",
-    //       qtdJovens: "0",
-    //       qtdCriancas: "0",
-    //       cBovinas: [],
-    //       cSuinas: [],
-    //       cFrango: [],
-    //       Bebidas: [],
-    //       Acomp: [],
-    //       Suprim: []
-    //     });
-    //   });
-  
-    //   return unsubscribe;
-    // }, [navigation]);
-
 
   const handleNomeChurras = (nomeChurras) => {
     const updatedinfoInput = [...infoInput];
@@ -139,14 +115,9 @@ export default function NovoChurrasco(){
         <CheckBoxes type="Acompanhamentos"onValueChange={handleAcomp} />
         <CheckBoxes type="Suprimentos"onValueChange={handleSuprim} />
 
-        
         <TouchableOpacity style={ styles.newButton} onPress={() => navigation.navigate("InfoChurras", {infoInput})}>
           <Text style={ {fontFamily: 'Graduate_400Regular', color: '#fff', textAlign: 'center'} }>Informações{'\n'}do Churras</Text>
-        </TouchableOpacity>
-        
-
-
-                      
+        </TouchableOpacity>        
       </View>
     </ScrollView>
 

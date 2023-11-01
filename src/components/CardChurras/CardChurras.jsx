@@ -1,6 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { useEffect, useState } from "react";
+import Icon from 'react-native-vector-icons/AntDesign';
+
+const Icon_open = () => <Icon name="down" size={30} color="#EF820D" />
+const Icon_close = () => <Icon name="up" size={30} color="#EF820D" />
 
 export default function CardChurras( { params } ) {
   const [showDetails, setShowDetails] = useState(false);
@@ -21,44 +25,26 @@ export default function CardChurras( { params } ) {
         {/* Titulo do card */}
         <View style={ [styles.viewTitle] }>
           <Text style={ [styles.title, globalStyles.text] }>{params.nome_churras}</Text>
+          {showDetails ? <Icon_close />: <Icon_open />}
         </View>
 
         <View style={{flexDirection: 'column'}}>
-          {/* Row */}
-          {/* <View style={ {flexDirection: 'row', justifyContent: 'space-between'} }> */}
-
-            {/* Parte Esquerda */}
-            {/* <View style={ [styles.halfLeft] }>
+          { showDetails ? (
+          <View style={ {flexDirection: 'row', justifyContent: 'space-between'} }>
+            <View style={ [styles.halfLeft] }>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Adultos: <Text style={ {color: '#EF820D'} }>{params.qtd_adultos}</Text></Text>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Jovens: <Text style={ {color: '#EF820D'} }>{params.qtd_jovens}</Text></Text>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Crianças: <Text style={ {color: '#EF820D'} }>{params.qtd_criancas}</Text></Text>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Local: <Text style={ {color: '#EF820D'} }>{params.logradouro}, {params.numero}</Text></Text>
-            </View> */}
-
+            </View>
+        
             {/* Parte Direita */}
-            {/* <View style={ [styles.halfRight] }>
+            <View style={ [styles.halfRight] }>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Preço Total: <Text style={ {color: '#EF820D'} }>R${params.preco_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, minimumFractionDigits: 2 })}</Text></Text>
               <Text style={ [globalStyles.text, styles.cardInfo] }>Preço por Pessoa: <Text style={ {color: '#EF820D'} }>R${params.preco_pessoa.toLocaleString('pt-BR', { minimumFractionDigits: 2, minimumFractionDigits: 2 })}</Text></Text>
-            </View> */}
-
-          {/* </View> */}
-
-            { showDetails ? (
-            <View style={ {flexDirection: 'row', justifyContent: 'space-between'} }>
-              <View style={ [styles.halfLeft] }>
-                <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Adultos: <Text style={ {color: '#EF820D'} }>{params.qtd_adultos}</Text></Text>
-                <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Jovens: <Text style={ {color: '#EF820D'} }>{params.qtd_jovens}</Text></Text>
-                <Text style={ [globalStyles.text, styles.cardInfo] }>Quantidade Crianças: <Text style={ {color: '#EF820D'} }>{params.qtd_criancas}</Text></Text>
-                <Text style={ [globalStyles.text, styles.cardInfo] }>Local: <Text style={ {color: '#EF820D'} }>{params.logradouro}, {params.numero}</Text></Text>
-              </View>
-          
-              {/* Parte Direita */}
-              <View style={ [styles.halfRight] }>
-                <Text style={ [globalStyles.text, styles.cardInfo] }>Preço Total: <Text style={ {color: '#EF820D'} }>R${params.preco_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, minimumFractionDigits: 2 })}</Text></Text>
-                <Text style={ [globalStyles.text, styles.cardInfo] }>Preço por Pessoa: <Text style={ {color: '#EF820D'} }>R${params.preco_pessoa.toLocaleString('pt-BR', { minimumFractionDigits: 2, minimumFractionDigits: 2 })}</Text></Text>
-              </View>
             </View>
-            ) : null }
+          </View>
+          ) : null }
         </View>
       </View>
     </TouchableOpacity>
@@ -76,9 +62,12 @@ const styles = StyleSheet.create({
   },
 
   viewTitle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: 10,
     borderBottomColor: '#000',
     borderBottomWidth: 1,
+    alignItems: 'center'
   },
 
   halfRight: {
